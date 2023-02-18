@@ -1,0 +1,1 @@
+<img src="{{ url('logounib.png') }}" alt="" srcset="" width="100">
