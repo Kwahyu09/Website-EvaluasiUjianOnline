@@ -22,9 +22,10 @@
           <li><a class="nav-link" href="/ketua">Ketua</a></li>
         </ul>
     </li>
-    <li class="{{ Request::is('kelas*') || Request::is('mahasiswa*') || Request::is('modul*') ? 'active' : '' }}">
+    <li class="{{ Request::is('dosen*') ||Request::is('kelas*') || Request::is('mahasiswa*') || Request::is('modul*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Data Fakultas</span></a>
         <ul class="dropdown-menu">
+          <li><a class="nav-link" href="/dosen">Dosen</a></li>
           <li><a class="nav-link" href="/kelas">Kelas</a></li>
           <li><a class="nav-link" href="/mahasiswa">Mahasiswa</a></li>
           <li><a class="nav-link" href="/modul">Modul</a></li>
@@ -42,7 +43,7 @@
         <a href="/hasilujian"  data-toggle="nav-link"><i class="far fa-file"></i> <span>Hasil Ujian</span></a>
     </li>
     <li class="{{ Request::is('evaluasi*') ? 'active' : '' }}">
-        <a href="/evaluasi"  data-toggle="nav-link"><i class="far fa-file"></i><span>Evaluasi</span></a>
+        <a href="/evaluasis"  data-toggle="nav-link"><i class="far fa-file"></i><span>Evaluasi</span></a>
     </li>
       @endif
     </ul>

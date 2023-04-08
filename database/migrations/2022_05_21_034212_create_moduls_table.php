@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('moduls', function (Blueprint $table) {
             $table->id();
             $table->char('kd_modul')->unique();
-            $table->string('nama_modul')->unique();
+            $table->string('nama_modul');
+            $table->string('slug');
             $table->integer('semester');
             $table->integer('sks');
             $table->timestamps();

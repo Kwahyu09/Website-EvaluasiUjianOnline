@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ujians', function (Blueprint $table) {
+        Schema::create('dosens', function (Blueprint $table) {
             $table->id();
-            $table->char('kd_ujian')->unique();
-            $table->string('nama_ujian');
+            $table->string('nip')->unique();
+            $table->string('nama_dos');
             $table->string('slug');
-            $table->date('tanggal');
-            $table->time('waktu_mulai');
-            $table->time('waktu_selesai');
-            $table->integer('skor');
+            $table->string('jabatan');
+            $table->string('gol_regu');
+            $table->string('jenis_kel');
+            $table->string('prodi');
+            $table->string('email');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ujians');
+        Schema::dropIfExists('dosens');
     }
 };

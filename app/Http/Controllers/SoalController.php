@@ -14,7 +14,7 @@ class SoalController extends Controller
      */
     public function index()
     {
-        return view('soal', [
+        return view('grupsoal.soal.soal', [
             "title" => "Soal",
             "post" => soal::latest()->filter(request(['search']))->paginate(10)
         ]);

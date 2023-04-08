@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\evaluasi;
+use App\Models\Evaluasi;
 use App\Http\Requests\StoreevaluasiRequest;
 use App\Http\Requests\UpdateevaluasiRequest;
+use App\Models\Ujian;
 
 class EvaluasiController extends Controller
 {
@@ -13,6 +14,13 @@ class EvaluasiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function index1()
+    {
+        return view('evaluasiujian', [
+            "title" => "Evaluasi Ujian",
+            "post" => Ujian::latest()->filter(request(['search','ujian']))->paginate(10)
+        ]);
+    }
     public function index()
     {
         return view('evaluasi', [

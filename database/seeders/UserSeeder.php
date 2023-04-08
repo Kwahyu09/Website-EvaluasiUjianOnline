@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         User::create([
             'nama' => 'Krisna Wahyudi',
             'username' => 'krisna',
-            'email' => 'krisnawahyudi@gmail.com',
+            'email' => 'krisnawahyudi2017@gmail.com',
             'role' => 'Admin',
             'password' => Hash::make('password')
         ]);
@@ -47,11 +47,6 @@ class UserSeeder extends Seeder
             'email' => 'yusuf@gmail.com',
             'role' => 'Mahasiswa',
             'password' => Hash::make('password')
-        ]);
-
-        Mahasiswa::create([
-            'user_id' => $mahasiswa->id,
-            'npm' => 'G1A020019'
         ]);
     }
 }

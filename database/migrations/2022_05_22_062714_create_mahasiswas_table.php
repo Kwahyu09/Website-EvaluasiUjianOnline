@@ -15,9 +15,13 @@ return new class extends Migration
     {
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kelas_id')->nullable();
-            $table->foreignId('user_id')->references('id')->on('users');
             $table->string('npm')->unique();
+            $table->string('nama_mhs');
+            $table->string('alamat');
+            $table->string('tempat_lhr');
+            $table->date('tanggal_lhr');
+            $table->date('jenis_kel');
+            $table->string('email');
             $table->timestamps();
         });
     }

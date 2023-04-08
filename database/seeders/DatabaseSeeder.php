@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Krisna Wahyudi',
         //     'username' => 'wahyu',
         //     'email' => 'wahyu@gmail.com',
-        //     'password' => bcrypt('wahyupass')
+        //     'password' => bcrypt('password')
         // ]);
 
         // admin::create([
@@ -88,12 +88,12 @@ class DatabaseSeeder extends Seeder
         //     'password' => bcrypt('rolinpass')
         // ]);
 
-        modul::create([
-            'kd_modul' => 'Ad4527',
-            'nama_modul' => 'sistem saraf',
-            'semester' => 3,
-            'sks' => 2
-        ]);
+        // modul::create([
+        //     'kd_modul' => 'Ad4527',
+        //     'nama_modul' => 'sistem saraf',
+        //     'semester' => 3,
+        //     'sks' => 2
+        // ]);
 
         // Mahasiswa::create([
         //     'kelas_id' =>1,
@@ -121,23 +121,18 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class
         ]);
 
-        // Kelas::create([
-        //     'nama_kelas' => 'Kedokteran A',
-        //     'tahun_ajaran' => 2019,
-        //     'jurusan' => 'kedokteran'
-        // ]);
-
-        // Kelas::create([
-        //     'nama_kelas' => 'Kedokteran B',
-        //     'tahun_ajaran' => 2019,
-        //     'jurusan' => 'kedokteran'
-        // ]);
-
-        // Kelas::create([
-        //     'nama_kelas' => 'Kedokteran B',
-        //     'tahun_ajaran' => 2020,
-        //     'jurusan' => 'kedokteran'
-        // ]);
+        $this->call([
+            DosenSeeder::class
+        ]);
+        $this->call([
+            KelasSeeder::class
+        ]);
+        $this->call([
+            UjianSeeder::class
+        ]);
+        $this->call([
+            ModulSeeder::class
+        ]);
 
         Grup_soal::create([
             // 'modul_id' =>1,
@@ -155,7 +150,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Soal::create([
-            'grup_soal_id' =>1,
             'kode_soal' => '12acas',
             'pertanyaan' => 'tenaga dokter yang diharapkan olehWHO (1978) dibawah ini kecuali?',
             'kunci' => 'Decision maker',
@@ -167,7 +161,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Soal::create([
-            'grup_soal_id' =>1,
             'kode_soal' => '12kads',
             'pertanyaan' => 'Enchepalomalacia berarti...',
             'kunci' => 'Pelabaran selaput otak',
@@ -178,21 +171,5 @@ class DatabaseSeeder extends Seeder
             'bobot' => 10
         ]);
 
-        Ujian::create([
-            'modul_id' => 1,
-            'kelas_id' =>1,
-            'kd_ujian' => 'ts6781',
-            'nama_ujian' => 'ujian modul 1',
-            'skor' => 80
-        ]);
-
-        Evaluasi::create([
-            'ujian_id'=>1,
-            'mahasiswa_id'=>1,
-            'soal_id' => 1,
-            'nama_evaluasi'=> 'evaluasi soal',
-            'jawaban'=> 'opsi_a',
-            'tingkat_soal'=> 'sukar'
-        ]);
     }
 }

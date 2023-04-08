@@ -17,7 +17,7 @@ class UjianController extends Controller
     {
         return view('ujian', [
             "title" => "Ujian",
-            "post" => Ujian::latest()->paginate(10)
+            "post" => Ujian::latest()->filter(request(['search']))->paginate(10)
         ]);
     }
 

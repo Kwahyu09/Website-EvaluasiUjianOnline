@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SoalController;
 use App\Http\Controllers\AktorController;
+use App\Http\Controllers\DosenController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\ModulController;
 use App\Http\Controllers\UjianController;
@@ -41,6 +42,7 @@ Route::post('/ketua/store', [AktorController::class, 'store_ketua'])->middleware
 // Route::post('/mahasiswa/store', [AktorController::class, 'store_mahasiswa'])->middleware(['auth'])->name('Storemahasiswa');
 
 Route::resource('/kelas', KelasController::class)->middleware('auth');
+Route::resource('/dosen', DosenController::class)->middleware('auth');
 
 Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->middleware(['auth'])->name('Mahasiswa');
 
@@ -56,6 +58,7 @@ Route::resource('/ujian', UjianController::class)->middleware(['auth']);
 
 Route::resource('/hasilujian', HasilujianController::class)->middleware(['auth']);
 
+Route::get('/evaluasis', [EvaluasiController::class, 'index1'])->middleware(['auth'])->name('Evaluasis');
 Route::get('/evaluasi', [EvaluasiController::class, 'index'])->middleware(['auth'])->name('Evaluasi');
 
 Route::get('/tambah', [RegisterController::class, 'index'])->name('Register');

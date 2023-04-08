@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('soals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('grup_soal_id');
             $table->char('kode_soal')->unique();
             $table->text('pertanyaan');
             $table->string('image')->nullable();

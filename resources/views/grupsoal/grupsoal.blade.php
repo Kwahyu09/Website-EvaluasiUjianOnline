@@ -2,7 +2,7 @@
 @section('container')
 <div class="card">
   <div class="card-body">
-    <h5>Data {{ $title }}</h5>
+    <h5>Data {{ $title }} Berdasarkan Modul</h5>
     @if ($post->count())
     <div class="d-flex justify-content-end mb-2">
       <div class="col-md-4">
@@ -24,7 +24,7 @@
         @foreach ($post as $pos)
         <div class="col-md-4 mb-3">
           <div class="card" style="width: 18rem;">
-            <img src="https://source.unsplash.com/500x250?{{ $pos->nama_modul }}" class="card-img-top" alt="{{ $pos->nama_modul }}">
+            <img src="https://source.unsplash.com/500x250/?{{ $pos->nama_modul }}" class="card-img-top" alt="{{ $pos->nama_modul }}">
             <div class="card-body">
               <h6 class="card-title mb-2">{{ $pos->nama_modul }}</h6>
               <small class="text-muted">

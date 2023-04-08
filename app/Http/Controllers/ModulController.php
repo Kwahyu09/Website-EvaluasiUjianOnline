@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\modul;
+use App\Models\Modul;
 use Illuminate\Http\Request;
 
 class ModulController extends Controller
@@ -16,7 +16,7 @@ class ModulController extends Controller
     {
         return view('fakultas.modul.index', [
             "title" => "Modul",
-            "post" => modul::latest()->filter(request(['search']))->paginate(10)
+            "post" => Modul::latest()->filter(request(['search']))->paginate(10)
         ]);
     }
 

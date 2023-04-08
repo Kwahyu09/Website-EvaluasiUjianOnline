@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Evaluasi;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class EvaluasiSeeder extends Seeder
 {
@@ -14,6 +15,11 @@ class EvaluasiSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Evaluasi::create([
+            'nama_evaluasi'=> 'evaluasi soal',
+            'nama_mhs'=> 'Krisna Wahyudi',
+            'jawaban'=> 'opsi_a',
+            'tingkat_soal'=> 'sukar'
+        ]);
     }
 }
