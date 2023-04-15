@@ -60,7 +60,11 @@ class ModulController extends Controller
      */
     public function show(modul $modul)
     {
-        //
+        return view('grupsoal.grupsoal2', [
+            "title" => "Grup Soal",
+            'modul' => $modul->nama_modul,
+            'post' => $modul->grup_soal
+        ]);
     }
 
     /**

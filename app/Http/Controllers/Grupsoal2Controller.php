@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Grup_soal;
+use App\Models\Modul;
 
 class Grupsoal2Controller extends Controller
 {
@@ -13,11 +14,12 @@ class Grupsoal2Controller extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Modul $modul)
     {
         return view('grupsoal.grupsoal2', [
             "title" => "Grup Soal",
-            "post" => Grup_soal::latest()->filter(request(['search','grup_soal']))->paginate(10)
+            'modul' => $modul->nama_modul,
+            'post' => $modul->grup_soal
         ]);
     }
 

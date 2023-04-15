@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('soals', function (Blueprint $table) {
             $table->id();
             $table->char('kode_soal')->unique();
+            $table->foreignId('grup_soal_id');
             $table->text('pertanyaan');
             $table->string('image')->nullable();
             $table->string('kunci');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('opsi_b');
             $table->string('opsi_c');
             $table->string('opsi_d');
+            $table->string('jawaban');
             $table->integer('bobot');
             $table->timestamps();
         });

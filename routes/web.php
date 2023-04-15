@@ -46,13 +46,13 @@ Route::resource('/dosen', DosenController::class)->middleware('auth');
 
 Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->middleware(['auth'])->name('Mahasiswa');
 
-Route::resource('/modul', ModulController::class)->middleware('auth');
+Route::get('/modul', [ModulController::class, 'index'])->middleware('auth');
 
 Route::get('/grupsoal', [GrupsoalController::class, 'index'])->middleware(['auth'])->name('GrupSoal Modul');
 
-Route::resource('/grupsoal2', Grupsoal2Controller::class)->middleware(['auth']);
+Route::get('/grupsoal/{modul:slug}', [Grupsoal2Controller::class, 'index'])->middleware(['auth']);
 
-Route::resource('/soal', SoalController::class)->middleware(['auth']);
+Route::get('/soal/{grup_soal:slug}', [GrupsoalController::class,'show'])->middleware(['auth']);
 
 Route::resource('/ujian', UjianController::class)->middleware(['auth']);
 

@@ -1,44 +1,40 @@
-@extends('layoutdashboard.main')@section('container')
+@extends('layoutdashboard.main') @section('container')
 <div class="card">
-  <div class="card-body">
-    <h5>Data {{ $title }}</h5>
-    @if ($post->count())
-    <div class="d-flex justify-content-end mb-2">
-      <div class="col-md-4">
-        {{-- <form action="/grupsoal2">
-          @if (request('grup_soal'))
-          <input type="hidden" name="grup_soal" value="{{ request('grup_soal') }}">
-          @endif
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search.." name="search" value="{{ request('search') }}">
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="submit">Search</button>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row align-items-center my-2">
+                    <div class="col">
+                        <h3>Laporan Nilai</h3>
+                        <br>
+                        <h5>Silahkan Pilih Ujian :
+                        </h5>
+                        <br>
+                        <form action="/evaluasi">
+                            <div class="input-group mb-3">
+                                <select class="custom-select" id="inputGroupSelect01">
+                                    <option selected="selected">Pilih...</option>
+                                    @foreach ($post as $pos)
+                                    <option value="{{ $pos->nama_ujian }}">{{ $pos->nama_ujian }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-auto mr-5">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <button type="submit" class="btn btn-info mr-5">
+                                <span class="fe fe-info fe-12 mr-2"></span>Lihat</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- end section -->
             </div>
-          </div>
-        </form> --}}
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        @foreach ($post as $pos)
-        <div class="col-md-4 mb-3">
-          <div class="card" style="width: 18rem;">
-            <img src="https://source.unsplash.com/500x250?{{ $pos->nama_ujian }}" class="card-img-top" alt="{{ $pos->nama_ujian }}">
-            <div class="card-body">
-              <h6 class="card-title mb-2">{{ $pos->nama_ujian }}</h6>
-              <a href="/evaluasi" class="btn btn-primary stretched-link">Lihat Evaluasi</a>
-            </div>
-          </div>
+            <!-- .col-12 -->
         </div>
-        @endforeach
-      </div>
+        <!-- .row -->
     </div>
-    @else
-      <p class="text-center fs-4">No Data Ujian</p>
-    @endif
-    <div class="d-flex justify-content-end">
-      {{ $post->links() }}
-    </div>
-  </div>
 </div>
 @endsection

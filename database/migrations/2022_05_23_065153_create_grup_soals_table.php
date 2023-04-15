@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('grup_soals', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('modul_id');
+            $table->foreignId('modul_id');
             $table->string('nama_grup');
+            $table->string('slug');
             $table->timestamps();
         });
     }

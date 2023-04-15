@@ -4,7 +4,7 @@
     <div class="row align-items-center my-4">
         <div class="col">
             <button type="button" class="btn btn-info">
-                <span class="fe fe-printer fe-12 mr-2"></span>Cetak</button>
+                <i class="bi bi-printer"></i> Cetak</button>
         </div>
         <div class="col-auto">
             <form class="form-inline mr-auto searchform text-muted">

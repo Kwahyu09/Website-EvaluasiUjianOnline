@@ -1,20 +1,14 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\soal;
-use App\Models\User;
-use App\Models\admin;
-use App\Models\Dosen;
-use App\Models\Kelas;
-use App\Models\modul;
-use App\Models\staff;
-use App\Models\Ujian;
-use App\Models\evaluasi;
-use App\Models\Grup_soal;
-use App\Models\Mahasiswa;
-use App\Models\Ketuasekretaris;
 use Illuminate\Database\Seeder;
+use Database\Seeders\SoalSeeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\DosenSeeder;
+use Database\Seeders\KelasSeeder;
+use Database\Seeders\ModulSeeder;
+use Database\Seeders\UjianSeeder;
+use Database\Seeders\GrupsoalSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
@@ -88,13 +82,6 @@ class DatabaseSeeder extends Seeder
         //     'password' => bcrypt('rolinpass')
         // ]);
 
-        // modul::create([
-        //     'kd_modul' => 'Ad4527',
-        //     'nama_modul' => 'sistem saraf',
-        //     'semester' => 3,
-        //     'sks' => 2
-        // ]);
-
         // Mahasiswa::create([
         //     'kelas_id' =>1,
         //     'npm' => 'G1A019073',
@@ -133,43 +120,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ModulSeeder::class
         ]);
-
-        Grup_soal::create([
-            // 'modul_id' =>1,
-            'nama_grup' => 'Grup 1'
+        $this->call([
+            GrupsoalSeeder::class
         ]);
-
-        Grup_soal::create([
-            // 'modul_id' =>1,
-            'nama_grup' => 'Grup 2'
+        $this->call([
+            SoalSeeder::class
         ]);
-
-        Grup_soal::create([
-            // 'modul_id' =>1,
-            'nama_grup' => 'Grup 3'
-        ]);
-
-        Soal::create([
-            'kode_soal' => '12acas',
-            'pertanyaan' => 'tenaga dokter yang diharapkan olehWHO (1978) dibawah ini kecuali?',
-            'kunci' => 'Decision maker',
-            'opsi_a' => 'Decision maker',
-            'opsi_b' => 'Community leader',
-            'opsi_c' => 'Experienced',
-            'opsi_d' => 'Communicator',
-            'bobot' => 10
-        ]);
-
-        Soal::create([
-            'kode_soal' => '12kads',
-            'pertanyaan' => 'Enchepalomalacia berarti...',
-            'kunci' => 'Pelabaran selaput otak',
-            'opsi_a' => 'Peradangan otak',
-            'opsi_b' => 'Pelunakan otak',
-            'opsi_c' => 'Penumpukan darah pada otak',
-            'opsi_d' => 'Pelabaran selaput otak',
-            'bobot' => 10
-        ]);
-
     }
 }

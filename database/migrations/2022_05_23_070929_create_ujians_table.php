@@ -17,11 +17,13 @@ return new class extends Migration
             $table->id();
             $table->char('kd_ujian')->unique();
             $table->string('nama_ujian');
+            $table->string('kelas');
+            $table->string('modul');
+            $table->string('grupsoal');
             $table->string('slug');
             $table->date('tanggal');
             $table->time('waktu_mulai');
             $table->time('waktu_selesai');
-            $table->integer('skor');
             $table->timestamps();
         });
     }
