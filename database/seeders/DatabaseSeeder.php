@@ -105,26 +105,13 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            UserSeeder::class
-        ]);
-
-        $this->call([
-            DosenSeeder::class
-        ]);
-        $this->call([
-            KelasSeeder::class
-        ]);
-        $this->call([
-            UjianSeeder::class
-        ]);
-        $this->call([
-            ModulSeeder::class
-        ]);
-        $this->call([
-            GrupsoalSeeder::class
-        ]);
-        $this->call([
-            SoalSeeder::class
+            UserSeeder::class,
+            DosenSeeder::class,
+            KelasSeeder::class,
+            UjianSeeder::class,
+            ModulSeeder::class,
+            GrupsoalSeeder::class,
+            SoalSeeder::class,
         ]);
     }
 }

@@ -17,6 +17,9 @@ class Ujian extends Model
         $query->when($filters['search'] ??  false, function($query, $search){
             return $query->where('kd_ujian', 'like', '%' . $search . '%')
                   ->orWhere('nama_ujian', 'like', '%' . $search . '%')
+                  ->orWhere('kelas', 'like', '%' . $search . '%')
+                  ->orWhere('modul', 'like', '%' . $search . '%')
+                  ->orWhere('grupsoal', 'like', '%' . $search . '%')
                   ->orWhere('tanggal', 'like', '%' . $search . '%')
                   ->orWhere('waktu_mulai', 'like', '%' . $search . '%')
                   ->orWhere('waktu_selesai', 'like', '%' . $search . '%');

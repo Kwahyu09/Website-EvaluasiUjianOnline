@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\modul;
+use App\Models\soal;
 use App\Models\Grup_soal;
 
 class GrupsoalController extends Controller
@@ -20,8 +21,10 @@ class GrupsoalController extends Controller
     {
         return view('grupsoal.soal.soal',[
             "title" => "soal",
-            'grup' => $grup_soal->nama_grup,
-            'post' => $grup_soal->soal
+            "slug" => $grup_soal->slug,
+            "grup" => $grup_soal->nama_grup,
+            "post" => $grup_soal->soal,
+            "soal" => soal::latest()->filter(request(['search','modul']))->paginate(6)
         ]);
     }
 }

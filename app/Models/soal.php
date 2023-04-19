@@ -20,6 +20,7 @@ class soal extends Model
                   ->orWhere('opsi_b', 'like', '%' . $search . '%')
                   ->orWhere('opsi_c', 'like', '%' . $search . '%')
                   ->orWhere('opsi_d', 'like', '%' . $search . '%')
+                  ->orWhere('jawaban', 'like', '%' . $search . '%')
                   ->orWhere('bobot', 'like', '%' . $search . '%');
         });
     }

@@ -32,5 +32,6 @@ class Grup_soal extends Model
     public function soal()
     {
         return $this->hasMany(soal::class);
+        return soal::latest()->filter(request(['search']))->paginate(10);
     }
 }

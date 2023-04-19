@@ -6,13 +6,21 @@
             <button type="button" class="btn btn-info">
                 <i class="bi bi-printer"></i> Cetak</button>
         </div>
-        <div class="col-auto">
-            <form class="form-inline mr-auto searchform text-muted">
-                <input
-                    class="form-control mr-sm-2 bg-transparent border-0 pl-4 text-muted"
-                    type="search"
-                    placeholder="Cari..."
-                    aria-label="Search"></form>
+        <div class="d-flex justify-content-end mb-2">
+            <div class="col-md-4">
+                <form action="/hasilujian">
+                    <div class="input-group mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Search.."
+                            name="search"
+                            value="{{ request('search') }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <br>

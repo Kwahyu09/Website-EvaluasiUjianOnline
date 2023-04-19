@@ -5,19 +5,19 @@
             {{ $title }}
             Berdasarkan
             {{ $grup }}</h5>
-        <div class="d-flex justify-content-start">
+        <div class="d-flex justify-content-start mb-3 mt-3">
             <a href="/soal/create" class="btn btn-primary">Tambah Data <i class="bi bi-plus-circle"></i>
             </a>
         </div>
         @if ($post->count())
         <div class="d-flex justify-content-end mb-2">
             <div class="col-md-4">
-                <form action="/soal">
+                <form action="/soal/{{ $slug }}">
                     <div class="input-group mb-3">
                         <input
                             type="text"
                             class="form-control"
-                            placeholder="Search.."
+                            placeholder="Cari.."
                             name="search"
                             value="{{ request('search') }}">
                         <div class="input-group-append">

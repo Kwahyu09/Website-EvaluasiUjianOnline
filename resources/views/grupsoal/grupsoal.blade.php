@@ -1,29 +1,9 @@
 @extends('layoutdashboard.main') 
 @section('container')
-<h5>Data
+<h5 class="mt-4 mb-5">Data
     {{ $title }}
     Berdasarkan Modul</h5>
 @if ($post->count())
-<div class="d-flex justify-content-end mb-2">
-    <div class="col-md-4">
-        <form action="/grupsoal">
-            @if (request('modul'))
-            <input type="hidden" name="modul" value="{{ request('modul') }}">
-            @endif
-            <div class="input-group mb-3">
-                <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search.."
-                    name="search"
-                    value="{{ request('search') }}">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Search</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 <div class="container">
     <div class="row">
         @foreach ($post as $pos)
