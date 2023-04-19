@@ -16,7 +16,7 @@
                         <input
                             type="text"
                             class="form-control"
-                            placeholder="Search.."
+                            placeholder="Cari.."
                             name="search"
                             value="{{ request('search') }}">
                         <div class="input-group-append">

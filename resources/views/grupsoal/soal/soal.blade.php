@@ -21,7 +21,9 @@
                             name="search"
                             value="{{ request('search') }}">
                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit">Search</button>
+                            <button class="btn btn-primary" type="submit">
+                                <i class="bi bi-search"></i>
+                            </button>
                         </div>
                     </div>
                 </form>
