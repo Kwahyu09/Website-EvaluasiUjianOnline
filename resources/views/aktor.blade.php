@@ -51,7 +51,7 @@
                     <tbody>
                         @foreach ($post as $pos)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}</td>
                             <td>{{ $pos->nama }}</td>
                             <td>{{ $pos->username }}</td>
                             <td>{{ $pos->email }}</td>
@@ -83,7 +83,7 @@
         <p class="text-center fs-4">Tidak Ditemukan Data
             {{ $title }}</p>
         @endif
-        <div class="d-flex justify-content-end">
+        <div class="mt-1 d-flex justify-content-end">
             {{ $post->links() }}
         </div>
     </div>

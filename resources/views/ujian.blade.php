@@ -48,7 +48,7 @@
                     <tbody>
                         @foreach ($post as $pos)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}</td>
                             <td>{{ $pos->kd_ujian }}</td>
                             <td>{{ $pos->nama_ujian }}</td>
                             <td>{{ $pos->kelas }}</td>

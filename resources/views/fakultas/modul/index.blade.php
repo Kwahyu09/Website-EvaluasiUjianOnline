@@ -52,7 +52,7 @@
                     <tbody>
                         @foreach ($post as $pos)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}</td>
                             <td>{{ $pos->kd_modul }}</td>
                             <td>{{ $pos->nama_modul }}</td>
                             <td>{{ $pos->semester }}</td>
@@ -85,7 +85,7 @@
         <p class="text-center fs-4">Tidak Ada Data
             {{ $title }}</p>
         @endif
-        <div class="d-flex justify-content-end">
+        <div class="mt-1 d-flex justify-content-end">
             {{ $post->links() }}
         </div>
     </div>

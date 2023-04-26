@@ -13,7 +13,7 @@ class GrupsoalController extends Controller
     {
         return view('grupsoal.grupsoal', [
             "title" => "grupsoal",
-            "post" => modul::latest()->filter(request(['search','modul']))->paginate(6)
+            "post" => modul::latest()->filter(request(['search','modul']))->paginate(8)
         ]);
     }
 

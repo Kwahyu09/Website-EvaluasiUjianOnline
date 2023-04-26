@@ -43,19 +43,21 @@
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table table-striped" id="sortable-table">
-                                <tr style="background-color: rgb(183, 181, 181)">
-                                    <th scope="col">No</th>
-                                    <th>Kode Soal</th>
-                                    <th>Pertanyaan</th>
-                                    <th>Kunci</th>
-                                    <th>Opsi A</th>
-                                    <th>Opsi B</th>
-                                    <th>Opsi C</th>
-                                    <th>Opsi D</th>
-                                    <th>Jawaban</th>
-                                    <th>Bobot</th>
-                                    <th>Action</th>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th>Kode Soal</th>
+                                        <th>Pertanyaan</th>
+                                        <th>Kunci</th>
+                                        <th>Opsi A</th>
+                                        <th>Opsi B</th>
+                                        <th>Opsi C</th>
+                                        <th>Opsi D</th>
+                                        <th>Jawaban</th>
+                                        <th>Bobot</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
                                 <tr>
                                     @foreach ($post as $pos)
                                     <tr>

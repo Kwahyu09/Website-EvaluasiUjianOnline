@@ -42,7 +42,8 @@
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table table-striped" id="sortable-table">
-                                <tr style="background-color: rgb(183, 181, 181)">
+                                <thead>
+                                <tr style="background-color: lightslategray;">
                                     <th>No</th>
                                     <th>NIP Dosen</th>
                                     <th>Nama Dosen</th>
@@ -53,10 +54,11 @@
                                     <th>Email</th>
                                     <th>Action</th>
                                 </tr>
+                                </thead>
                                 <tbody>
                                     @foreach ($post as $pos)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}</td>
                                         <td>{{ $pos->nip }}</td>
                                         <td>{{ $pos->nama_dos }}</td>
                                         <td>{{ $pos->jabatan }}</td>
