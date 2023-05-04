@@ -63,6 +63,8 @@ Route::get('/evaluasi', [EvaluasiController::class, 'index'])->middleware(['auth
 
 Route::get('/tambah', [RegisterController::class, 'index'])->name('Register');
 
+Route::get('/profile-admin', [AktorController::class, 'profile_admin'])->middleware(['auth'])->name('prodile');
+
 Route::get('/mahasiswa-home', function() {
     return view('welcome');
 })->middleware('auth')->name('mahasiswa-home');

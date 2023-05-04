@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
     {
         User::create([
             'nama' => 'Krisna Wahyudi',
+            'nik' => '382619030282',
             'username' => 'krisna',
             'email' => 'krisnawahyudi2017@gmail.com',
             'role' => 'Admin',
@@ -27,6 +28,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'nama' => 'Rolin Sanjaya',
+            'nik' => '938362930387',
             'username' => 'rolin',
             'email' => 'rolinsans@gmail.com',
             'role' => 'Staf',
@@ -36,6 +38,7 @@ class UserSeeder extends Seeder
         User::create([
             'nama' => 'Surya Saputra',
             'username' => 'Surya',
+            'nik' => '938362930353',
             'email' => 'surya@gmail.com',
             'role' => 'Ketua',
             'password' => Hash::make('password')
@@ -43,9 +46,10 @@ class UserSeeder extends Seeder
 
         $mahasiswa = User::create([
             'nama' => 'Yusuf Maulana',
+            'nik' => '9383629398362',
             'username' => 'Yusuf',
             'email' => 'yusuf@gmail.com',
-            'role' => 'Mahasiswa',
+            'role' => 'Ketua',
             'password' => Hash::make('password')
         ]);
     }

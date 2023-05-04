@@ -4,13 +4,12 @@
         <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Tambah Akun {{ $title }}</h4>
+                    <h4>Edit Akun {{ $title }}</h4>
                   </div>
-                  <form action="/{{ $title }}/store" method="post">
+                  <form action="/" method="post">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <input type="hidden" name="role" id="role" value="{{ $role }}">
                             <label for="inputAddress">Nama</label>
                             <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" id="nama" required value="{{ old('nama') }}">
                             @error('nama')

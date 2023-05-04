@@ -32,6 +32,14 @@ class AktorController extends Controller
         ]);
     }
 
+    public function profile_admin()
+    {
+        return view('edit_aktor', [
+            "title" => "Profile Admin",
+            "post" => User::latest()->where('role','Admin')->paginate(10)
+        ]);
+    }
+
     public function index_staff()
     {
         return view('aktor', [
@@ -67,10 +75,11 @@ class AktorController extends Controller
     public function store_staff(Request $request)
     {
         $validatedData = $request->validate([
+            'nik' => 'required|min:2|max:60|unique:App\Models\User',
             'nama' => 'required|max:255|unique:App\Models\User',
             'username' => 'required|min:4|max:255|unique:App\Models\User',
             'role' => 'required|min:4|max:9',
-            'email' => 'required|email:dns|max:255|min:4|unique:App\Models\User',
+            'email' => 'required|email|max:255|min:4|unique:App\Models\User',
             'password' => 'required|min:5|max:255'
         ]);
         
@@ -92,8 +101,9 @@ class AktorController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|max:255|unique:App\Models\User',
             'username' => 'required|min:4|max:255|unique:App\Models\User',
+            'nik' => 'required|min:2|max:60|unique:App\Models\User',
             'role' => 'required|min:4|max:9',
-            'email' => 'required|email:dns|max:255|min:4|unique:App\Models\User',
+            'email' => 'required|email|max:255|min:4|unique:App\Models\User',
             'password' => 'required|min:5|max:255'
         ]);
         

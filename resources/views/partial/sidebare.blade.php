@@ -11,8 +11,8 @@
       <li class="{{ Request::is('/') ? 'active' : '' }}">
         <a href="/" class="nav-link"><i class="fas fa-fire"></i><span>Home</span></a>
       </li>
-      <li class="{{ ($title === "admin") ? 'dropdown active' : '' }}">
-        <a href="/admin"  data-toggle="nav-link"><i class="far fa-user"></i> <span>Profile</span></a>
+      <li class="{{ ($title === "Profile Admin") ? 'dropdown active' : '' }}">
+        <a href="/profile-admin"  data-toggle="nav-link"><i class="far fa-user"></i> <span>Profile</span></a>
       </li>
       @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Staf')
       <li class="{{ ($title === "staff" || $title === "ketua") ? 'dropdown active' : '' }}">

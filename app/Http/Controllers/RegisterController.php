@@ -15,6 +15,13 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function edit()
+    {
+        return view('register.edit',[
+            'title' => 'Edit Profile'
+        ]);
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([

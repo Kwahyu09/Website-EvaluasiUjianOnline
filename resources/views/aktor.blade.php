@@ -42,6 +42,7 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
+                            <th scope="col">Nik</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Usename</th>
                             <th scope="col">Email</th>
@@ -52,6 +53,7 @@
                         @foreach ($post as $pos)
                         <tr>
                             <td>{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}</td>
+                            <td>{{ $pos->nik }}</td>
                             <td>{{ $pos->nama }}</td>
                             <td>{{ $pos->username }}</td>
                             <td>{{ $pos->email }}</td>
