@@ -28,7 +28,7 @@
                     <div class="card-footer">
                         <div class="row align-items-center justify-content-between text-dark">
                             <div class="col-auto">
-                                <a href="/soal" class="btn btn-primary stretched-link">Lihat Soal</a>
+                                <a href="/soal/{{ $pos->slug }}" class="btn btn-primary stretched-link">Lihat Soal</a>
                             </div>
                         </div>
                     </div>

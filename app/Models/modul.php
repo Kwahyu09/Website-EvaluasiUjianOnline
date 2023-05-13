@@ -35,4 +35,9 @@ class Modul extends Model
     {
         return $this->hasMany(ujian::class);
     }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -85,7 +85,7 @@ class AktorController extends Controller
         
         $validatedData['password'] = Hash::make($validatedData['password']);
         User::create($validatedData);
-        return redirect('/staff')->with('success', 'Data Berhasil Ditambahkan!');;
+        return redirect('/staff')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
     public function create_ketua()

@@ -27,6 +27,9 @@ class DashboardHomeController extends Controller
         $mahasiswa = User::where('role', 'Mahasiswa')->count();
         $kelas = Kelas::count();
         $modul = Modul::count();
+        if(auth()->user()->role == "Ketua"){
+            $modul = Modul::where('user_id', auth()->user()->id)->count();
+        }
         $grupsoal = Grup_soal::count();
         $soal = soal::count();
         $ujian = Ujian::count();
