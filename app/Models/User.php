@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Modul;
+use App\Models\Grup_soal;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -50,5 +52,10 @@ class User extends Authenticatable
     public function modul()
     {
         return $this->hasMany(Modul::class);
+    }
+
+    public function grup_soal()
+    {
+        return $this->hasMany(Grup_soal::class);
     }
 }

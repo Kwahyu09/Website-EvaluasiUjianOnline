@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grup_soal;
 use App\Models\soal;
 use Illuminate\Http\Request;
 
@@ -12,12 +13,14 @@ class SoalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Grup_soal $grup_soal)
     {
-        return view('grupsoal.soal.soal', [
-            "title" => "Soal",
-            "soalslug" => "grup_soal",
-            "post" => soal::latest()->filter(request(['search']))->paginate(10)
+        return view('grupsoal.soal.soal',[
+            "title" => "soal",
+            "slug" => $grup_soal->slug,
+            "grup" => $grup_soal->nama_grup,
+            "post" => $grup_soal->soal,
+            "soal" => soal::latest()->filter(request(['search','modul']))->paginate(6)
         ]);
     }
 
@@ -26,9 +29,14 @@ class SoalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Grup_soal $grup_soal)
     {
-        //
+        return view('grupsoal.soal.create',[
+            "title" => "Soal",
+            "kd_soal" => uniqid(),
+            "nama_grup" => $grup_soal->nama_grup,
+            "grupsoal_id" => $grup_soal->id
+        ]);
     }
 
     /**
@@ -39,7 +47,7 @@ class SoalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**

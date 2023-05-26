@@ -5,7 +5,7 @@
     {{ $modul }}</h5>
     <div class="d-flex justify-content-start mb-4 mt-3">
       <div class="d-flex justify-content-start">
-        <a href="/grupsoal2/create" class="btn btn-primary">Tambah Data
+        <a href="/grupsoal/create/{{ $slug }}" class="btn btn-primary">Tambah Data
           <i class="bi bi-plus-circle"></i>
         </a>
       </div>

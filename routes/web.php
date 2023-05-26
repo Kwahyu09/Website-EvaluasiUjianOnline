@@ -42,17 +42,26 @@ Route::post('/ketua/store', [AktorController::class, 'store_ketua'])->middleware
 // Route::post('/mahasiswa/store', [AktorController::class, 'store_mahasiswa'])->middleware(['auth'])->name('Storemahasiswa');
 
 Route::resource('/kelas', KelasController::class)->middleware('auth');
+
 Route::resource('/dosen', DosenController::class)->middleware('auth');
 
 Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->middleware(['auth'])->name('Mahasiswa');
 
-Route::get('/modul', [ModulController::class, 'index'])->middleware('auth');
+Route::resource('/modul', ModulController::class)->middleware('auth');
 
 Route::get('/grupsoal', [GrupsoalController::class, 'index'])->middleware(['auth'])->name('GrupSoal Modul');
 
-Route::get('/grupsoal/{modul:slug}', [Grupsoal2Controller::class, 'index'])->middleware(['auth']);
+Route::get('/grupsoal/{modul:slug}', [GrupsoalController::class, 'index_grup'])->middleware(['auth']);
 
-Route::get('/soal/{grup_soal:slug}', [GrupsoalController::class,'show'])->middleware(['auth']);
+Route::get('/grupsoal/create/{modul:slug}', [GrupsoalController::class, 'create'])->middleware(['auth']);
+
+Route::post('/grupsoal/store', [GrupsoalController::class, 'store'])->middleware(['auth']);
+
+Route::get('/soal/{grup_soal:slug}', [SoalController::class,'index'])->middleware(['auth']);
+
+Route::post('/soal/store', [SoalController::class, 'store'])->middleware(['auth']);
+
+Route::get('/soal/create/{grup_soal:slug}', [SoalController::class,'create'])->middleware(['auth']);
 
 Route::resource('/ujian', UjianController::class)->middleware(['auth']);
 
@@ -68,5 +77,15 @@ Route::get('/profile-admin', [AktorController::class, 'profile_admin'])->middlew
 Route::get('/mahasiswa-home', function() {
     return view('welcome');
 })->middleware('auth')->name('mahasiswa-home');
+
+Route::get('/dosen/create/checkSlug',[DosenController::class, 'checkslug'])->middleware(['auth']);
+
+Route::get('/kelas/create/checkSlug',[KelasController::class, 'checkslug'])->middleware(['auth']);
+
+Route::get('/modul/create/checkSlug',[ModulController::class, 'checkslug'])->middleware(['auth']);
+
+Route::get('/ujian/create/checkSlug',[UjianController::class, 'checkslug'])->middleware(['auth']);
+
+Route::get('/grupsoal/create/{modul:slug}/checkSlug', [GrupsoalController::class, 'checkslug'])->middleware(['auth']);
 
 require __DIR__.'/auth.php';

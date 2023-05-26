@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class KelasController extends Controller
 {
@@ -43,6 +44,7 @@ class KelasController extends Controller
         $validatedData = $request->validate([
             'nama_kelas' => 'required|max:255|unique:App\Models\Kelas',
             'tahun_ajaran' => 'required|min:4|max:4',
+            'slug' => 'required|max:255|unique:App\Models\Kelas',
             'jurusan' => 'required|max:255'
         ]);
 
@@ -95,5 +97,11 @@ class KelasController extends Controller
     {
         Kelas::delete($kelas);
         return redirect('/kelas')->with('success', 'Data Berhasil Dihapus!');
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Kelas::class, 'slug', $request->nama_kelas);
+        return response()->json(['slug' => $slug ]);
     }
 }

@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ujian;
+use App\Models\Grup_soal;
+use App\Models\Kelas;
+use App\Models\Modul;
 use App\Http\Requests\StoreUjianRequest;
 use App\Http\Requests\UpdateUjianRequest;
+use Illuminate\Http\Request;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class UjianController extends Controller
 {
@@ -15,7 +20,7 @@ class UjianController extends Controller
      */
     public function index()
     {
-        return view('ujian', [
+        return view('ujian.index', [
             "title" => "Ujian",
             "post" => Ujian::latest()->filter(request(['search']))->paginate(10)
         ]);
@@ -28,7 +33,20 @@ class UjianController extends Controller
      */
     public function create()
     {
-        //
+        $modul = Modul::all();
+        $grupsoal = Grup_soal::all();
+        $kelas = Kelas::all();
+
+        if(auth()->user()->role == "Ketua"){
+            $Modul = Modul::where('user_id', auth()->user()->id)->latest()->filter(request(['search']))->paginate(1000);
+            $grupsoal = Grup_soal::where('user_id', auth()->user()->id)->latest()->filter(request(['search']))->paginate(1000);
+        }
+        return view('ujian.create',[
+            "title" => "Ujian",
+            "modul" => $modul,
+            "grup_soal" => $grupsoal,
+            "kelas" => $kelas
+        ]);
     }
 
     /**
@@ -85,5 +103,11 @@ class UjianController extends Controller
     public function destroy(Ujian $ujian)
     {
         //
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Ujian::class, 'slug', $request->nama_ujian);
+        return response()->json(['slug' => $slug ]);
     }
 }

@@ -6,7 +6,7 @@
             Berdasarkan
             {{ $grup }}</h5>
         <div class="d-flex justify-content-start mb-3 mt-3">
-            <a href="/soal/create" class="btn btn-primary">Tambah Data <i class="bi bi-plus-circle"></i>
+            <a href="/soal/create/{{ $slug }}" class="btn btn-primary">Tambah Data <i class="bi bi-plus-circle"></i>
             </a>
         </div>
         @if ($post->count())

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Modul;
+use App\Models\User;
 use Illuminate\Http\Request;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ModulController extends Controller
 {
@@ -28,7 +30,8 @@ class ModulController extends Controller
     public function create()
     {
         return view('fakultas.modul.create',[
-            "title" => "Modul"
+            "title" => "Modul",
+            "post" => User::all()->where('role','Ketua')
         ]);
     }
 
@@ -43,8 +46,10 @@ class ModulController extends Controller
         $validatedData = $request->validate([
             'kd_modul' => 'required|min:4|max:6|unique:App\Models\modul',
             'nama_modul' => 'required|max:255|unique:App\Models\modul',
+            'slug' => 'required',
             'semester' => 'required',
-            'sks' => 'required'
+            'sks' => 'required',
+            'user_id' => 'required'
         ]);
 
         modul::create($validatedData);
@@ -99,5 +104,11 @@ class ModulController extends Controller
     public function destroy(modul $modul)
     {
         //
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Modul::class, 'slug', $request->nama_modul);
+        return response()->json(['slug' => $slug ]);
     }
 }

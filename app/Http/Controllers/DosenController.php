@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dosen;
 use Illuminate\Http\Request;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DosenController extends Controller
 {
@@ -27,7 +28,9 @@ class DosenController extends Controller
      */
     public function create()
     {
-        //
+        return view('fakultas.dosen.create', [
+            "title" => "Dosen"
+        ]);
     }
 
     /**
@@ -38,7 +41,7 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
@@ -84,5 +87,11 @@ class DosenController extends Controller
     public function destroy(Dosen $dosen)
     {
         //
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Dosen::class, 'slug', $request->nama_dos);
+        return response()->json(['slug' => $slug ]);
     }
 }

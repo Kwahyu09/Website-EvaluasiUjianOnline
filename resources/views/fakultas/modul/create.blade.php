@@ -1,68 +1,96 @@
 @extends('layoutdashboard.main')
 @section('container')
-<div class="row">
-  <div class="col-lg-8 col-md-6 col-sm-6 col-12">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="text-center my-3 mr-4 ml-4">Tambah Data {{ $title }}</h4>
-        <form method="POST" action="/modul">
-        @csrf
-          <div class="mb-3 mr-4 ml-4">
-            <label for="kd_modul" class="form-label">Kode Modul</label>
-            <input type="text" class="form-control @error('kd_modul') is-invalid @enderror" id="kd_modul" name="kd_modul" required value="{{ old('kd_modul') }}">
-            @error('kd_modul')
-                <div class="invalid-feedback">
-                    {{ $message }}
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Tambah Data {{ $title }}</h4>
+                  </div>
+                  <form action="{{ route('modul.store') }}" method="post">
+                    @csrf
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="kd_modul">Kode Modul</label>
+                            <input type="text" name="kd_modul" class="form-control @error('kd_modul') is-invalid @enderror" id="kd_modul" required value="{{ old('kd_modul') }}">
+                            @error('kd_modul')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="nama_modul">Nama Modul</label>
+                            <input type="text" name="nama_modul" class="form-control @error('nama_modul') is-invalid @enderror" id="nama_modul" required value="{{ old('nama_modul') }}">
+                            @error('nama_modul')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="nama_modul">Dosen Pengampu</label>
+                            <select name="user_id" class="custom-select  @error('user_id') is-invalid @enderror" id="user_id" 
+                                            required="required"
+                                            value="{{ old('nama_user') }}">
+                                        @foreach ($post as $pos)
+                                            <option value="{{ $pos->id }}">{{ $pos->nama }}</option>
+                                        @endforeach
+                                        </select>
+                            @error('nama_modul')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <input type="hidden" name="slug" class="form-control @error('slug') is-invalid @enderror" id="slug" value="{{ old('slug') }}">
+                        <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="semester">Semester</label>
+                                     <select name="semester" class="custom-select  @error('semester') is-invalid @enderror" id="semester">
+                                    <?php
+                                    for ($i = 1; $i <=14; $i++): ?>
+                                        <option value="<?=$i;?>"><?=$i;?></option>
+                                    <?php endfor; ?>
+                                    </select>
+                                    @error('semester')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="sks">Sks</label>
+                                     <select name="sks" class="custom-select  @error('sks') is-invalid @enderror" id="sks">
+                                    <?php
+                                    for ($i = 1; $i <=6; $i++): ?>
+                                        <option value="<?=$i;?>"><?=$i;?></option>
+                                    <?php endfor; ?>
+                                    </select>
+                                    @error('sks')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="card-footer mr-3 mb-3 mt-0">
+                                <button class="btn btn-primary float-right" type="submit">Tambah</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            @enderror
-          </div>
-          <div class="mb-3 mr-4 ml-4">
-            <label for="nama_modul" class="form-label">Nama Modul</label>
-            <input type="text" class="form-control @error('nama_modul') is-invalid @enderror" id="nama_modul" name="nama_modul" required value="{{ old('nama_modul') }}">
-            @error('nama_modul')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-          </div>
-          <div class="form-group mb-3 mr-4 ml-4">
-            <label for="semester" class="form-label">Semester</label>
-            <select class="form-select" id="semester" name="semester">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-              </select>
-            @error('semester')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-          </div>
-          <div class="form-group mb-3 mr-4 ml-4">
-            <label for="sks" class="form-label">Sks</label>
-            <select class="form-select" id="sks" name="sks">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </select>
-            @error('sks')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-          </div>
-          <button style="float: right" type="submit" class="btn btn-primary mr-4 ml-4">Tambah Data</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+            </div>
+        </div>
+
+<script>
+    const nama_modul = document.querySelector('#nama_modul');
+    const slug = document.querySelector('#slug');
+
+    nama_modul.addEventListener('change', function(){
+        fetch('/modul/create/checkSlug?nama_modul=' + nama_modul.value)
+        .then(response => response.json())
+        .then(data => slug.value = data.slug)
+    });
+    
+</script>
 @endsection

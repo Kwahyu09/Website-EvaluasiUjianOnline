@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Dosen extends Model
 {
     use HasFactory;
+    use Sluggable;
 
     public function scopeFilter($query, array $filters)
     {
@@ -20,5 +22,19 @@ class Dosen extends Model
                   ->orWhere('prodi', 'like', '%' . $search . '%')
                   ->orWhere('email', 'like', '%' . $search . '%');
         });
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'nama_dos'
+            ]
+        ];
     }
 }
