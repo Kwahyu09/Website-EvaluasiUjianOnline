@@ -4,7 +4,7 @@
         <h5 class="mb-2">Data
             {{ $title }}
             Berdasarkan
-            {{ $grup }}</h5>
+            {{ $slug }}</h5>
         <div class="d-flex justify-content-start mb-3 mt-3">
             <a href="/soal/create/{{ $slug }}" class="btn btn-primary">Tambah Data <i class="bi bi-plus-circle"></i>
             </a>
@@ -48,7 +48,6 @@
                                         <th scope="col">No</th>
                                         <th>Kode Soal</th>
                                         <th>Pertanyaan</th>
-                                        <th>Kunci</th>
                                         <th>Opsi A</th>
                                         <th>Opsi B</th>
                                         <th>Opsi C</th>
@@ -62,15 +61,14 @@
                                     @foreach ($post as $pos)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $pos->kode_soal }}</td>
-                                        <td>{{ $pos->pertanyaan }}</td>
-                                        <td>{{ $pos->kunci }}</td>
-                                        <td>{{ $pos->opsi_a }}</td>
-                                        <td>{{ $pos->opsi_b }}</td>
-                                        <td>{{ $pos->opsi_c }}</td>
-                                        <td>{{ $pos->opsi_d }}</td>
-                                        <td>{{ $pos->jawaban }}</td>
-                                        <td>{{ $pos->bobot }}</td>
+                                        <td>{!! $pos->kode_soal !!}</td>
+                                        <td>{!! $pos->pertanyaan !!}</td>
+                                        <td>{!! $pos->opsi_a !!}</td>
+                                        <td>{!! $pos->opsi_b !!}</td>
+                                        <td>{!! $pos->opsi_c !!}</td>
+                                        <td>{!! $pos->opsi_d !!}</td>
+                                        <td>{!! $pos->jawaban !!}</td>
+                                        <td>{!! $pos->bobot !!}</td>
                                         <td>
                                             <div class="justify-content-start">
                                             <a

@@ -43,6 +43,7 @@ class UjianController extends Controller
         }
         return view('ujian.create',[
             "title" => "Ujian",
+            "kd_ujian" => uniqid(),
             "modul" => $modul,
             "grup_soal" => $grupsoal,
             "kelas" => $kelas
@@ -55,9 +56,24 @@ class UjianController extends Controller
      * @param  \App\Http\Requests\StoreUjianRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUjianRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'kd_ujian' => 'required|min:5|max:150',
+            'nama_ujian' => 'required|min:5|max:150',
+            'kelas' => 'required|max:255',
+            'modul' => 'required|max:255',
+            'slug' => 'required|min:5|max:50|unique:App\Models\Ujian',
+            'grupsoal' => 'required|max:255',
+            'acak_soal' => 'required',
+            'acak_jawaban' => 'required',
+            'tanggal' => 'required',
+            'waktu_mulai' => 'required',
+            'waktu_selesai' => 'required'
+        ]);
+
+        Ujian::create($validatedData);
+        return redirect('/ujian')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
     /**

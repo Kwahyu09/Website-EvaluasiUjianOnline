@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('modul');
             $table->string('grupsoal');
             $table->string('slug');
+            $table->string('acak_soal')->nullable();
+            $table->string('acak_jawaban')->nullable();
             $table->date('tanggal');
             $table->time('waktu_mulai');
             $table->time('waktu_selesai');

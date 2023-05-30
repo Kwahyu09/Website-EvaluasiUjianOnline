@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Kelas;
 use App\Models\Modul;
 use App\Models\Grup_soal;
 use Laravel\Sanctum\HasApiTokens;
@@ -57,5 +58,10 @@ class User extends Authenticatable
     public function grup_soal()
     {
         return $this->hasMany(Grup_soal::class);
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
     }
 }

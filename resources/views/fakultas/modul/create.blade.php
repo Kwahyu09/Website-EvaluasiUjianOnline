@@ -9,15 +9,7 @@
                   <form action="{{ route('modul.store') }}" method="post">
                     @csrf
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="kd_modul">Kode Modul</label>
-                            <input type="text" name="kd_modul" class="form-control @error('kd_modul') is-invalid @enderror" id="kd_modul" required value="{{ old('kd_modul') }}">
-                            @error('kd_modul')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
+                        <input type="hidden" name="kd_modul" class="form-control" id="kd_modul" value="{{ $kd_modul }}">
                         <div class="form-group">
                             <label for="nama_modul">Nama Modul</label>
                             <input type="text" name="nama_modul" class="form-control @error('nama_modul') is-invalid @enderror" id="nama_modul" required value="{{ old('nama_modul') }}">
@@ -33,7 +25,11 @@
                                             required="required"
                                             value="{{ old('nama_user') }}">
                                         @foreach ($post as $pos)
-                                            <option value="{{ $pos->id }}">{{ $pos->nama }}</option>
+                                            @if(old('user_id') == $pos->id)
+                                                <option value="{{ $pos->id }}" selected>{{ $pos->nama }}</option>                                               
+                                            @else
+                                                <option value="{{ $pos->id }}">{{ $pos->nama }}</option>
+                                            @endif
                                         @endforeach
                                         </select>
                             @error('nama_modul')
@@ -49,7 +45,11 @@
                                      <select name="semester" class="custom-select  @error('semester') is-invalid @enderror" id="semester">
                                     <?php
                                     for ($i = 1; $i <=14; $i++): ?>
-                                        <option value="<?=$i;?>"><?=$i;?></option>
+                                        @if(old('semester') == $i)
+                                            <option value="<?=$i;?>" selected><?=$i;?></option>
+                                        @else
+                                            <option value="<?=$i;?>"><?=$i;?></option>
+                                        @endif
                                     <?php endfor; ?>
                                     </select>
                                     @error('semester')
@@ -63,7 +63,11 @@
                                      <select name="sks" class="custom-select  @error('sks') is-invalid @enderror" id="sks">
                                     <?php
                                     for ($i = 1; $i <=6; $i++): ?>
-                                        <option value="<?=$i;?>"><?=$i;?></option>
+                                        @if(old('sks') == $i)
+                                            <option value="<?=$i;?>" selected><?=$i;?></option>
+                                        @else
+                                            <option value="<?=$i;?>"><?=$i;?></option>
+                                        @endif
                                     <?php endfor; ?>
                                     </select>
                                     @error('sks')

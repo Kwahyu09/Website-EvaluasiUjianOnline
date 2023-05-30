@@ -6,11 +6,13 @@
                   <div class="card-header">
                     <h4>Tambah Akun {{ $title }}</h4>
                   </div>
-                  <form action="/{{ $title }}/store" method="post">
+                  <form action="/mahasiswa/store" method="post">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
                             <input type="hidden" name="role" id="role" value="{{ $role }}">
+                            <input type="hidden" name="kelas_id" id="kelas_id" value="{{ $kelas_id }}">
+                            <input type="hidden" name="slug_kelas" id="slug_kelas" value="{{ $slug_kelas }}">
                             <label for="inputAddress">Nama</label>
                             <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" id="nama" required value="{{ old('nama') }}">
                             @error('nama')
@@ -29,7 +31,7 @@
                             @enderror
                             </div>
                             <div class="form-group">
-                            <label for="inputAddress2">Nik</label>
+                            <label for="inputAddress2">NPM</label>
                             <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" id="nik" required value="{{ old('nik') }}">
                             @error('nik')
                             <div class="invalid-feedback">

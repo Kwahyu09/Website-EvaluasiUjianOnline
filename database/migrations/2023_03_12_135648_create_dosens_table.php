@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('nip')->unique();
             $table->string('nama_dos');
             $table->string('slug');
-            $table->string('jabatan');
-            $table->string('gol_regu');
+            $table->string('jabatan')->nullable();
+            $table->string('gol_regu')->nullable();
             $table->string('jenis_kel');
             $table->string('prodi');
             $table->string('email');

@@ -6,10 +6,11 @@
                   <div class="card-header">
                     <h4>Tambah Data {{ $title }}</h4>
                   </div>
-                  <input type="hidden" name="slug_modul" id="slug_modul" value="{{ $slug_modul }}">
-                  <input type="hidden" name="nama_modul" id="nama_modul" value="{{ $nama_modul }}">
                   <form action="/grupsoal/store" method="post">
                     @csrf
+                    <input type="hidden" name="slug_modul" id="slug_modul" value="{{ $slug_modul }}">
+                    <input type="hidden" name="nama_modul" id="nama_modul" value="{{ $nama_modul }}">
+                    <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->id }}">
                     <div class="card-body">
                         <div class="form-group">
                           <input type="hidden" name="modul_id" id="modul_id" value="{{ $modul_id }}">

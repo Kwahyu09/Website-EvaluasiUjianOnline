@@ -31,6 +31,7 @@ class ModulController extends Controller
     {
         return view('fakultas.modul.create',[
             "title" => "Modul",
+            "kd_modul" => uniqid(),
             "post" => User::all()->where('role','Ketua')
         ]);
     }
@@ -44,9 +45,9 @@ class ModulController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'kd_modul' => 'required|min:4|max:6|unique:App\Models\modul',
-            'nama_modul' => 'required|max:255|unique:App\Models\modul',
-            'slug' => 'required',
+            'kd_modul' => 'required|unique:App\Models\modul',
+            'nama_modul' => 'required|min:1|max:255|unique:App\Models\modul',
+            'slug' => 'required|unique:App\Models\modul',
             'semester' => 'required',
             'sks' => 'required',
             'user_id' => 'required'

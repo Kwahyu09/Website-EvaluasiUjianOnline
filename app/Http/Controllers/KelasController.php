@@ -61,7 +61,11 @@ class KelasController extends Controller
      */
     public function show(Kelas $kelas)
     {
-        //
+        return view('mahasiswa.index',[
+            'title' => 'Mahasiswa',
+            'kelas' => $kelas->slug,
+            'post' => $kelas->user
+        ]);
     }
 
     /**
@@ -95,13 +99,22 @@ class KelasController extends Controller
      */
     public function destroy(Kelas $kelas)
     {
-        Kelas::delete($kelas);
-        return redirect('/kelas')->with('success', 'Data Berhasil Dihapus!');
+        // Kelas::delete($kelas);
+        // return redirect('/kelas')->with('success', 'Data Berhasil Dihapus!');
     }
 
     public function checkSlug(Request $request)
     {
         $slug = SlugService::createSlug(Kelas::class, 'slug', $request->nama_kelas);
         return response()->json(['slug' => $slug ]);
+    }
+
+    public function kelas_siswa()
+    {
+        return view('mahasiswa.kelas',[
+            "title" => "Kelas Mahasiswa",
+            "slug" => "kelasmahasiswa",
+            "post" => Kelas::latest()->filter(request(['search']))->paginate(8)
+        ]);
     }
 }

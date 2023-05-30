@@ -37,7 +37,7 @@
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="/dosen">Dosen</a></li>
           <li><a class="nav-link" href="/kelas">Kelas</a></li>
-          <li><a class="nav-link" href="/mahasiswa">Mahasiswa</a></li>
+          <li><a class="nav-link" href="/kelasmahasiswa">Mahasiswa</a></li>
           <li><a class="nav-link" href="/modul">Modul</a></li>
         </ul>
     </li>

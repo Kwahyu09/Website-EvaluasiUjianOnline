@@ -68,14 +68,16 @@ class GrupsoalController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
-        // $validatedData = $request->validate([
-        //     'nama_grup' => 'required|min:4|max:255|unique:App\Models\Grup_soal'
-        // ]);
+        $validatedData = $request->validate([
+            'user_id' => 'required',
+            'modul_id' => 'required',
+            'nama_grup' => 'required|min:4|max:255',
+            'slug' => 'required|min:4|max:255|unique:App\Models\Modul'
+        ]);
 
-        // Grup_soal::create($validatedData);
+        Grup_soal::create($validatedData);
 
-        // return redirect('/grupsoal2')->with('success', 'Data Grup Berhasil Ditambahkan!');
+        return redirect('/grupsoal'.'/'.$request->slug_modul)->with('success', 'Data Grup Berhasil Ditambahkan!');
     }
 
     /**

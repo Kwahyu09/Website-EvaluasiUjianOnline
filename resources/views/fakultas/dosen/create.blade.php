@@ -32,12 +32,38 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="jabatan">Jabatan</label>
-                                        <select class="custom-select @error('jabatan') is-invalid @enderror" id="jabatan" name="jabatan" required value="{{ old('jabatan') }}">
-                                            <option value="Asisten Ahli">Asisten Ahli</option>
-                                            <option value="Lektor">Lektor</option>
-                                            <option value="Lektor Kepala">Lektor Kepala</option>
-                                            <option value="Guru Besar/Profesor">Guru Besar/Profesor</option>
-                                            <option value="">Null</option>
+                                        <select class="custom-select @error('jabatan') is-invalid @enderror" id="jabatan" name="jabatan" required>
+                                            @if(old('jabatan') == "Asisten Ahli")
+                                                <option value="Asisten Ahli" selected>Asisten Ahli</option>
+                                                <option value="Lektor">Lektor</option>
+                                                <option value="Lektor Kepala">Lektor Kepala</option>
+                                                <option value="Guru Besar/Profesor">Guru Besar/Profesor</option>
+                                                <option value="">Tidak Ada</option>
+                                            @elseif(old('jabatan') == "Lektor")
+                                                <option value="Asisten Ahli">Asisten Ahli</option>
+                                                <option value="Lektor" selected>Lektor</option>
+                                                <option value="Lektor Kepala">Lektor Kepala</option>
+                                                <option value="Guru Besar/Profesor">Guru Besar/Profesor</option>
+                                                <option value="">Tidak Ada</option>
+                                            @elseif(old('jabatan') == "Lektor Kepala")
+                                                <option value="Asisten Ahli">Asisten Ahli</option>
+                                                <option value="Lektor">Lektor</option>
+                                                <option value="Lektor Kepala" selected>Lektor Kepala</option>
+                                                <option value="Guru Besar/Profesor">Guru Besar/Profesor</option>
+                                                <option value="">Tidak Ada</option>
+                                            @elseif(old('jabatan') == "Guru Besar/Profesor")
+                                                <option value="Asisten Ahli">Asisten Ahli</option>
+                                                <option value="Lektor">Lektor</option>
+                                                <option value="Lektor Kepala">Lektor Kepala</option>
+                                                <option value="Guru Besar/Profesor" selected>Guru Besar/Profesor</option>
+                                                <option value="">Tidak Ada</option>
+                                            @else
+                                                <option value="Asisten Ahli">Asisten Ahli</option>
+                                                <option value="Lektor">Lektor</option>
+                                                <option value="Lektor Kepala">Lektor Kepala</option>
+                                                <option value="Guru Besar/Profesor">Guru Besar/Profesor</option>
+                                                <option value="">Tidak Ada</option>
+                                            @endif
                                         </select>
                                     @error('jabatan')
                                     <div class="invalid-feedback">
@@ -49,16 +75,118 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="gol_regu">Golongan Regu</label>
-                                        <select class="custom-select @error('gol_regu') is-invalid @enderror" id="gol_regu" name="gol_regu" required value="{{ old('gol_regu') }}">
-                                        <option value="III/a">III/a</option>
-                                        <option value="III/b">III/b</option>
-                                        <option value="III/c">III/c</option>
-                                        <option value="III/d">III/d</option>
-                                        <option value="IV/a">IV/a</option>
-                                        <option value="IV/b">IV/b</option>
-                                        <option value="IV/c">IV/c</option>
-                                        <option value="IV/d">IV/d</option>
-                                        <option value="IV/e">IV/e</option>
+                                        <select class="custom-select @error('gol_regu') is-invalid @enderror" id="gol_regu" name="gol_regu" required>
+                                            @if(old('gol_regu') == "III/a")
+                                                <option value="III/a" selected>III/a</option>
+                                                <option value="III/b">III/b</option>
+                                                <option value="III/c">III/c</option>
+                                                <option value="III/d">III/d</option>
+                                                <option value="IV/a">IV/a</option>
+                                                <option value="IV/b">IV/b</option>
+                                                <option value="IV/c">IV/c</option>
+                                                <option value="IV/d">IV/d</option>
+                                                <option value="IV/e">IV/e</option>
+                                                <option value="">Tidak Ada</option>
+                                            @elseif(old('gol_regu') == "III/b")
+                                                <option value="III/a">III/a</option>
+                                                <option value="III/b" selected>III/b</option>
+                                                <option value="III/c">III/c</option>
+                                                <option value="III/d">III/d</option>
+                                                <option value="IV/a">IV/a</option>
+                                                <option value="IV/b">IV/b</option>
+                                                <option value="IV/c">IV/c</option>
+                                                <option value="IV/d">IV/d</option>
+                                                <option value="IV/e">IV/e</option>
+                                                <option value="">Tidak Ada</option>
+                                            @elseif(old('gol_regu') == "III/c")
+                                                <option value="III/a">III/a</option>
+                                                <option value="III/b">III/b</option>
+                                                <option value="III/c" selected>III/c</option>
+                                                <option value="III/d">III/d</option>
+                                                <option value="IV/a">IV/a</option>
+                                                <option value="IV/b">IV/b</option>
+                                                <option value="IV/c">IV/c</option>
+                                                <option value="IV/d">IV/d</option>
+                                                <option value="IV/e">IV/e</option>
+                                                <option value="">Tidak Ada</option>
+                                            @elseif(old('gol_regu') == "III/d")
+                                                <option value="III/a">III/a</option>
+                                                <option value="III/b">III/b</option>
+                                                <option value="III/c">III/c</option>
+                                                <option value="III/d" selected>III/d</option>
+                                                <option value="IV/a">IV/a</option>
+                                                <option value="IV/b">IV/b</option>
+                                                <option value="IV/c">IV/c</option>
+                                                <option value="IV/d">IV/d</option>
+                                                <option value="IV/e">IV/e</option>
+                                                <option value="">Tidak Ada</option>
+                                            @elseif(old('gol_regu') == "IV/a")
+                                                <option value="III/a">III/a</option>
+                                                <option value="III/b">III/b</option>
+                                                <option value="III/c">III/c</option>
+                                                <option value="III/d">III/d</option>
+                                                <option value="IV/a" selected>IV/a</option>
+                                                <option value="IV/b">IV/b</option>
+                                                <option value="IV/c">IV/c</option>
+                                                <option value="IV/d">IV/d</option>
+                                                <option value="IV/e">IV/e</option>
+                                                <option value="">Tidak Ada</option>
+                                            @elseif(old('gol_regu') == "IV/b")
+                                                <option value="III/a">III/a</option>
+                                                <option value="III/b">III/b</option>
+                                                <option value="III/c">III/c</option>
+                                                <option value="III/d">III/d</option>
+                                                <option value="IV/a">IV/a</option>
+                                                <option value="IV/b" selected>IV/b</option>
+                                                <option value="IV/c">IV/c</option>
+                                                <option value="IV/d">IV/d</option>
+                                                <option value="IV/e">IV/e</option>
+                                                <option value="">Tidak Ada</option>
+                                            @elseif(old('gol_regu') == "IV/c")
+                                                <option value="III/a">III/a</option>
+                                                <option value="III/b">III/b</option>
+                                                <option value="III/c">III/c</option>
+                                                <option value="III/d">III/d</option>
+                                                <option value="IV/a">IV/a</option>
+                                                <option value="IV/b">IV/b</option>
+                                                <option value="IV/c" selected>IV/c</option>
+                                                <option value="IV/d">IV/d</option>
+                                                <option value="IV/e">IV/e</option>
+                                                <option value="">Tidak Ada</option>
+                                            @elseif(old('gol_regu') == "IV/d")
+                                                <option value="III/a">III/a</option>
+                                                <option value="III/b">III/b</option>
+                                                <option value="III/c">III/c</option>
+                                                <option value="III/d">III/d</option>
+                                                <option value="IV/a">IV/a</option>
+                                                <option value="IV/b">IV/b</option>
+                                                <option value="IV/c">IV/c</option>
+                                                <option value="IV/d" selected>IV/d</option>
+                                                <option value="IV/e">IV/e</option>
+                                                <option value="">Tidak Ada</option>
+                                            @elseif(old('gol_regu') == "IV/e")
+                                                <option value="III/a">III/a</option>
+                                                <option value="III/b">III/b</option>
+                                                <option value="III/c">III/c</option>
+                                                <option value="III/d">III/d</option>
+                                                <option value="IV/a">IV/a</option>
+                                                <option value="IV/b">IV/b</option>
+                                                <option value="IV/c">IV/c</option>
+                                                <option value="IV/d">IV/d</option>
+                                                <option value="IV/e" selected>IV/e</option>
+                                                <option value="">Tidak Ada</option>
+                                            @else
+                                                <option value="III/a">III/a</option>
+                                                <option value="III/b">III/b</option>
+                                                <option value="III/c">III/c</option>
+                                                <option value="III/d">III/d</option>
+                                                <option value="IV/a">IV/a</option>
+                                                <option value="IV/b">IV/b</option>
+                                                <option value="IV/c">IV/c</option>
+                                                <option value="IV/d">IV/d</option>
+                                                <option value="IV/e">IV/e</option>
+                                                <option value="">Tidak Ada</option>
+                                            @endif
                                         </select>
                                     @error('jabatan')
                                     <div class="invalid-feedback">
@@ -78,11 +206,16 @@
                                 <input class="form-check-input" type="radio" name="jenis_kel" id="jenis_kel" value="Perempuan">
                                 <label class="form-check-label" for="jenis_kel">Perempuan</label>
                                 </div>
+                                @error('jenis_kel')
+                                    <p class="text-danger">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="prodi">Prodi</label>
-                                    <input type="prodi" name="prodi" class="form-control  @error('prodi') is-invalid @enderror" id="prodi" required>
+                                    <input type="prodi" name="prodi" class="form-control  @error('prodi') is-invalid @enderror" id="prodi" required value="{{ old('prodi') }}">
                                     @error('prodi')
                                         <div class="invalid-feedback">
                                             {{ $message }}

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->char('kode_soal')->unique();
             $table->foreignId('grup_soal_id');
             $table->text('pertanyaan');
+            $table->string('slug');
             $table->string('image')->nullable();
-            $table->string('kunci');
             $table->string('opsi_a');
             $table->string('opsi_b');
             $table->string('opsi_c');

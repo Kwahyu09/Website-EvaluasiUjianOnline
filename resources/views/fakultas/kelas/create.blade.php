@@ -6,7 +6,7 @@
                   <div class="card-header">
                     <h4>Tambah Data {{ $title }}</h4>
                   </div>
-                  <form action="{{ route('kelas.store') }}" method="post">
+                  <form action="/kelas/store" method="post">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
@@ -56,9 +56,11 @@
 <script>
     const nama_kelas = document.querySelector('#nama_kelas');
     const slug = document.querySelector('#slug');
+    const tahun_ajaran = document.querySelector('#tahun_ajaran');
+    const jurusan = document.querySelector('#jurusan');
 
     nama_kelas.addEventListener('change', function(){
-        fetch('/kelas/create/checkSlug?nama_kelas=' + nama_kelas.value)
+        fetch('/kelas/create/checkSlug?nama_kelas=' + nama_kelas.value + ' ' + tahun_ajaran.value + ' ' + jurusan.value)
         .then(response => response.json())
         .then(data => slug.value = data.slug)
     });

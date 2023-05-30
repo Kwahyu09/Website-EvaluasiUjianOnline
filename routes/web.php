@@ -10,7 +10,6 @@ use App\Http\Controllers\UjianController;
 use App\Http\Controllers\EvaluasiController;
 use App\Http\Controllers\GrupsoalController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\Grupsoal2Controller;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\HasilujianController;
 use App\Http\Controllers\DashboardHomeController;
@@ -41,15 +40,27 @@ Route::post('/ketua/store', [AktorController::class, 'store_ketua'])->middleware
 // Route::get('/mahasiswa/create', [AktorController::class, 'create_mahasiswa'])->middleware(['auth'])->name('Createmahasiswa');
 // Route::post('/mahasiswa/store', [AktorController::class, 'store_mahasiswa'])->middleware(['auth'])->name('Storemahasiswa');
 
-Route::resource('/kelas', KelasController::class)->middleware('auth');
+Route::get('/kelas', [KelasController::class,'index'])->middleware(['auth']);
+
+Route::get('/kelas/create', [KelasController::class,'create'])->middleware(['auth']);
+
+Route::post('/kelas/store', [KelasController::class,'store'])->middleware(['auth']);
 
 Route::resource('/dosen', DosenController::class)->middleware('auth');
 
 Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->middleware(['auth'])->name('Mahasiswa');
 
+Route::post('/mahasiswa/store', [MahasiswaController::class,'store'])->middleware(['auth']);
+
+Route::get('/mahasiswa/create/{kelas:slug}', [MahasiswaController::class, 'create'])->middleware(['auth'])->name('CreateKetua');
+
+Route::get('/kelasmahasiswa', [KelasController::class, 'kelas_siswa'])->middleware(['auth']);
+
 Route::resource('/modul', ModulController::class)->middleware('auth');
 
 Route::get('/grupsoal', [GrupsoalController::class, 'index'])->middleware(['auth'])->name('GrupSoal Modul');
+
+Route::get('/kelas/{kelas:slug}',[KelasController::class, 'show'])->middleware(['auth']);
 
 Route::get('/grupsoal/{modul:slug}', [GrupsoalController::class, 'index_grup'])->middleware(['auth']);
 

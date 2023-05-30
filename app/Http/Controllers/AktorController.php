@@ -75,7 +75,7 @@ class AktorController extends Controller
     public function store_staff(Request $request)
     {
         $validatedData = $request->validate([
-            'nik' => 'required|min:2|max:60|unique:App\Models\User',
+            'nik' => 'required|min:2|max:18|unique:App\Models\User',
             'nama' => 'required|max:255|unique:App\Models\User',
             'username' => 'required|min:4|max:255|unique:App\Models\User',
             'role' => 'required|min:4|max:9',
@@ -101,7 +101,7 @@ class AktorController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|max:255|unique:App\Models\User',
             'username' => 'required|min:4|max:255|unique:App\Models\User',
-            'nik' => 'required|min:2|max:60|unique:App\Models\User',
+            'nik' => 'required|min:2|max:18|unique:App\Models\User',
             'role' => 'required|min:4|max:9',
             'email' => 'required|email|max:255|min:4|unique:App\Models\User',
             'password' => 'required|min:5|max:255'

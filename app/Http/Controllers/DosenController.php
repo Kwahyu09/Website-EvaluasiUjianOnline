@@ -41,7 +41,19 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $validatedData = $request->validate([
+            'nip' => 'required|min:2|max:18|unique:App\Models\Dosen',
+            'nama_dos' => 'required|min:3|max:255',
+            'slug' => 'required|unique:App\Models\Dosen',
+            'jabatan' => 'max:255',
+            'gol_regu' => 'max:255',
+            'jenis_kel' => 'required|min:4|max:9',
+            'prodi' => 'required|min:3|max:255',
+            'email' => 'required|email|max:255|min:4|unique:App\Models\Dosen'
+        ]);
+        
+        Dosen::create($validatedData);
+        return redirect('/dosen')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
     /**

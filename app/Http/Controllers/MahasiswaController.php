@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use App\Models\Kelas;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreMahasiswaRequest;
 use App\Http\Requests\UpdateMahasiswaRequest;
 use App\Models\User;
@@ -27,9 +30,14 @@ class MahasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Kelas $kelas)
     {
-        //
+        return view('mahasiswa.create', [
+            "title" => "Mahasiswa",
+            "role" => "Mahasiswa",
+            "kelas_id" => $kelas->id,
+            "slug_kelas" => $kelas->slug
+        ]);
     }
 
     /**
@@ -38,9 +46,21 @@ class MahasiswaController extends Controller
      * @param  \App\Http\Requests\StoreMahasiswaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMahasiswaRequest $request)
+    public function store(Request $request)
     {
-        //
+         $validatedData = $request->validate([
+            'kelas_id' => 'required',
+            'nik' => 'required|min:9|max:9|unique:App\Models\User',
+            'nama' => 'required|max:255',
+            'username' => 'required|min:4|max:255|unique:App\Models\User',
+            'role' => 'required|min:4|max:9',
+            'email' => 'required|email|max:255|min:4|unique:App\Models\User',
+            'password' => 'required|min:5|max:255'
+        ]);
+        
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        User::create($validatedData);
+        return redirect('/kelas'.'/'.$request->slug_kelas)->with('success', 'Data Berhasil Ditambahkan!');
     }
 
     /**

@@ -10,6 +10,8 @@ class Dosen extends Model
 {
     use HasFactory;
     use Sluggable;
+    
+    protected $guarded = ['id'];
 
     public function scopeFilter($query, array $filters)
     {

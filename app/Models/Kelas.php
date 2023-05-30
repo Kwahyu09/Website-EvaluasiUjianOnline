@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -22,9 +23,9 @@ class Kelas extends Model
         });
     }
 
-    public function mahasiswa()
+    public function user()
     {
-        return $this->hasMany(mahasiswa::class);
+        return $this->hasMany(User::class);
     }
 
     public function ujian()

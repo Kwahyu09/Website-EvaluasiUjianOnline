@@ -10,6 +10,14 @@
         </a>
       </div>
     </div>
+    @if(session()->has('success'))
+        <div class="alert alert-success alert-block">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert">
+                <a href="/{{ $title }}" style="text-decoration: none;">×</a>
+            </button>
+        </div>
+    @endif
     @if ($post->count())
 <div class="container">
     <div class="row">
