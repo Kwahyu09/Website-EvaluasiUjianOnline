@@ -70,7 +70,6 @@
                                         <td>{!! $pos->jawaban !!}</td>
                                         <td>{!! $pos->bobot !!}</td>
                                         <td>
-                                            <div class="justify-content-start">
                                             <a
                                                 href="/{{ $title }}/{{ $pos->id }}"
                                                 class="btn btn-primary btn-action mr-1"
@@ -78,18 +77,12 @@
                                                 title="Ubah">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            </div>
-                                            <div class="justify-content-end"></div>
-                                            <a
-                                                href="/{{ $title }}/{{ $pos->id }}"
-                                                class="btn btn-danger btn-action"
-                                                data-toggle="tooltip"
-                                                title="Hapus"
-                                                data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
-                                                data-confirm-yes="alert('Deleted')">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                            </div>
+                                            <form action="/soal/{{ $pos->slug }}" method="POST" class="d-inline">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="btn btn-danger btn-action" data-toggle="tooltip"
+                                                title="Hapus" onclick="return confirm('Yakin Data Ini Dihapus ?')"><i class="fas fa-trash"></i></button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

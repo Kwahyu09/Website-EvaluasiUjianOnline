@@ -98,7 +98,8 @@ class DosenController extends Controller
      */
     public function destroy(Dosen $dosen)
     {
-        //
+        Dosen::destroy($dosen->id);
+        return redirect('/dosen')->with('success', 'Data Berhasil DiHapus!');
     }
 
     public function checkSlug(Request $request)

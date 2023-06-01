@@ -30,11 +30,12 @@ Route::get('/admin', [AktorController::class, 'index_admin'])->middleware(['auth
 Route::get('/staff', [AktorController::class, 'index_staff'])->middleware(['auth'])->name('Staff');
 Route::get('/staff/create', [AktorController::class, 'create_staff'])->middleware(['auth'])->name('CreateStaff');
 Route::post('/staff/store', [AktorController::class, 'store_staff'])->middleware(['auth'])->name('StoreStaff');
-Route::post('/staff/destroy', [AktorController::class, 'destroy_staff'])->middleware(['auth'])->name('destroyStaff');
+Route::delete('/staff/{user:id}', [AktorController::class, 'destroy_staff'])->middleware(['auth'])->name('destroyStaff');
 
 Route::get('/ketua', [AktorController::class, 'index_ketua'])->middleware(['auth'])->name('Ketua');
 Route::get('/ketua/create', [AktorController::class, 'create_ketua'])->middleware(['auth'])->name('CreateKetua');
 Route::post('/ketua/store', [AktorController::class, 'store_ketua'])->middleware(['auth'])->name('StoreKetua');
+Route::delete('/ketua/{user:id}', [AktorController::class, 'destroy_ketua'])->middleware(['auth'])->name('destroyKetua');
 
 // Route::get('/mahasiswa', [AktorController::class, 'index_mahasiswa'])->middleware(['auth'])->name('mahasiswa');
 // Route::get('/mahasiswa/create', [AktorController::class, 'create_mahasiswa'])->middleware(['auth'])->name('Createmahasiswa');
@@ -46,9 +47,15 @@ Route::get('/kelas/create', [KelasController::class,'create'])->middleware(['aut
 
 Route::post('/kelas/store', [KelasController::class,'store'])->middleware(['auth']);
 
+Route::delete('/kelas/{kelas:slug}', [KelasController::class, 'destroy'])->middleware(['auth'])->name('destroyKetua');
+
 Route::resource('/dosen', DosenController::class)->middleware('auth');
 
+Route::delete('/dosen/{dosen:id}', [DosenController::class, 'destroy'])->middleware(['auth'])->name('destroyDosen');
+
 Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->middleware(['auth'])->name('Mahasiswa');
+
+Route::delete('/mahasiswa/{user:id}', [MahasiswaController::class, 'destroy'])->middleware(['auth'])->name('MahasiswaHapus');
 
 Route::post('/mahasiswa/store', [MahasiswaController::class,'store'])->middleware(['auth']);
 
@@ -58,7 +65,11 @@ Route::get('/kelasmahasiswa', [KelasController::class, 'kelas_siswa'])->middlewa
 
 Route::resource('/modul', ModulController::class)->middleware('auth');
 
+Route::delete('/modul/{modul:slug}', [ModulController::class, 'destroy'])->middleware(['auth'])->name('destroyModul');
+
 Route::get('/grupsoal', [GrupsoalController::class, 'index'])->middleware(['auth'])->name('GrupSoal Modul');
+
+Route::delete('/grupsoal/{grup_soal:slug}', [GrupsoalController::class, 'destroy'])->middleware(['auth'])->name('destroyGrupsoal');
 
 Route::get('/kelas/{kelas:slug}',[KelasController::class, 'show'])->middleware(['auth']);
 
@@ -72,9 +83,13 @@ Route::get('/soal/{grup_soal:slug}', [SoalController::class,'index'])->middlewar
 
 Route::post('/soal/store', [SoalController::class, 'store'])->middleware(['auth']);
 
+Route::delete('/soal/{soal:slug}', [SoalController::class, 'destroy'])->middleware(['auth'])->name('destroySoal');
+
 Route::get('/soal/create/{grup_soal:slug}', [SoalController::class,'create'])->middleware(['auth']);
 
 Route::resource('/ujian', UjianController::class)->middleware(['auth']);
+
+Route::delete('/ujian/{ujian:slug}', [UjianController::class, 'destroy'])->middleware(['auth'])->name('destroyUjian');
 
 Route::resource('/hasilujian', HasilujianController::class)->middleware(['auth']);
 

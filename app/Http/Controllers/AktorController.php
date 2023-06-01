@@ -174,4 +174,10 @@ class AktorController extends Controller
         User::destroy($user->id);
         return redirect('/staff')->with('success', 'Data Berhasil DiHapus!');
     }
+    
+    public function destroy_ketua(User $user)
+    {
+        User::destroy($user->id);
+        return redirect('/ketua')->with('success', 'Data Berhasil DiHapus!');
+    }
 }

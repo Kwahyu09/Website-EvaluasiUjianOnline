@@ -74,15 +74,12 @@
                                                 title="Ubah">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <a
-                                                href="/{{ $title }}/{{ $pos->id }}"
-                                                class="btn btn-danger btn-action"
-                                                data-toggle="tooltip"
-                                                title="Hapus"
-                                                data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
-                                                data-confirm-yes="alert('Deleted')">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
+                                            <form action="/dosen/{{ $pos->id }}" method="POST" class="d-inline">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="btn btn-danger btn-action" data-toggle="tooltip"
+                                                title="Hapus" onclick="return confirm('Yakin Data Ini Dihapus ?')"><i class="fas fa-trash"></i></button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -6,7 +6,6 @@ use App\Models\Mahasiswa;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\StoreMahasiswaRequest;
 use App\Http\Requests\UpdateMahasiswaRequest;
 use App\Models\User;
 
@@ -103,8 +102,9 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mahasiswa $mahasiswa)
+    public function destroy(User $user)
     {
-        //
+        User::destroy($user->id);
+        return redirect('/staff')->with('success', 'Data Berhasil DiHapus!');
     }
 }

@@ -66,18 +66,19 @@
                             <td>{{ $pos->waktu_mulai }}</td>
                             <td>{{ $pos->waktu_selesai }}</td>
                             <td>
-                                <a  href="/{{ $title }}/{{ $pos->id }}" class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Ubah">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </a>
                                 <a
                                     href="/{{ $title }}/{{ $pos->id }}"
-                                    class="btn btn-danger btn-action"
+                                    class="btn btn-primary btn-action mr-1"
                                     data-toggle="tooltip"
-                                    title="Hapus"
-                                    data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
-                                    data-confirm-yes="alert('Deleted')">
-                                    <i class="fas fa-trash"></i>
+                                    title="Ubah">
+                                    <i class="fas fa-pencil-alt"></i>
                                 </a>
+                                <form action="/ujian/{{ $pos->slug }}" method="POST" class="d-inline">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger btn-action" data-toggle="tooltip"
+                                    title="Hapus" onclick="return confirm('Yakin Data Ini Dihapus ?')"><i class="fas fa-trash"></i></button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

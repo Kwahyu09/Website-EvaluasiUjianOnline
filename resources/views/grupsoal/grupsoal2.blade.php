@@ -38,6 +38,23 @@
                             <div class="col-auto">
                                 <a href="/soal/{{ $pos->slug }}" class="btn btn-primary stretched-link">Lihat Soal</a>
                             </div>
+                            <div class="col-auto">
+                                <div class="file-action">
+                                    <a
+                                        href="/{{ $title }}/{{ $pos->id }}"
+                                        class="btn btn-primary btn-action mr-1"
+                                        data-toggle="tooltip"
+                                        title="Ubah">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <form action="/grupsoal/{{ $pos->slug }}" method="POST" class="d-inline">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-danger btn-action" data-toggle="tooltip"
+                                        title="Hapus" onclick="return confirm('Yakin Data Ini Dihapus ?')"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.card-footer -->

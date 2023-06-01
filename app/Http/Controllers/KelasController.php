@@ -99,8 +99,8 @@ class KelasController extends Controller
      */
     public function destroy(Kelas $kelas)
     {
-        // Kelas::delete($kelas);
-        // return redirect('/kelas')->with('success', 'Data Berhasil Dihapus!');
+        Kelas::destroy($kelas->id);
+        return redirect('/kelas')->with('success', 'Data Berhasil DiHapus!');
     }
 
     public function checkSlug(Request $request)

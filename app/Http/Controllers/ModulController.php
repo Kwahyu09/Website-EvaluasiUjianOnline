@@ -104,7 +104,8 @@ class ModulController extends Controller
      */
     public function destroy(modul $modul)
     {
-        //
+        Modul::destroy($modul->id);
+        return redirect('/modul')->with('success', 'Data Berhasil DiHapus!');
     }
 
     public function checkSlug(Request $request)
