@@ -4,28 +4,29 @@
         <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Tambah Data {{ $title }}</h4>
+                    <h4>Ubah Data {{ $title }}</h4>
                   </div>
-                  <form action="/kelas/store" method="post">
+                  <form action="/kelas/{{ $post->slug }}/update" method="post">
+                    @method('put')
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
                             <label for="nama_kelas">Nama Kelas</label>
-                            <input type="text" name="nama_kelas" class="form-control @error('nama_kelas') is-invalid @enderror" id="nama_kelas" required value="{{ old('nama_kelas') }}">
+                            <input type="text" name="nama_kelas" class="form-control @error('nama_kelas') is-invalid @enderror" id="nama_kelas" required value="{{ old('nama_kelas', $post->nama_kelas) }}">
                             @error('nama_kelas')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
                         </div>
-                        <input type="hidden" name="slug" class="form-control @error('slug') is-invalid @enderror" id="slug" value="{{ old('slug') }}">
+                        <input type="hidden" name="slug" class="form-control @error('slug') is-invalid @enderror" id="slug" value="{{ old('slug', $post->slug) }}">
                         <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="tahun_ajaran">Tahun</label>
                                      <select name="tahun_ajaran" class="custom-select  @error('tahun_ajaran') is-invalid @enderror" id="tahun_ajaran">
                                     <?php
                                     for ($year = (int)date('Y'); 1990 <= $year; $year--): ?>
-                                        @if(old('tahun_ajaran') == $year)
+                                        @if(old('tahun_ajaran', $post->tahun_ajaran) == $year)
                                             <option value="<?=$year;?>" selected><?=$year;?></option>
                                         @else
                                             <option value="<?=$year;?>"><?=$year;?></option>
@@ -40,7 +41,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="jurusan">Jurusan</label>
-                                    <input type="jurusan" name="jurusan" class="form-control  @error('jurusan') is-invalid @enderror" id="jurusan" required value="{{ old('jurusan') }}">
+                                    <input type="jurusan" name="jurusan" class="form-control  @error('jurusan') is-invalid @enderror" id="jurusan" required value="{{ old('jurusan', $post->jurusan) }}">
                                     @error('jurusan')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -49,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="card-footer mr-3 mb-3 mt-0">
-                                <button class="btn btn-primary float-right" type="submit">Tambah</button>
+                                <button class="btn btn-primary float-right" type="submit">Ubah</button>
                             </div>
                         </div>
                     </form>

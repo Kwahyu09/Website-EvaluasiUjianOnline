@@ -91,7 +91,10 @@ class SoalController extends Controller
      */
     public function edit(soal $soal)
     {
-        //
+        return view('grupsoal.soal.edit',[
+            "title" => "Soal",
+            "post" => $soal
+        ]);
     }
 
     /**
@@ -103,7 +106,34 @@ class SoalController extends Controller
      */
     public function update(Request $request, soal $soal)
     {
-        //
+        $rules = [
+            'kode_soal' => 'required|min:5|max:50',
+            'pertanyaan' => 'required|min:2|max:255',
+            'grup_soal_id' => 'required',
+            'opsi_a' => 'required',
+            'opsi_b' => 'required',
+            'opsi_c' => 'required',
+            'opsi_d' => 'required',
+            'bobot' => 'required'
+        ];
+        
+        if($request->slug != $soal->slug){
+            $validatedData['slug'] = 'required|min:5|max:50|unique:App\Models\Soal';
+        }
+        $validatedData = $request->validate($rules);
+        if($request['jawaban'] == "opsi_a"){
+            $validatedData['jawaban'] = $request['opsi_a'];
+        }elseif($request['jawaban'] == "opsi_b"){
+            $validatedData['jawaban'] = $request['opsi_b'];
+        }elseif($request['jawaban'] == "opsi_c"){
+            $validatedData['jawaban'] = $request['opsi_c'];
+        }else{
+            $validatedData['jawaban'] = $request['opsi_d'];
+        }
+
+        Soal::where('id', $soal->id)
+            ->update($validatedData);
+        return redirect('/soal'.'/'.$soal->grup_soal->slug)->with('success', 'Data Berhasil DiUbah!');
     }
 
     /**

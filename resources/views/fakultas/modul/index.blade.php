@@ -44,6 +44,7 @@
                             <th scope="col">No</th>
                             <th scope="col">Kode Modul</th>
                             <th scope="col">Nama Modul</th>
+                            <th scope="col">Dosen Pengampu</th>
                             <th scope="col">Semester</th>
                             <th scope="col">Sks</th>
                             <th scope="col">Action</th>
@@ -55,11 +56,12 @@
                             <td>{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}</td>
                             <td>{{ $pos->kd_modul }}</td>
                             <td>{{ $pos->nama_modul }}</td>
+                            <td>{{ $pos->user->nama }}</td>
                             <td>{{ $pos->semester }}</td>
                             <td>{{ $pos->sks }}</td>
                             <td>
                                 <a
-                                    href="/{{ $title }}/{{ $pos->id }}"
+                                    href="/modul/{{ $pos->slug }}/edit"
                                     class="btn btn-primary btn-action mr-1"
                                     data-toggle="tooltip"
                                     title="Ubah">

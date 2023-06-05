@@ -75,7 +75,10 @@ class DosenController extends Controller
      */
     public function edit(Dosen $dosen)
     {
-        //
+        return view('fakultas.dosen.edit', [
+            "title" => "Dosen",
+            "post" => $dosen,
+        ]);
     }
 
     /**
@@ -87,7 +90,28 @@ class DosenController extends Controller
      */
     public function update(Request $request, Dosen $dosen)
     {
-        //
+        $rules = [
+            'nama_dos' => 'required|min:3|max:255',
+            'jabatan' => 'max:255',
+            'gol_regu' => 'max:255',
+            'jenis_kel' => 'required|min:4|max:9',
+            'prodi' => 'required|min:3|max:255'
+        ];
+
+        if($request->nip != $dosen->nip){
+            $rules['nip'] = 'required|min:2|max:18|unique:App\Models\Dosen';
+        }
+        if($request->slug != $dosen->slug){
+            $rules['slug'] = 'required|unique:App\Models\Dosen';
+        }
+        if($request->email != $dosen->email){
+            $rules['email'] = 'required|email|max:255|min:4|unique:App\Models\Dosen';
+        }
+
+        $validatedData = $request->validate($rules);
+        Dosen::where('id', $dosen->id)
+            ->update($validatedData);
+        return redirect('/dosen')->with('success', 'Data Berhasil DiUbah!');
     }
 
     /**

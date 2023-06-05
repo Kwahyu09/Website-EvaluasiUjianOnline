@@ -72,7 +72,7 @@ class GrupsoalController extends Controller
             'user_id' => 'required',
             'modul_id' => 'required',
             'nama_grup' => 'required|min:4|max:255',
-            'slug' => 'required|min:4|max:255|unique:App\Models\Modul'
+            'slug' => 'required|min:4|max:255|unique:App\Models\Grup_soal'
         ]);
 
         Grup_soal::create($validatedData);
@@ -86,9 +86,19 @@ class GrupsoalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Grup_soal $grup_soal)
     {
-        //
+        $nama_modul = "";
+        if ($grup_soal->modul_id == $grup_soal->modul_id){
+           $nama_modul = Modul::find($grup_soal->modul_id, ['slug']);;        
+        }
+        return view('grupsoal.edit',[
+            "title" => "Grup Soal",
+            "post" => $grup_soal,
+            "nama_modul" => $nama_modul,
+            "slug_modul" => $nama_modul
+
+        ]);
     }
 
     /**
@@ -98,9 +108,22 @@ class GrupsoalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Grup_soal $grup_soal)
     {
-        //
+        $rules = [
+            'user_id' => 'required',
+            'modul_id' => 'required',
+            'nama_grup' => 'required|min:4|max:255',
+        ];
+
+        if($request->slug != $grup_soal->slug){
+            $rules['slug'] = 'required|min:4|max:255|unique:App\Models\Grup_soal';
+        }
+
+        $validatedData = $request->validate($rules);
+        Grup_soal::where('id', $grup_soal->id)
+            ->update($validatedData);
+        return redirect('/kelas')->with('success', 'Data Berhasil DiUbah!');
     }
 
     /**

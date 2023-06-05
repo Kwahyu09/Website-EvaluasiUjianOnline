@@ -71,7 +71,7 @@
                                         <td>{!! $pos->bobot !!}</td>
                                         <td>
                                             <a
-                                                href="/{{ $title }}/{{ $pos->id }}"
+                                                href="/soal/{{ $pos->slug }}/edit"
                                                 class="btn btn-primary btn-action mr-1"
                                                 data-toggle="tooltip"
                                                 title="Ubah">

@@ -57,7 +57,7 @@
                             <td>{{ $pos->jurusan }}</td>
                             <td>
                                 <a
-                                    href="/{{ $title }}/{{ $pos->id }}"
+                                    href="/kelas/{{ $pos->slug }}/edit"
                                     class="btn btn-primary btn-action mr-1"
                                     data-toggle="tooltip"
                                     title="Ubah">

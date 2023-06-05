@@ -59,20 +59,12 @@
                             <td>{{ $pos->email }}</td>
                             <td>
                                 <a
-                                    href="/{{ $title }}/{{ $pos->id }}"
+                                    href="/{{ $title }}/{{ $pos->username }}/edit"
                                     class="btn btn-primary btn-action mr-1"
                                     data-toggle="tooltip"
                                     title="Ubah">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                {{-- <a
-                                    href="/{{ $title }}/{{ $pos->id }}"
-                                    class="btn btn-danger btn-action"
-                                    data-toggle="tooltip"
-                                    title="Hapus"
-                                    data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?">
-                                    <i class="fas fa-trash"></i>
-                                </a> --}}
                                 <form action="/{{ $title }}/{{ $pos->id }}" method="POST" class="d-inline">
                                     @method('DELETE')
                                     @csrf

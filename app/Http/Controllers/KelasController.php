@@ -42,7 +42,7 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_kelas' => 'required|max:255|unique:App\Models\Kelas',
+            'nama_kelas' => 'required|max:255',
             'tahun_ajaran' => 'required|min:4|max:4',
             'slug' => 'required|max:255|unique:App\Models\Kelas',
             'jurusan' => 'required|max:255'
@@ -76,7 +76,10 @@ class KelasController extends Controller
      */
     public function edit(Kelas $kelas)
     {
-        //
+        return view('fakultas.kelas.edit', [
+            "title" => "Kelas",
+            "post" => $kelas,
+        ]);
     }
 
     /**
@@ -88,7 +91,20 @@ class KelasController extends Controller
      */
     public function update(Request $request, Kelas $kelas)
     {
-        //
+        $rules = [
+            'nama_kelas' => 'required|max:255',
+            'tahun_ajaran' => 'required|min:4|max:4',
+            'jurusan' => 'required|max:255'
+        ];
+
+        if($request->slug != $kelas->slug){
+            $rules['slug'] = 'required|max:255|unique:App\Models\Kelas';
+        }
+
+        $validatedData = $request->validate($rules);
+        Kelas::where('id', $kelas->id)
+            ->update($validatedData);
+        return redirect('/kelas')->with('success', 'Data Berhasil DiUbah!');
     }
 
     /**

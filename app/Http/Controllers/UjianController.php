@@ -95,7 +95,22 @@ class UjianController extends Controller
      */
     public function edit(Ujian $ujian)
     {
-        //
+        $modul = Modul::all();  
+        $grupsoal = Grup_soal::all();
+        $kelas = Kelas::all();
+
+        if(auth()->user()->role == "Ketua"){
+            $Modul = Modul::where('user_id', auth()->user()->id)->latest()->filter(request(['search']))->paginate(1000);
+            $grupsoal = Grup_soal::where('user_id', auth()->user()->id)->latest()->filter(request(['search']))->paginate(1000);
+        }
+
+         return view('ujian.edit',[
+            "title" => "Ujian",
+            "post" => $ujian,
+            "modul" => $modul,
+            "grup_soal" => $grupsoal,
+            "kelas" => $kelas
+        ]);
     }
 
     /**
@@ -105,9 +120,29 @@ class UjianController extends Controller
      * @param  \App\Models\Ujian  $ujian
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUjianRequest $request, Ujian $ujian)
+    public function update(Request $request, Ujian $ujian)
     {
-        //
+        $rules = [
+            'kd_ujian' => 'required|min:5|max:150',
+            'nama_ujian' => 'required|min:5|max:150',
+            'kelas' => 'required|max:255',
+            'modul' => 'required|max:255',
+            'grupsoal' => 'required|max:255',
+            'acak_soal' => 'required',
+            'acak_jawaban' => 'required',
+            'tanggal' => 'required',
+            'waktu_mulai' => 'required',
+            'waktu_selesai' => 'required'
+        ];
+
+        if($request->slug != $ujian->slug){
+            $rules['slug'] = 'required|min:5|max:50|unique:App\Models\Ujian';
+        }
+
+        $validatedData = $request->validate($rules);
+        Ujian::where('id', $ujian->id)
+            ->update($validatedData);
+        return redirect('/ujian')->with('success', 'Data Berhasil DiUbah!');
     }
 
     /**

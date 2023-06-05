@@ -44,31 +44,31 @@
                             <table class="table table-striped" id="sortable-table">
                                 <thead>
                                 <tr style="background-color: lightslategray;">
-                                    <th>No</th>
-                                    <th>NIP Dosen</th>
+                                    <th style="width: 50px">No</th>
+                                    <th style="width: 80px">NIP Dosen</th>
                                     <th>Nama Dosen</th>
                                     <th>Jabatan</th>
                                     <th>Gol/Reg</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Prodi</th>
                                     <th>Email</th>
-                                    <th>Action</th>
+                                    <th style="width: 150px">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($post as $pos)
                                     <tr>
-                                        <td>{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}</td>
-                                        <td>{{ $pos->nip }}</td>
+                                        <td style="width: 50px">{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}</td>
+                                        <td style="width: 80px">{{ $pos->nip }}</td>
                                         <td>{{ $pos->nama_dos }}</td>
                                         <td>{{ $pos->jabatan }}</td>
                                         <td>{{ $pos->gol_regu }}</td>
                                         <td>{{ $pos->jenis_kel }}</td>
                                         <td>{{ $pos->prodi }}</td>
                                         <td>{{ $pos->email }}</td>
-                                        <td>
+                                        <td style="width: 150px">
                                             <a
-                                                href="/{{ $title }}/{{ $pos->id }}"
+                                                href="/dosen/{{ $pos->slug }}/edit"
                                                 class="btn btn-primary btn-action mr-1"
                                                 data-toggle="tooltip"
                                                 title="Ubah">

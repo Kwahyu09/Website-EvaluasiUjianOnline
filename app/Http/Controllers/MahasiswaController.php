@@ -79,9 +79,14 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mahasiswa $mahasiswa)
+    public function edit(User $user)
     {
-        //
+        return view('aktor.edit2', [
+            "title" => "Profile",
+            "post" => $user,
+            "role" => $user->role,
+            "kelas_id" => $user->kelas_id
+        ]);
     }
 
     /**
@@ -91,9 +96,29 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
+    public function update(Request $request, User $user)
     {
-        //
+        $rules = [
+            'nama' => 'required|max:255',
+            'role' => 'required|min:4|max:9',
+            'password' => 'required|min:5|max:255'
+        ];
+
+        if($request->nik != $user->nik){
+            $rules['nik'] = 'required|min:2|max:18|unique:App\Models\User';
+        }
+        if($request->username != $user->username){
+            $rules['username'] = 'required|min:4|max:255|unique:App\Models\User';
+        }
+        if($request->email != $user->email){
+            $rules['email'] = 'required|email:dns|max:255|min:4|unique:App\Models\User';
+        }
+
+        $validatedData = $request->validate($rules);
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        User::where('id', $user->id)
+            ->update($validatedData);
+        return redirect('/staff')->with('success', 'Data Berhasil Diubah!');
     }
 
     /**

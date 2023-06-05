@@ -58,7 +58,7 @@
                             <td>{{ $pos->email }}</td>
                             <td>
                                 <a
-                                    href="/{{ $title }}/{{ $pos->id }}"
+                                    href="/mahasiswa/{{ $pos->username }}/edit"
                                     class="btn btn-primary btn-action mr-1"
                                     data-toggle="tooltip"
                                     title="Ubah">

@@ -23,6 +23,8 @@ class UjianSeeder extends Seeder
             'modul' => 'Sistem Saraf',
             'grupsoal' => 'Ulangan Harian',
             'slug' => 'ujian-modul-1',
+            'acak_soal' => 'Y',
+            'acak_jawaban' => 'Y',
             'tanggal' => '2023-03-20',
             'waktu_mulai' =>'13:00:00',
             'waktu_selesai' =>'14:00:00'
@@ -34,6 +36,8 @@ class UjianSeeder extends Seeder
             'modul' => 'Ilmu Penyakit Kulit &Kelamin',
             'grupsoal' => 'Ujian Tengah Semester',
             'slug' => 'ujian-modul-2',
+            'acak_soal' => 'Y',
+            'acak_jawaban' => 'Y',
             'tanggal' => '2023-03-25',
             'waktu_mulai' =>'08:00:00',
             'waktu_selesai' =>'09:30:00'
@@ -42,6 +46,8 @@ class UjianSeeder extends Seeder
             'kd_ujian' => 'xca986',
             'nama_ujian' => 'ujian modul 3',
             'kelas' => 'Kedokteran A 2019',
+            'acak_soal' => 'Y',
+            'acak_jawaban' => 'Y',
             'modul' => 'Ilmu Penyakit Dalam',
             'grupsoal' => 'Ujian Akhir Semester',
             'slug' => 'ujian-modul-3',

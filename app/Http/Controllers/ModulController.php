@@ -81,7 +81,11 @@ class ModulController extends Controller
      */
     public function edit(modul $modul)
     {
-        //
+        return view('fakultas.modul.edit', [
+            "title" => "Modul",
+            "post" => $modul,
+            "user" => User::all()->where('role','Ketua')
+        ]);
     }
 
     /**
@@ -93,7 +97,26 @@ class ModulController extends Controller
      */
     public function update(Request $request, modul $modul)
     {
-        //
+        $rules = [
+            'semester' => 'required',
+            'sks' => 'required',
+            'user_id' => 'required'
+        ];
+
+        if($request->slug != $modul->slug){
+            $rules['slug'] = 'required|unique:App\Models\modul';
+        }
+        if($request->nama_modul != $modul->nama_modul){
+            $rules['nama_modul'] = 'required|min:1|max:255|unique:App\Models\modul';
+        }
+        if($request->kd_modul != $modul->kd_modul){
+            $rules['kd_modul'] = 'required|unique:App\Models\modul';
+        }
+
+        $validatedData = $request->validate($rules);
+        modul::where('id', $modul->id)
+            ->update($validatedData);
+        return redirect('/modul')->with('success', 'Data Berhasil DiUbah!');
     }
 
     /**

@@ -4,16 +4,17 @@
         <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Tambah Data {{ $title }}</h4>
+                    <h4>Ubah Data {{ $title }}</h4>
                   </div>
                   <div class="card-body">
-                  <form action="{{ route('ujian.store') }}" method="POST">
+                  <form action="/ujian/{{ $post->slug }}/update" method="POST">
+                    @method('put')
                                     @csrf
                                     <input
                                         type="hidden"
                                         name="kd_ujian"
                                         class="form-control @error('kd_ujian') is-invalid @enderror"
-                                        id="kd_ujian" value="{{ $kd_ujian }}">
+                                        id="kd_ujian" value="{{ $post->kd_ujian }}">
                                     <div class="form-group">
                                         <label for="nama_ujian">Nama {{ $title }}</label>
                                         <input
@@ -22,7 +23,7 @@
                                             class="form-control @error('nama_ujian') is-invalid @enderror"
                                             id="nama_ujian"
                                             required="required"
-                                            value="{{ old('nama_ujian') }}">
+                                            value="{{ old('nama_ujian',$post->nama_ujian) }}">
                                         @error('nama_ujian')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -34,7 +35,7 @@
                                             type="hidden"
                                             name="slug"
                                             class="form-control @error('slug') is-invalid @enderror"
-                                            id="slug" readonly>
+                                            id="slug" readonly value="{{ old('slug',$post->slug) }}">
                                         @error('slug')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -45,7 +46,7 @@
                                         <label for="modul">Modul</label>
                                         <select class="custom-select" id="modul" name="modul">
                                             @foreach ($modul as $m)
-                                                @if(old('modul')  == $m->nama_modul )
+                                                @if(old('modul',$post->modul)  == $m->nama_modul )
                                                     <option value="{{ $m->nama_modul }}" selected>{{ $m->nama_modul }}</option>
                                                 @else
                                                     <option value="{{ $m->nama_modul }}">{{ $m->nama_modul }}</option>
@@ -62,7 +63,7 @@
                                         <label for="grupsoal">Grup Soal</label>
                                         <select class="custom-select" id="grupsoal" name="grupsoal">
                                             @foreach ($grup_soal as $grup)
-                                                @if(old('grupsoal')  == $grup->slug )
+                                                @if(old('grupsoal', $post->grupsoal)  == $grup->slug )
                                                     <option value="{{ $grup->slug }}" selected>{{ $grup->slug }}</option>
                                                 @else
                                                     <option value="{{ $grup->slug }}">{{ $grup->slug }}</option>
@@ -79,7 +80,7 @@
                                         <label for="kelas">Kelas</label>
                                         <select class="custom-select" id="kelas" name="kelas">
                                             @foreach ($kelas as $k)
-                                                @if(old('kelas')  == $k->slug )
+                                                @if(old('kelas', $post->kelas)  == $k->slug )
                                                     <option value="{{ $k->slug }}" selected>{{ $k->slug }}</option>
                                                 @else
                                                     <option value="{{ $k->slug }}">{{ $k->slug }}</option>
@@ -97,11 +98,11 @@
                                             <label for="acak_soal">Acak Soal : </label>
                                         </div>
                                         <div class="form-check form-check-inline mb-2">
-                                            <input class="form-check-input" type="radio" name="acak_soal" id="acak_soal" value="Y">
+                                            <input class="form-check-input" type="radio" name="acak_soal" id="acak_soal" value="Y" <?php if($post->acak_soal =='Y') echo 'checked'?>>
                                             <label class="form-check-label" for="acak_soal">Ya</label>
                                         </div>
                                         <div class="form-check form-check-inline mb-2">
-                                            <input class="form-check-input" type="radio" name="acak_soal" id="acak_soal" value="T">
+                                            <input class="form-check-input" type="radio" name="acak_soal" id="acak_soal" value="T" <?php if($post->acak_soal =='T') echo 'checked'?>>
                                             <label class="form-check-label" for="acak_soal">Tidak</label>
                                         </div>
                                         @error('acak_soal')
@@ -115,11 +116,11 @@
                                             <label for="acak_jawaban">Acak Jawaban : </label>
                                         </div>
                                         <div class="form-check form-check-inline mb-2">
-                                            <input class="form-check-input" type="radio" name="acak_jawaban" id="acak_jawaban" value="Y">
+                                            <input class="form-check-input" type="radio" name="acak_jawaban" id="acak_jawaban" value="Y" <?php if($post->acak_jawaban =='Y') echo 'checked'?>>
                                             <label class="form-check-label" for="acak_jawaban">Ya</label>
                                         </div>
                                         <div class="form-check form-check-inline mb-2">
-                                            <input class="form-check-input" type="radio" name="acak_jawaban" id="acak_jawaban" value="T">
+                                            <input class="form-check-input" type="radio" name="acak_jawaban" id="acak_jawaban" value="T" <?php if($post->acak_jawaban =='T') echo 'checked'?>>
                                             <label class="form-check-label" for="acak_jawaban">Tidak</label>
                                         </div>
                                         @error('acak_jawaban')
@@ -138,7 +139,7 @@
                                                                 class="form-control  @error('tanggal') is-invalid @enderror"
                                                                 id="tanggal"
                                                                 required="required"
-                                                                value="{{ old('tanggal') }}">
+                                                                value="{{ old('tanggal',$post->tanggal) }}">
                                                 @error('grup_soal')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -157,7 +158,7 @@
                                                     class="form-control  @error('waktu_mulai') is-invalid @enderror"
                                                     id="waktu_mulai"
                                                     required="required"
-                                                    value="{{ old('waktu_mulai') }}">
+                                                    value="{{ old('waktu_mulai',$post->waktu_mulai) }}">
                                                     @error('waktu_mulai')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -172,7 +173,7 @@
                                                         class="form-control  @error('waktu_selesai') is-invalid @enderror"
                                                         id="waktu_selesai"
                                                         required="required"
-                                                        value="{{ old('waktu_selesai') }}">
+                                                        value="{{ old('waktu_selesai',$post->waktu_selesai) }}">
                                                         @error('waktu_selesai')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -182,7 +183,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer mr-3 mb-3 mt-0">
-                                        <button class="btn btn-primary float-right" type="submit">Tambah</button>
+                                        <button class="btn btn-primary float-right" type="submit">Ubah</button>
                                     </div>
                                 </form>
                             </div>

@@ -41,7 +41,7 @@
                             <div class="col-auto">
                                 <div class="file-action">
                                     <a
-                                        href="/{{ $title }}/{{ $pos->id }}"
+                                        href="/grupsoal/{{ $pos->slug }}/edit"
                                         class="btn btn-primary btn-action mr-1"
                                         data-toggle="tooltip"
                                         title="Ubah">

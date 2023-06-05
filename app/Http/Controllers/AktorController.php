@@ -26,7 +26,7 @@ class AktorController extends Controller
 
     public function index_admin()
     {
-        return view('aktor', [
+        return view('aktor.index', [
             "title" => "admin",
             "post" => User::latest()->Filter(request(['search']))->where('role','Admin')->paginate(10)
         ]);
@@ -34,7 +34,7 @@ class AktorController extends Controller
 
     public function profile_admin()
     {
-        return view('edit_aktor', [
+        return view('aktor.edit', [
             "title" => "Profile Admin",
             "post" => User::latest()->where('role','Admin')->paginate(10)
         ]);
@@ -42,7 +42,7 @@ class AktorController extends Controller
 
     public function index_staff()
     {
-        return view('aktor', [
+        return view('aktor.index', [
             "title" => "staff",
             "post" => User::latest()->Filter(request(['search']))->where('role','Staf')->paginate(10)
         ]);
@@ -50,7 +50,7 @@ class AktorController extends Controller
 
     public function index_ketua()
     {
-        return view('aktor', [
+        return view('aktor.index', [
             "title" => "ketua",
             "post" => User::latest()->Filter(request(['search']))->where('role','Ketua')->paginate(10)
         ]);
@@ -66,7 +66,7 @@ class AktorController extends Controller
 
     public function create_staff()
     {
-        return view('create_aktor', [
+        return view('aktor.create', [
             "title" => "staff",
             "role" => "Staf"
         ]);
@@ -90,7 +90,7 @@ class AktorController extends Controller
 
     public function create_ketua()
     {
-        return view('create_aktor', [
+        return view('aktor.create', [
             "title" => "ketua",
             "role" => "Ketua"
         ]);
@@ -148,7 +148,43 @@ class AktorController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $role = "Admin";
+        $kelas_id = "";
+        if(auth()->user()->role == "Ketua"){
+            $role = "Ketua";
+        }elseif(auth()->user()->role == "Staf"){
+            $role = "Staf";
+        }elseif(auth()->user()->role == "Mahasiswa"){
+            $role = "Mahasiswa";
+            $kelas_id = auth()->user()->kelas_id;
+        }
+        return view('aktor.edit', [
+            "title" => "Profile",
+            "post" => $user,
+            "role" => $role,
+            "kelas_id" => $kelas_id
+        ]);
+    }
+
+    public function edit_staf(User $user)
+    {
+        $kelas_id = "";
+        return view('aktor.edit2', [
+            "title" => "Staff",
+            "post" => $user,
+            "role" => "Staf",
+            "kelas_id" => $kelas_id
+        ]);
+    }
+    public function edit_ketua(User $user)
+    {
+        $kelas_id = "";
+        return view('aktor.edit2', [
+            "title" => "Ketua",
+            "post" => $user,
+            "role" => "Ketua",
+            "kelas_id" => $kelas_id
+        ]);
     }
 
     /**
@@ -158,9 +194,81 @@ class AktorController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update_admin(Request $request, User $user)
     {
-        //
+        $rules = [
+            'nama' => 'required|max:255',
+            'role' => 'required|min:4|max:9',
+            'password' => 'required|min:5|max:255'
+        ];
+
+        if($request->nik != $user->nik){
+            $rules['nik'] = 'required|min:2|max:18|unique:App\Models\User';
+        }
+        if($request->username != $user->username){
+            $rules['username'] = 'required|min:4|max:255|unique:App\Models\User';
+        }
+        if($request->email != $user->email){
+            $rules['email'] = 'required|email:dns|max:255|min:4|unique:App\Models\User';
+        }
+
+        $validatedData = $request->validate($rules);
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        User::where('id', $user->id)
+            ->update($validatedData);
+        return redirect('/profile'.'/'.$request['username'].'/'.'edit')->with('success', 'Data Berhasil Diubah!');
+
+    }
+
+    public function update_staf(Request $request, User $user)
+    {
+        $rules = [
+            'nama' => 'required|max:255',
+            'role' => 'required|min:4|max:9',
+            'password' => 'required|min:5|max:255'
+        ];
+
+        if($request->nik != $user->nik){
+            $rules['nik'] = 'required|min:2|max:18|unique:App\Models\User';
+        }
+        if($request->username != $user->username){
+            $rules['username'] = 'required|min:4|max:255|unique:App\Models\User';
+        }
+        if($request->email != $user->email){
+            $rules['email'] = 'required|email:dns|max:255|min:4|unique:App\Models\User';
+        }
+
+        $validatedData = $request->validate($rules);
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        User::where('id', $user->id)
+            ->update($validatedData);
+        return redirect('/staff')->with('success', 'Data Berhasil Diubah!');
+
+    }
+    public function update_ketua(Request $request, User $user)
+    {
+        $rules = [
+            'nama' => 'required|max:255',
+            'role' => 'required|min:4|max:9',
+            'password' => 'required|min:5|max:255'
+        ];
+
+        if($request->nik != $user->nik){
+            $rules['nik'] = 'required|min:2|max:18|unique:App\Models\User';
+        }
+        if($request->username != $user->username){
+            $rules['username'] = 'required|min:4|max:255|unique:App\Models\User';
+        }
+        if($request->email != $user->email){
+            $rules['email'] = 'required|email:dns|max:255|min:4|unique:App\Models\User';
+        }
+
+        $validatedData = $request->validate($rules);
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        User::where('id', $user->id)
+            ->update($validatedData);
+        return redirect('/ketua')->with('success', 'Data Berhasil Diubah!');
+
     }
 
     /**

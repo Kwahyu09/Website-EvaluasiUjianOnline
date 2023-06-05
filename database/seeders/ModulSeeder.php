@@ -37,7 +37,7 @@ class ModulSeeder extends Seeder
             'slug' => 'ilmu-penyakit-dalam',
             'semester' => 3,
             'sks' => 2,
-            'user_id' => 4
+            'user_id' => 3
         ]);
     }
 }
