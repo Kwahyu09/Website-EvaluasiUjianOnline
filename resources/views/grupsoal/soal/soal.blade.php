@@ -31,14 +31,8 @@
         </div>
         <div class="row">
             <div class="col-12">
-                @if(session()->has('success'))
-                <div class="alert alert-success alert-block">
-                    {{ session('success') }}
-                    <button type="button" class="close" data-dismiss="alert">
-                        <a href="/dosen" style="text-decoration: none;">×</a>
-                    </button>
+                <div class="flash-data" data-flashdata="{{ session('success') }}">
                 </div>
-                @endif
                 <div class="card">
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -77,12 +71,10 @@
                                                 title="Ubah">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <form action="/soal/{{ $pos->slug }}" method="POST" class="d-inline">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-danger btn-action" data-toggle="tooltip"
-                                                title="Hapus" onclick="return confirm('Yakin Data Ini Dihapus ?')"><i class="fas fa-trash"></i></button>
-                                            </form>
+                                            <a href="/soal/{{ $pos->slug }}/delete" class="btn btn-danger btn-action mr-1 tombol-hapus" data-toggle="tooltip"
+                                            title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                     @endforeach

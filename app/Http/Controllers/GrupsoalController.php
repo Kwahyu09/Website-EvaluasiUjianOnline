@@ -135,7 +135,7 @@ class GrupsoalController extends Controller
     public function destroy(Grup_soal $grup_soal)
     {
         Grup_soal::destroy($grup_soal->id);
-        return redirect('/modul')->with('success', 'Data Berhasil DiHapus!');
+        return back()->with('success', 'Data Berhasil DiHapus!');
     }
 
     public function checkSlug(Request $request)

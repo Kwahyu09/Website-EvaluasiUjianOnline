@@ -10,14 +10,8 @@
         </a>
       </div>
     </div>
-    @if(session()->has('success'))
-        <div class="alert alert-success alert-block">
-            {{ session('success') }}
-            <button type="button" class="close" data-dismiss="alert">
-                <a href="/{{ $title }}" style="text-decoration: none;">×</a>
-            </button>
-        </div>
-    @endif
+    <div class="flash-data" data-flashdata="{{ session('success') }}">
+    </div>
     @if ($post->count())
 <div class="container">
     <div class="row">
@@ -47,12 +41,10 @@
                                         title="Ubah">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <form action="/grupsoal/{{ $pos->slug }}" method="POST" class="d-inline">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn btn-danger btn-action" data-toggle="tooltip"
-                                        title="Hapus" onclick="return confirm('Yakin Data Ini Dihapus ?')"><i class="fas fa-trash"></i></button>
-                                    </form>
+                                    <a href="/grupsoal/{{ $pos->slug }}/delete" class="btn btn-danger btn-action mr-1 tombol-hapus" data-toggle="tooltip"
+                                    title="Hapus">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>

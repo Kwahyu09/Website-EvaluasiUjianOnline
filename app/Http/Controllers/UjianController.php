@@ -154,7 +154,7 @@ class UjianController extends Controller
     public function destroy(Ujian $ujian)
     {
         Ujian::destroy($ujian->id);
-        return redirect('/ujian')->with('success', 'Data Berhasil DiHapus!');
+        return back()->with('success', 'Data Berhasil DiHapus!');
     }
 
     public function checkSlug(Request $request)

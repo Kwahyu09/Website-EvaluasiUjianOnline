@@ -130,6 +130,6 @@ class MahasiswaController extends Controller
     public function destroy(User $user)
     {
         User::destroy($user->id);
-        return redirect('/staff')->with('success', 'Data Berhasil DiHapus!');
+        return back()->with('success', 'Data Berhasil DiHapus!');
     }
 }

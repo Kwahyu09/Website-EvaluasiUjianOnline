@@ -29,14 +29,8 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                @if(session()->has('success'))
-                <div class="alert alert-success alert-block">
-                    {{ session('success') }}
-                    <button type="button" class="close" data-dismiss="alert">
-                        <a href="/{{ $title }}" style="text-decoration: none;">×</a>
-                    </button>
+                <div class="flash-data" data-flashdata="{{ session('success') }}">
                 </div>
-                @endif
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -64,12 +58,10 @@
                                     title="Ubah">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <form action="/mahasiswa/{{ $pos->id }}" method="POST" class="d-inline">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="btn btn-danger btn-action" data-toggle="tooltip"
-                                    title="Hapus" onclick="return confirm('Yakin Data Ini Dihapus ?')"><i class="fas fa-trash"></i></button>
-                                </form>
+                                <a href="/mahasiswa/{{ $pos->username }}/delete" class="btn btn-danger btn-action mr-1 tombol-hapus" data-toggle="tooltip"
+                                title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
                         @endforeach
