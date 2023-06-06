@@ -36,7 +36,11 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Nik</th>
+                            @if($title == "staff")
+                                <th scope="col">NIK</th>
+                            @elseif($title == "ketua")
+                                <th scope="col">NIP</th>
+                            @endif
                             <th scope="col">Nama</th>
                             <th scope="col">Usename</th>
                             <th scope="col">Email</th>
@@ -47,7 +51,11 @@
                         @foreach ($post as $pos)
                         <tr>
                             <td>{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}</td>
-                            <td>{{ $pos->nik }}</td>
+                            @if($title == "staff")
+                                <td>{{ $pos->nik }}</td>
+                            @elseif($title == "ketua")
+                                <td>{{ $pos->nip }}</td>
+                            @endif
                             <td>{{ $pos->nama }}</td>
                             <td>{{ $pos->username }}</td>
                             <td>{{ $pos->email }}</td>

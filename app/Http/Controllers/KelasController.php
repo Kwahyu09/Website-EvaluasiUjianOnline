@@ -125,7 +125,7 @@ class KelasController extends Controller
         return response()->json(['slug' => $slug ]);
     }
 
-    public function kelas_siswa()
+    public function kelas_mahasiswa()
     {
         return view('mahasiswa.kelas',[
             "title" => "Kelas Mahasiswa",

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use App\Models\Kelas;
+use App\Models\Ujian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdateMahasiswaRequest;
@@ -21,6 +22,27 @@ class MahasiswaController extends Controller
         return view('mahasiswa', [
             "title" => "mahasiswa",
             "post" => User::latest()->Filter(request(['search']))->where('role','Mahasiswa')->paginate(10)
+        ]);
+    }
+    public function mahasiswa_index()
+    {
+        return view('mahasiswa', [
+            "title" => "mahasiswa",
+            "post" => User::latest()->Filter(request(['search']))->where('role','Mahasiswa')->paginate(10)
+        ]);
+    }
+    public function ujian_index()
+    {
+        return view('mahasiswa_ujian', [
+            "title" => "Ujian Mahasiswa",
+            "post" => Ujian::latest()->filter(request(['search','ujian']))->paginate(10)
+        ]);
+    }
+    public function ujian_data()
+    {
+        return view('data_ujian', [
+            "title" => "Ujian Mahasiswa",
+            "post" => Ujian::latest()->filter(request(['search','ujian']))->paginate(10)
         ]);
     }
 

@@ -59,17 +59,43 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request)
+    public function store(Request $request)
     {
-        $request->authenticate();
+        $role = $request->role;
 
-        $request->session()->regenerate();
-
-        if (Auth::user()->role == 'Mahasiswa') {
-            return redirect()->route('mahasiswa-home');
-        } else {
-            return redirect()->intended(RouteServiceProvider::HOME);
+        if ($role == 'Admin') {
+            $credentials = [
+                'nip' => $request->login,
+                'password' => $request->password,
+            ];
         }
+        else if ($role == 'Staf') {
+            $credentials = [
+                'nik' => $request->login,
+                'password' => $request->password,
+            ];
+        }
+        else if ($role == 'Ketua') {
+            $credentials = [
+                'nip' => $request->login,
+                'password' => $request->password,
+            ];
+        }
+        else if ($role == 'Mahasiswa') {
+            $credentials = [
+                'npm' => $request->login,
+                'password' => $request->password,
+            ];
+        }
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 
     /**

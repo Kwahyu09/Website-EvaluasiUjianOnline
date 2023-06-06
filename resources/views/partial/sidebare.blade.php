@@ -53,5 +53,10 @@
         <a href="/evaluasis"  data-toggle="nav-link"><i class="far fa-file"></i><span>Evaluasi</span></a>
     </li>
       @endif
+      @if (Auth::user()->role == 'Mahasiswa')
+      <li class="{{ Request::is('ujian-mahasiswa*') ? 'active' : '' }}">
+        <a href="/ujian-mahasiswa"  data-toggle="nav-link"><i class="far fa-file"></i><span>Ujian</span></a>
+      </li>
+      @endif
     </ul>
   </aside>

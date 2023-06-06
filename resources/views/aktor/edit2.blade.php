@@ -38,15 +38,27 @@
                                 </div>
                             @enderror
                             </div>
-                            <div class="form-group">
-                            <label for="inputAddress2">Nik</label>
-                            <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" id="nik" required value="{{ old('nik', $post->nik) }}">
-                            @error('nik')
-                            <div class="invalid-feedback">
-                                    {{ $message }}
-                            </div>
-                            @enderror
-                            </div>
+                            @if($title == "Staff")
+                                <div class="form-group">
+                                <label for="inputAddress2">NIK</label>
+                                <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" id="nik" required value="{{ old('nik', $post->nik) }}">
+                                @error('nik')
+                                <div class="invalid-feedback">
+                                        {{ $message }}
+                                </div>
+                                @enderror
+                                </div>
+                            @elseif($title == "Ketua")
+                                <div class="form-group">
+                                <label for="inputAddress2">NIP</label>
+                                <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror" id="nip" required value="{{ old('nip', $post->nip) }}">
+                                @error('nip')
+                                <div class="invalid-feedback">
+                                        {{ $message }}
+                                </div>
+                                @enderror
+                                </div>
+                            @endif
                             <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
