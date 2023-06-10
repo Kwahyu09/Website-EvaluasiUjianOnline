@@ -216,7 +216,7 @@ class AktorController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
         User::where('id', $user->id)
             ->update($validatedData);
-        return redirect('/profile'.'/'.$request['username'].'/'.'edit')->with('success', 'Data Berhasil Diubah!');
+        return redirect('/')->with('success', 'Data Berhasil Diubah!');
 
     }
 

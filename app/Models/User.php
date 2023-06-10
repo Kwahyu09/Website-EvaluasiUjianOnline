@@ -46,6 +46,9 @@ class User extends Authenticatable
         $query->when($filters['search'] ??  false, function($query, $search){
             return $query->where('username', 'like', '%' . $search . '%')
                 ->orWhere('nama', 'like', '%' . $search . '%')
+                ->orWhere('nik', 'like', '%' . $search . '%')
+                ->orWhere('nip', 'like', '%' . $search . '%')
+                ->orWhere('npm', 'like', '%' . $search . '%')
                 ->orWhere('email', 'like', '%' . $search . '%');
         });
     }
@@ -58,6 +61,10 @@ class User extends Authenticatable
     public function grup_soal()
     {
         return $this->hasMany(Grup_soal::class);
+    }
+    public function ujian()
+    {
+        return $this->hasMany(Ujian::class);
     }
 
     public function kelas()

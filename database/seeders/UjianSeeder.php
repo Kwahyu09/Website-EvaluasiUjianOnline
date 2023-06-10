@@ -18,42 +18,45 @@ class UjianSeeder extends Seeder
         
         Ujian::create([
             'kd_ujian' => 'ts6781',
-            'nama_ujian' => 'ujian modul 1',
-            'kelas' => 'Kedokteran B 2020',
+            'nama_ujian' => 'Ulangan Tengah Semester Demam',
+            'kelas' => 'kedokteran-a-2019',
             'modul' => 'Sistem Saraf',
-            'grupsoal' => 'Ulangan Harian',
-            'slug' => 'ujian-modul-1',
+            'grupsoal' => 'ujian-tengah-semester',
+            'slug' => 'ulangan-tengah-semester-demam',
             'acak_soal' => 'Y',
             'acak_jawaban' => 'Y',
-            'tanggal' => '2023-03-20',
+            'tanggal' => '2023-06-15',
             'waktu_mulai' =>'13:00:00',
-            'waktu_selesai' =>'14:00:00'
+            'waktu_selesai' =>'14:00:00',
+            'user_id' => '5'
         ]);
         Ujian::create([
             'kd_ujian' => 'avd984',
-            'nama_ujian' => 'ujian modul 2',
-            'kelas' => 'Kedokteran B 2019',
-            'modul' => 'Ilmu Penyakit Kulit &Kelamin',
-            'grupsoal' => 'Ujian Tengah Semester',
-            'slug' => 'ujian-modul-2',
+            'nama_ujian' => 'Ulangan Harian Demam',
+            'kelas' => 'kedokteran-b-2023',
+            'modul' => 'Demam',
+            'grupsoal' => 'ulangan-harian',
+            'slug' => 'ulangan-harian-demam',
             'acak_soal' => 'Y',
             'acak_jawaban' => 'Y',
-            'tanggal' => '2023-03-25',
+            'tanggal' => '2023-06-17',
             'waktu_mulai' =>'08:00:00',
-            'waktu_selesai' =>'09:30:00'
+            'waktu_selesai' =>'09:30:00',
+            'user_id' => '5'
         ]);
         Ujian::create([
             'kd_ujian' => 'xca986',
-            'nama_ujian' => 'ujian modul 3',
-            'kelas' => 'Kedokteran A 2019',
+            'nama_ujian' => 'Ujian Akhir Semester',
+            'kelas' => 'kedokteran-b-2023',
             'acak_soal' => 'Y',
             'acak_jawaban' => 'Y',
             'modul' => 'Ilmu Penyakit Dalam',
-            'grupsoal' => 'Ujian Akhir Semester',
-            'slug' => 'ujian-modul-3',
-            'tanggal' => '2023-03-24',
+            'grupsoal' => 'ujian-akhir-semester',
+            'slug' => 'ujian-akhir-semester',
+            'tanggal' => '2023-06-20',
             'waktu_mulai' =>'12:00:00',
-            'waktu_selesai' =>'13:30:00'
+            'waktu_selesai' =>'13:30:00',
+            'user_id' => '4'
         ]);
     }
 }

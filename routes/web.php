@@ -9,10 +9,10 @@ use App\Http\Controllers\ModulController;
 use App\Http\Controllers\UjianController;
 use App\Http\Controllers\EvaluasiController;
 use App\Http\Controllers\GrupsoalController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\HasilujianController;
 use App\Http\Controllers\DashboardHomeController;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +24,7 @@ use App\Http\Controllers\DashboardHomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/profile/{user:username}/edit', [AktorController::class, 'edit'])->middleware(['auth'])->name('profile');
 Route::put('/Admin/{user:username}', [AktorController::class,'update_admin'])->middleware(['auth', 'role:Admin'])->name('updateAdmin');
 
 Route::get('/', [DashboardHomeController::class, 'index'])->middleware(['auth'])->name('home');
@@ -62,7 +63,7 @@ Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->middleware(['au
 Route::get('/mahasiswa/{user:username}/delete', [MahasiswaController::class, 'destroy'])->middleware(['auth', 'role:Admin|Staf'])->name('MahasiswaHapus');
 Route::post('/mahasiswa/store', [MahasiswaController::class,'store'])->middleware(['auth', 'role:Admin|Staf'])->name('Mahasiswa-tambah');
 Route::get('/mahasiswa/create/{kelas:slug}', [MahasiswaController::class, 'create'])->middleware(['auth', 'role:Admin|Staf'])->name('CreateKetua');
-Route::put('/Mahasiswa/{user:username}', [AktorController::class,'update_admin'])->middleware(['auth', 'role:Admin|Staf'])->name('ProfileMahasiswa');
+Route::put('/Mahasiswa/{user:username}', [AktorController::class,'update_admin'])->middleware(['auth'])->name('ProfileMahasiswa');
 Route::get('/mahasiswa/{user:username}/edit', [MahasiswaController::class, 'edit'])->middleware(['auth', 'role:Admin|Staf'])->name('editMahasiswa');
 Route::put('/Mahasiswa/{user:username}/update', [MahasiswaController::class,'update'])->middleware(['auth'])->name('UpdateMahasiswa');
 
@@ -94,15 +95,20 @@ Route::put('/ujian/{ujian:slug}/update', [UjianController::class, 'update'])->mi
 Route::get('/ujian/create/checkSlug',[UjianController::class, 'checkslug'])->middleware(['auth']);
 
 Route::resource('/hasilujian', HasilujianController::class)->middleware(['auth','role:Admin|Ketua']);
-Route::get('/evaluasis', [EvaluasiController::class, 'index1'])->middleware(['auth','role:Admin|Ketua'])->name('Evaluasis');
-Route::get('/evaluasi', [EvaluasiController::class, 'index'])->middleware(['auth','role:Admin|Ketua'])->name('Evaluasi');
-
-
-Route::get('/profile/{user:username}/edit', [AktorController::class, 'edit'])->middleware(['auth'])->name('profile');
+Route::post('/hasilujian/hasil_ujian', [HasilujianController::class, 'hasil'])->middleware(['auth','role:Admin|Ketua'])->name('hasilujian.hasil_ujian');
+Route::get('/evaluasi', [EvaluasiController::class, 'index'])->middleware(['auth','role:Admin|Ketua'])->name('Evaluasis');
+Route::post('/evaluasi/soal', [EvaluasiController::class, 'soalEvaluasi'])->middleware(['auth','role:Admin|Ketua'])->name('evaluasi_soal');
+Route::post('/evaluasi/show', [EvaluasiController::class, 'show'])->middleware(['auth','role:Admin|Ketua'])->name('showsoal');
+Route::post('/cetak', [HasilujianController::class, 'cetak'])->middleware(['auth','role:Admin|Ketua'])->name('cetak');
 
 Route::get('/mahasiswa-home', [MahasiswaController::class,'mahasiswa_index'])->middleware(['auth', 'role:Mahasiswa'])->name('mahasiswa-home');
-Route::get('/ujian-data', [MahasiswaController::class,'ujian_data'])->middleware(['auth', 'role:Mahasiswa'])->name('mahasiswadataujian');
+Route::post('/ujian-data', [MahasiswaController::class,'ujian_data'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-data');
 Route::get('/ujian-mahasiswa', [MahasiswaController::class,'ujian_index'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-mahasiswa-index');
+Route::get('/masuk-ujian/{ujian:slug}', [MahasiswaController::class,'ujian_masuk'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-mahasiswa-index');
+Route::post('/evaluasi/store', [EvaluasiController::class,'store'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-mahasiswa-tambah');
+Route::put('/evaluasi/update/{id}', [EvaluasiController::class,'update'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-mahasiswa-update');
+Route::get('/selesaiujian', [HasilujianController::class,'selesai_ujian'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian.berakhir');
+Route::post('/selesaiujian', [HasilujianController::class,'selesai_ujian'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian.berakhirpost');
 
 
 require __DIR__.'/auth.php';

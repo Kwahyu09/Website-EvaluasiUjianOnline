@@ -5,25 +5,46 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="mb-3">Data Ujian</h3>
-                <div class="form-group">
-                    <label for="nama_ujian">Nama Ujian : Ulangan Harian</label>
-                    <br>
-                        <label for="nama_ujian">Kelas : XII Nautika Kapal Penangkap Ikan</label>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nama">Nama :
+                            {{ Auth::user()->nama }}</label>
                         <br>
-                            <label for="nama_ujian">Tanggal : 2023-03-20</label>
+                            <label>NPM :
+                                {{ Auth::user()->npm }}
+                            </label>
+                            <label for="nama_ujian">Nama Ujian :
+                                {{ $post->nama_ujian }}</label>
                             <br>
-                                <label for="nama_ujian">Waktu Mulai : 13:00:00</label>
-                                <br>
-                                    <label for="nama_ujian">Waktu Selesai : 14:00:00</label>
-                                </div>
-                                <div class="card-footer mr-3 mb-3 mt-0">
-                                    <a href="/masuk-ujian" class="btn btn-primary float-right" type="submit">Mulai Ujian</a>
-                                </div>
-                                <!-- end section -->
+                                <label for="nama_ujian">Kelas :
+                                    {{ $post->kelas }}</label>
                             </div>
-                            <!-- .col-12 -->
-                        </div>
-                        <!-- .row -->
-                    </div>
-                </div>
+                            <div class="form-group col-md-6">
+                                <label for="nama_ujian">Tanggal :
+                                    {{ $post->tanggal }}</label>
+                                <br>
+                                    <label for="nama_ujian">Waktu Mulai :
+                                        {{ $post->waktu_mulai }}</label>
+                                    <br>
+                                        <label for="nama_ujian">Waktu Selesai :
+                                            {{ $post->waktu_selesai }}</label>
+                                    </div>
+                                    <h6>Petunjuk Ujian :</h6>
+                                    1. Dalam pengerjaan ujian dilakukan dengan memilih salah satu jawaban yang benar
+                                    <br>
+                                        2. Lalu mengklik tombol Tambah Jawaban (menyimpan jawaban) dan lanjut ke soal berikutnya<br>
+                                            3. Ketika Mengubah Jawaban Harus Mengklik tombol Ubah Jawaban<br>
+                                            4. Apabila telah selesai maka dapat mengklik tombol Selesai Ujian<br>
+                                                5. Segera Selesaikan Semua pertanyaan, jika waktu sudah selesai otomatis sistem
+                                                ujian akan berakhir<br></div>
+                                    <a href="/masuk-ujian/{{ $post->slug }}" class="btn btn-primary float-right" type="submit">Mulai Ujian</a>
+
+                                            </div>
+                                            <!-- end section -->
+                                        </div>
+                                        <!-- .col-12 -->
+                                    </div>
+                                    <!-- .row -->
+                                </div>
+                            </div>
 @endsection

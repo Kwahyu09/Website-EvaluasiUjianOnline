@@ -42,6 +42,14 @@ class Ujian extends Model
     {
         return $this->belongsTo(kelas::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function grup_soal()
+    {
+        return $this->hasOne(Grup_soal::class);
+    }
 
     public function evaluasi()
     {

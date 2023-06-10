@@ -16,10 +16,12 @@ class EvaluasiSeeder extends Seeder
     public function run()
     {
         Evaluasi::create([
-            'nama_evaluasi'=> 'evaluasi soal',
-            'nama_mhs'=> 'Krisna Wahyudi',
+            'nama_mahasiswa'=> 'Ahmad Muhaimin',
+            'npm_mahasiswa'=> 'G1A023001',
             'jawaban'=> 'opsi_a',
-            'tingkat_soal'=> 'sukar'
+            'skor'=> '10',
+            'soal_id' => '4',
+            'ujian_id' => '2'
         ]);
     }
 }

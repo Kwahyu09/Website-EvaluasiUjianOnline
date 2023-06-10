@@ -4,7 +4,7 @@
         <h5 class="mb-2">Data
             {{ $title }}
             Berdasarkan
-            {{ $slug }}</h5>
+            {{ $grup }} {{ $modul->nama_modul }}</h5>
         <div class="d-flex justify-content-start mb-3 mt-3">
             <a href="/soal/create/{{ $slug }}" class="btn btn-primary">Tambah Data <i class="bi bi-plus-circle"></i>
             </a>
@@ -12,7 +12,7 @@
         @if ($post->count())
         <div class="d-flex justify-content-end mb-2">
             <div class="col-md-4">
-                <form action="/soal/{{ $slug }}">
+                <form action="{{ url()->full() }}">
                     <div class="input-group mb-3">
                         <input
                             type="text"

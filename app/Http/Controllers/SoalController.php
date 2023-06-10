@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grup_soal;
+use App\Models\Modul;
 use App\Models\soal;
 use Illuminate\Http\Request;
 
@@ -35,6 +36,8 @@ class SoalController extends Controller
             "kd_soal" => uniqid(),
             "nama_grup" => $grup_soal->nama_grup,
             "grupsoal_id" => $grup_soal->id,
+            "grupsoal_nama" => $grup_soal->nama_grup,
+            "modul" => Modul::find($grup_soal->modul_id,['nama_modul']),
             "grupsoal_slug" => $grup_soal->slug
         ]);
     }

@@ -16,10 +16,12 @@ return new class extends Migration
     {
         Schema::create('evaluasis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_evaluasi');
-            $table->string('nama_mhs');
+            $table->foreignId('soal_id');
+            $table->foreignId('ujian_id');
+            $table->string('nama_mahasiswa');
+            $table->string('npm_mahasiswa');
             $table->string('jawaban');
-            $table->string('tingkat_soal');
+            $table->string('skor');
             $table->timestamps();
         });
     }

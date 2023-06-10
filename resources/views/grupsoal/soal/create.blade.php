@@ -4,7 +4,7 @@
         <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Tambah Data {{ $title }} {{ $nama_grup }}</h4>
+                    <h4>Tambah Data {{ $title }} {{ $grupsoal_nama }} {{ $modul->nama_modul }}</h4>
                   </div>
                   <form action="/soal/store" method="post">
                     @csrf

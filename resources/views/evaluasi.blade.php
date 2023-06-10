@@ -1,74 +1,54 @@
-@extends('layoutdashboard.main') @section('container')
+@extends('layoutdashboard.main') 
+@section('container')
 <div class="card">
     <div class="card-body">
         <h5 class="mb-2">Data
-            {{ $title }}</h5>
-        <div class="d-flex justify-content-start">
-            <a href="/evaluasi/create" class="btn btn-primary">Tambah Data
-                <i class="bi bi-plus-circle"></i>
-            </a>
-        </div>
-        @if ($post->count())
-        <div class="d-flex justify-content-end mb-2">
-            <div class="col-md-4">
-                <form action="/evaluasi">
-                    <div class="input-group mb-3">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Cari.."
-                            name="search"
-                            value="{{ request('search') }}">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit">
-                                <i class="bi bi-search"></i>
-                            </button>
+            {{ $title }} Berdasarkan soal {{ $ujian->nama_ujian }}</h5>
+        @if ($soal->count())
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="flash-data" data-flashdata="{{ session('success') }}">
+                </div>
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="sortable-table">
+                                <thead>
+                                <tr style="background-color: lightslategray;">
+                                    <th style="width: 50px">No</th>
+                                    <th style="width: 80px">Kode Soal</th>
+                                    <th>Pertanyaan</th>
+                                    <th>Jawaban</th>
+                                    <th>Bobot</th>
+                                    <th>Aksi</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($soal as $s)
+                                    <tr>
+                                        <td style="width: 50px">{{ ($soal->currentPage() - 1)  * $soal->links()->paginator->perPage() + $loop->iteration }}</td>
+                                        <td>{{ $s->kode_soal }}</td>
+                                        <td>{!! $s->pertanyaan !!}</td>
+                                        <td>{!! $s->jawaban !!}</td>
+                                        <td>{{ $s->bobot }}</td>
+                                        <td style="width: 150px">
+                                            <form method="POST" action="/evaluasi/show">
+                                                @csrf
+                                                <input type="hidden" name="ujian_id" id="ujian_id" value="{{ $ujian->id }}">
+                                                <input type="hidden" name="soal_id" id="soal_id" value="{{ $s->id }}">
+                                                <button class="btn btn-info btn-action mr-1"
+                                                data-toggle="tooltip"
+                                                title="Lihat Evaluasi" type="submit">
+                                                <i class="bi bi-info-square"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                @if(session()->has('success'))
-                <div class="alert alert-success alert-block">
-                    {{ session('success') }}
-                    <button type="button" class="close" data-dismiss="alert">
-                        <a href="/evaluasi" style="text-decoration: none;">×</a>
-                    </button>
                 </div>
-                @endif
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Kode Modul</th>
-                            <th scope="col">Nama Modul</th>
-                            <th scope="col">Semester</th>
-                            <th scope="col">Sks</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($post as $pos)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $pos->kd_modul }}</td>
-                            <td>{{ $pos->nama_modul }}</td>
-                            <td>{{ $pos->semester }}</td>
-                            <td>{{ $pos->sks }}</td>
-                            <td>
-                                <a href="/{{ $title }}/{{ $pos->id }}" class="badge bg-warning">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                                <a href="/{{ $title }}/{{ $pos->id }}" class="badge bg-danger">
-                                    <i class="bi bi-trash-fill"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
             </div>
         </div>
         @else
@@ -76,7 +56,7 @@
             {{ $title }}</p>
         @endif
         <div class="d-flex justify-content-end">
-            {{ $post->links() }}
+            {{ $soal->links() }}
         </div>
     </div>
 </div>

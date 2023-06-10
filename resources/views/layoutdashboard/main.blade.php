@@ -16,13 +16,48 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   {{-- Trik EDITOR --}}
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
+    <script src="/js/jam.js"></script>
     <style>
       trix-toolbar [data-trix-button-group="file-tools"] {
         display: none;
       }
+    </style>
+    <style>
+      #chartContainer {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .chart {
+        width: 100%;
+        height: 300px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #watch {
+            color: rgb(252, 150, 65);
+            position: absolute;
+            z-index: 1;
+            height: 40px;
+            width: 700px;
+            overflow: show;
+            margin: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            font-size: 10vw;
+            -webkit-text-stroke: 3px rgb(210, 65, 36);
+            text-shadow: 4px 4px 10px rgba(210, 65, 36, 0.4),
+                4px 4px 20px rgba(210, 45, 26, 0.4),
+                4px 4px 30px rgba(210, 25, 16, 0.4),
+                4px 4px 40px rgba(210, 15, 06, 0.4);
+        }
     </style>
 
     <!-- Start GA -->
@@ -38,7 +73,7 @@
 
     <title>evaluasi-ujian | {{ $title }}</title>
 </head>
-<body>
+<body onload="realtimeClock()">
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
           @include('partial.navbar')

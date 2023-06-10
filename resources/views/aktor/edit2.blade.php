@@ -2,14 +2,8 @@
 @section('container')
     <div class="row">
         <div class="col-12 col-md-6 col-lg-6">
-                @if(session()->has('success'))
-                <div class="alert alert-success alert-block">
-                    {{ session('success') }}
-                    <button type="button" class="close" data-dismiss="alert">
-                        <a href="/{{ $title }}" style="text-decoration: none;">×</a>
-                    </button>
+                <div class="flash-data" data-flashdata="{{ session('success') }}">
                 </div>
-                @endif
                 <div class="card">
                   <div class="card-header">
                     <h4>Edit Akun {{ $title }}</h4>
@@ -53,6 +47,16 @@
                                 <label for="inputAddress2">NIP</label>
                                 <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror" id="nip" required value="{{ old('nip', $post->nip) }}">
                                 @error('nip')
+                                <div class="invalid-feedback">
+                                        {{ $message }}
+                                </div>
+                                @enderror
+                                </div>
+                            @elseif($role == "Mahasiswa")
+                                <div class="form-group">
+                                <label for="inputAddress2">NPM</label>
+                                <input type="text" name="npm" class="form-control @error('npm') is-invalid @enderror" id="npm" required value="{{ old('npm', $post->npm) }}">
+                                @error('npm')
                                 <div class="invalid-feedback">
                                         {{ $message }}
                                 </div>

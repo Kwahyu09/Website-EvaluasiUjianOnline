@@ -1,7 +1,8 @@
-@extends('layoutdashboard.main') @section('container')
+@extends('layoutdashboard.main') 
+@section('container')
 <div class="card">
     <div class="card-body">
-        <h5 class="mb-2">Kelas {{ $title }} {{ $kelas }}</h5>
+        <h5 class="mb-2">Data {{ $title }} Kelas {{ $nama_kelas }}</h5>
         <div class="d-flex justify-content-start">
             <a href="/mahasiswa/create/{{ $kelas }}" class="btn btn-primary">
                 <span class="fe fe-plus-circle fe-12 mr-2"></span>Tambah
@@ -10,7 +11,7 @@
         @if ($post->count())
         <div class="d-flex justify-content-end mb-2">
             <div class="col-md-4">
-                <form action="/{{ $title }}">
+                <form action="{{ url()->full() }}">
                     <div class="input-group mb-3">
                         <input
                             type="text"
@@ -46,7 +47,7 @@
                         @foreach ($post as $pos)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $pos->nik }}</td>
+                            <td>{{ $pos->npm }}</td>
                             <td>{{ $pos->nama }}</td>
                             <td>{{ $pos->username }}</td>
                             <td>{{ $pos->email }}</td>

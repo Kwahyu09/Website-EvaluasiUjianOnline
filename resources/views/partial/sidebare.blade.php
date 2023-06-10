@@ -1,15 +1,31 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
       <img src="{{ asset('backend/assets/img/logounib.png') }}" width="50"><br><h6>FKIK UNIB</h6>
+      @if (Auth::user()->role == 'Mahasiswa')
+      <a href="">Sistem Informasi Ujian</a>
+      @else
       <a href="/">Evaluasi Ujian</a>
+      @endif
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
+      @if (Auth::user()->role == 'Mahasiswa')
+      <a href="/">Ujian</a>
+      @else
       <a href="/">Eval</a>
+      @endif
     </div>
     <ul class="sidebar-menu">
+      @if(Request::is('masuk-ujian*') || Request::is('selesaiujian*'))
+      <li class="menu-header"></li>
+      @else
       <li class="menu-header">Menu</li>
+      @endif
       <li class="{{ Request::is('/') ? 'active' : '' }}">
+        @if(Request::is('masuk-ujian*') || Request::is('selesaiujian*'))
+        <a href="" class="nav-link"></a>
+        @else
         <a href="/" class="nav-link"><i class="fas fa-fire"></i><span>Home</span></a>
+        @endif
       </li>
       @if (Auth::user()->role == 'Admin')
       <li class="{{ Request::is('staff*') || Request::is('ketua*') ? 'active' : '' }}">
@@ -21,7 +37,7 @@
       </li>
       @endif
       @if(Auth::user()->role == 'Staf')
-      <li class="{{ Request::is('staff*') ? 'active' : '' }}">
+      <li class="{{ Request::is('ketua*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manajemen Akun</span></a>
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="/ketua">Ketua</a></li>
@@ -50,12 +66,16 @@
         <a href="/hasilujian"  data-toggle="nav-link"><i class="far fa-file"></i> <span>Hasil Ujian</span></a>
     </li>
     <li class="{{ Request::is('evaluasi*') ? 'active' : '' }}">
-        <a href="/evaluasis"  data-toggle="nav-link"><i class="far fa-file"></i><span>Evaluasi</span></a>
+        <a href="/evaluasi"  data-toggle="nav-link"><i class="far fa-file"></i><span>Evaluasi</span></a>
     </li>
       @endif
       @if (Auth::user()->role == 'Mahasiswa')
-      <li class="{{ Request::is('ujian-mahasiswa*') ? 'active' : '' }}">
+      <li class="{{ Request::is('ujian-mahasiswa*') || Request::is('ujian-data*') ? 'active' : '' }}">
+        @if(Request::is('masuk-ujian*') || Request::is('selesaiujian*'))
+        <a href=""  data-toggle="nav-link"></a>
+        @else
         <a href="/ujian-mahasiswa"  data-toggle="nav-link"><i class="far fa-file"></i><span>Ujian</span></a>
+        @endif
       </li>
       @endif
     </ul>

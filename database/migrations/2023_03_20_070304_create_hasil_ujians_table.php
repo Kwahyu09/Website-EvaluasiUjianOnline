@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('hasil_ujians', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_ujian');
-            $table->date('tanggal_ujian');
-            $table->string('npm_mhs');
-            $table->string('nama_mhs');
+            $table->foreignId('ujian_id');
+            $table->string('nama_mahasiswa');
+            $table->string('npm_mahasiswa');
             $table->string('nilai');
             $table->timestamps();
         });

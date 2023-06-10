@@ -20,9 +20,14 @@ class UjianController extends Controller
      */
     public function index()
     {
+        $ujian = Ujian::latest()->filter(request(['search']))->paginate(1000);
+
+        if(auth()->user()->role == "Ketua"){
+            $ujian = Ujian::where('user_id', auth()->user()->id)->latest()->filter(request(['search']))->paginate(1000);
+        }
         return view('ujian.index', [
             "title" => "Ujian",
-            "post" => Ujian::latest()->filter(request(['search']))->paginate(10)
+            "post" => $ujian
         ]);
     }
 
@@ -59,6 +64,7 @@ class UjianController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'user_id' => 'required',
             'kd_ujian' => 'required|min:5|max:150',
             'nama_ujian' => 'required|min:5|max:150',
             'kelas' => 'required|max:255',
@@ -123,6 +129,7 @@ class UjianController extends Controller
     public function update(Request $request, Ujian $ujian)
     {
         $rules = [
+            'user_id' => 'required',
             'kd_ujian' => 'required|min:5|max:150',
             'nama_ujian' => 'required|min:5|max:150',
             'kelas' => 'required|max:255',

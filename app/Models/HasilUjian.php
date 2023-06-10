@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class HasilUjian extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+
+    public function ujian()
+    {
+        return $this->belongsTo(Ujian::class);
+    }
+    public function soal()
+    {
+        return $this->belongsTo(Soal::class);
+    }
 }

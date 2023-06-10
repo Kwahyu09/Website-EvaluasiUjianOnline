@@ -4,6 +4,16 @@ if (flasData) {
     Swal.fire("Berhasil!", flasData, "success");
 }
 
+const flasDataeror = $(".flash-dataeror").data("flashdataeror");
+
+if (flasDataeror) {
+    Swal.fire({
+        icon: "error",
+        title: "Gagal",
+        text: flasDataeror,
+    });
+}
+
 //tombol hapus
 $(".tombol-hapus").on("click", function (e) {
     e.preventDefault();

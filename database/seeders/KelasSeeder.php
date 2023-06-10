@@ -17,21 +17,21 @@ class KelasSeeder extends Seeder
     {
          Kelas::create([
             'nama_kelas' => 'Kedokteran A',
-            'slug' => 'Kedokteran-A-2019',
+            'slug' => 'kedokteran-a-2019',
             'tahun_ajaran' => 2019,
             'jurusan' => 'kedokteran'
         ]);
 
         Kelas::create([
             'nama_kelas' => 'Kedokteran B',
-            'slug' => 'Kedokteran-B-2019',
+            'slug' => 'kedokteran-b-2023',
             'tahun_ajaran' => 2019,
             'jurusan' => 'kedokteran'
         ]);
 
         Kelas::create([
             'nama_kelas' => 'Kedokteran B',
-            'slug' => 'Kedokteran-B-2020',
+            'slug' => 'kedokteran-b-2020',
             'tahun_ajaran' => 2020,
             'jurusan' => 'kedokteran'
         ]);

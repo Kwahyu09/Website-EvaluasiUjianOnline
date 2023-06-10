@@ -5,18 +5,17 @@
             <div class="col-md-12">
                 <div class="row align-items-center my-2">
                     <div class="col">
-                        <h3>Pilih Evaluasi Berdasarkan Ujian</h3>
+                        <h3>Hasil Ujian (Laporan Nilai)</h3>
                         <br>
                         <h5>Silahkan Pilih Ujian :
                         </h5>
                         <br>
-                        <form action="{{ route('evaluasi_soal') }}" method="post">
+                        <form action="{{ route('hasilujian.hasil_ujian') }}" method="post">
                             @csrf
                             <div class="input-group mb-3">
-                                <select class="custom-select" id="id_ujian" name="id_ujian" >
-                                    <option selected="selected">Pilih...</option>
-                                    @foreach ($post as $pos)
-                                    <option value="{{ $pos->id }}">{{ $pos->nama_ujian }}</option>
+                                <select class="custom-select" id="ujian_id" name="ujian_id">
+                                    @foreach ($ujian as $uji)
+                                    <option value="{{ $uji->id }}">{{ $uji->nama_ujian }}</option>
                                     @endforeach
                                 </select>
                             </div>

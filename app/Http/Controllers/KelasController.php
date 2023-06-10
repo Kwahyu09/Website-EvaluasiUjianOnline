@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
@@ -47,7 +48,6 @@ class KelasController extends Controller
             'slug' => 'required|max:255|unique:App\Models\Kelas',
             'jurusan' => 'required|max:255'
         ]);
-
         Kelas::create($validatedData);
 
         return redirect('/kelas')->with('success', 'Data Kelas Berhasil Ditambahkan!');
@@ -59,12 +59,20 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function show(Kelas $kelas)
+    public function show(Request $request, Kelas $kelas)
     {
+        $search = $request->get('search');
+
         return view('mahasiswa.index',[
             'title' => 'Mahasiswa',
             'kelas' => $kelas->slug,
-            'post' => $kelas->user
+            'nama_kelas' => $kelas->nama_kelas,
+            'post' => User::where('kelas_id', $kelas->id)->where(function ($query) use ($search) {
+                $query->where('username', 'like', '%'. $search .'%')
+            ->orWhere('nama', 'like', '%' . $search . '%')
+            ->orWhere('npm', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%');
+            })->get()
         ]);
     }
 

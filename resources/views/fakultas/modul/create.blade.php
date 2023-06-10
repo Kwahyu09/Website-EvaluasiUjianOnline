@@ -20,7 +20,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="nama_modul">Dosen Pengampu</label>
+                            <label for="nama_modul">Ketua Modul</label>
                             <select name="user_id" class="custom-select  @error('user_id') is-invalid @enderror" id="user_id" 
                                             required="required"
                                             value="{{ old('nama_user') }}">

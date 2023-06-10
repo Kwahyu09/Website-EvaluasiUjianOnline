@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mahasiswa;
+use DateTime;
+use DateTimeZone;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Kelas;
+use App\Models\Soal;
 use App\Models\Ujian;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdateMahasiswaRequest;
-use App\Models\User;
+use App\Models\Evaluasi;
+use App\Models\Grup_soal;
+use App\Models\HasilUjian;
 
 class MahasiswaController extends Controller
 {
@@ -33,17 +41,75 @@ class MahasiswaController extends Controller
     }
     public function ujian_index()
     {
+        $kelas = Auth::user()->kelas;
+        $ujian = Ujian::where('kelas', $kelas->slug)->get();
+
         return view('mahasiswa_ujian', [
             "title" => "Ujian Mahasiswa",
-            "post" => Ujian::latest()->filter(request(['search','ujian']))->paginate(10)
+            "post" => $ujian,
         ]);
     }
-    public function ujian_data()
+    public function ujian_masuk(Ujian $ujian)
     {
-        return view('data_ujian', [
+        $timezone = 'Asia/Jakarta'; 
+        $date = new DateTime('now', new DateTimeZone($timezone));
+        $tanggal = $date->format('Y-m-d');
+        $jam = $date->format('H:i:s');
+
+        $slug = $ujian->grupsoal;
+        $grup = Grup_soal::where('slug', $slug)->get();
+        $id_grup = $grup[0]['id'];
+        $soal = Soal::latest()->where('grup_soal_id',$id_grup)->paginate(100);
+
+        $npm = Auth::user()->npm;
+        $evaluasi = Evaluasi::where('ujian_id', $ujian->id)->where('npm_mahasiswa',$npm)->get();
+        return view('masuk_ujian',  [
             "title" => "Ujian Mahasiswa",
-            "post" => Ujian::latest()->filter(request(['search','ujian']))->paginate(10)
+            "soal" => $soal,
+            "ujian" => $ujian,
+            "jam" => $jam,
+            "tanggal" => $tanggal,
+            "evaluasi" => $evaluasi
         ]);
+    }
+
+    public function ujian_data(Request $request)
+    {
+        $timezone = 'Asia/Jakarta'; 
+        $date = new DateTime('now', new DateTimeZone($timezone)); 
+        $tanggal = $date->format('Y-m-d');
+        $jam = $date->format('H:i:s');
+
+
+        $request->validate([
+            'id_modul' => 'required',
+            'kd_ujian' => 'required'
+        ]);
+        $idModul = $request->id_modul;
+        $kode = $request->kd_ujian;
+        
+        $ujian = Ujian::find($idModul);
+        $hasil = HasilUjian::pluck('ujian_id')->toArray();
+        $npm = HasilUjian::pluck('npm_mahasiswa')->toArray();
+        if ($kode == $ujian->kd_ujian) {
+            if($ujian->tanggal === $tanggal && $ujian->waktu_mulai <= $jam && $ujian->waktu_selesai >= $jam){
+                if(in_array($ujian->id, $hasil) && in_array(auth()->user()->npm, $npm)){
+                    return back()->with('success', 'Anda Sudah Mengerjakan Ujian');
+                }else{
+                    return view('data_ujian', [
+                        "title" => "Ujian Mahasiswa",
+                        "post" => $ujian
+                        ]);
+                }
+            }else {
+            return back()->with('success', 'Waktu Ujian Belum dimulai');
+         }
+        }
+        else {
+            return back()->with('success', 'Kode Ujian Salah');
+        }
+
+        
     }
 
     /**
@@ -71,7 +137,7 @@ class MahasiswaController extends Controller
     {
          $validatedData = $request->validate([
             'kelas_id' => 'required',
-            'nik' => 'required|min:9|max:9|unique:App\Models\User',
+            'npm' => 'required|min:9|max:9|unique:App\Models\User',
             'nama' => 'required|max:255',
             'username' => 'required|min:4|max:255|unique:App\Models\User',
             'role' => 'required|min:4|max:9',
@@ -103,8 +169,8 @@ class MahasiswaController extends Controller
      */
     public function edit(User $user)
     {
-        return view('aktor.edit2', [
-            "title" => "Profile",
+        return view('aktor.edit3', [
+            "title" => "Mahasiswa",
             "post" => $user,
             "role" => $user->role,
             "kelas_id" => $user->kelas_id
@@ -136,11 +202,13 @@ class MahasiswaController extends Controller
             $rules['email'] = 'required|email:dns|max:255|min:4|unique:App\Models\User';
         }
 
+        $slug = $user->kelas->slug;
+
         $validatedData = $request->validate($rules);
         $validatedData['password'] = Hash::make($validatedData['password']);
         User::where('id', $user->id)
             ->update($validatedData);
-        return redirect('/staff')->with('success', 'Data Berhasil Diubah!');
+        return redirect('/kelas'.'/'.$slug)->with('success', 'Data Berhasil Diubah!');
     }
 
     /**

@@ -1,76 +1,53 @@
-@extends('layoutdashboard.main')
-@section('container') 
-<div class = "card" > <div class="card-body">
-    <div class="row align-items-center my-4">
-        <div class="col">
-            <button type="button" class="btn btn-info">
-                <i class="bi bi-printer"></i> Cetak</button>
-        </div>
-        <div class="d-flex justify-content-end mb-2">
-            <div class="col-md-4">
-                <form action="/hasilujian">
-                    <div class="input-group mb-3">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Cari.."
-                            name="search"
-                            value="{{ request('search') }}">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+@extends('layoutdashboard.main') 
+@section('container')
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-auto col-md-8">
+                <h4 class="mb-2">Data Hasil {{ $ujian->nama_ujian }}</h4>
+                    <h5>Kelas : {{ $ujian->kelas }}</h5>
+            </div>
+            <div class="col-auto col-md-8">
+                <div class="input-group mb-3">
+                    <form method="post" action="{{ route('cetak') }}">
+                        @csrf
+                        <input type="hidden" name="ujian_id" id="ujian_id" value="{{ $ujian->id }}">
+                    <button class="btn btn-info"><i class="bi bi-printer"></i>Cetak</button>
+                    </form>
+                </div>
             </div>
         </div>
-        <br>
-            <h4>Hasil Ujian mata pelajaran
-            </h4>
-            <h5>Kelas : 10
-            </h5>
-            <br>
-                <!-- table -->
-                <table class="table table-hover table-borderless border-v text-center">
-                    <thead class="thead-dark">
+        @if ($hasil->count())
+        <div class="row">
+            <div class="col-md-12">
+                <div class="flash-data" data-flashdata="{{ session('success') }}">
+                </div>
+                <table class="table table-striped">
+                    <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nik</th>
+                            <th>Npm</th>
                             <th>Nama Siswa</th>
                             <th>Skor Akhir</th>
-                            <th>Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr
-                            class="accordion-toggle collapsed"
-                            id="c-2474"
-                            data-toggle="collapse"
-                            data-parent="#c-2474"
-                            href="#collap-2474">
-                            <td>1</td>
-                            <td>78375189300728</td>
-                            <td>Muhammad Riski</td>
-                            <td>90</td>
-                            <td>Lulus</td>
+                        <tr>
+                        @foreach ($hasil as $has)
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $has->npm_mahasiswa }}</td>
+                            <td>{{ $has->nama_mahasiswa }}</td>
+                            <td>{{ $has->nilai }}</td>
                         </tr>
-                        <tr
-                            class="accordion-toggle collapsed"
-                            id="c-2474"
-                            data-toggle="collapse"
-                            data-parent="#c-2474"
-                            href="#collap-2474">
-                            <td>2</td>
-                            <td>95289300754538</td>
-                            <td>Mawar Puspita</td>
-                            <td>95</td>
-                            <td>Lulus</td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
+        @else
+        <p class="text-center fs-4">Tidak Ada Data
+            {{ $title }}</p>
+        @endif
     </div>
 </div>
 @endsection

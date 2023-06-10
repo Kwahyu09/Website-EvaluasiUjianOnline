@@ -34,12 +34,28 @@ class UserSeeder extends Seeder
             'role' => 'Staf',
             'password' => Hash::make('password')
         ]);
+        User::create([
+            'nama' => 'Melati',
+            'nik' => '9383629307625',
+            'username' => 'melati',
+            'email' => 'melati@gmail.com',
+            'role' => 'Staf',
+            'password' => Hash::make('password')
+        ]);
 
         User::create([
             'nama' => 'Surya Saputra',
             'username' => 'Surya',
             'nip' => '938362930353',
             'email' => 'surya@gmail.com',
+            'role' => 'Ketua',
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'nama' => 'Krisna Wahyudi',
+            'username' => 'krisna9',
+            'nip' => '892745928204528',
+            'email' => 'krisna@gmail.com',
             'role' => 'Ketua',
             'password' => Hash::make('password')
         ]);
@@ -60,6 +76,51 @@ class UserSeeder extends Seeder
             'role' => 'Mahasiswa',
             'email' => 'yusuf543@gmail.com',
             'kelas_id' => '1',
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'npm' => 'G1A023001',
+            'nama' => 'Ahmad Muhaimin',
+            'username' => 'ahmatmuh',
+            'role' => 'Mahasiswa',
+            'email' => 'ahmat@gmail.com',
+            'kelas_id' => '2',
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'npm' => 'G1A023002',
+            'nama' => 'Siti Nurbaya',
+            'username' => 'siti23',
+            'role' => 'Mahasiswa',
+            'email' => 'siti@gmail.com',
+            'kelas_id' => '2',
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'npm' => 'G1A023003',
+            'nama' => 'Bung Yoza',
+            'username' => 'bungyoz',
+            'role' => 'Mahasiswa',
+            'email' => 'bungyoza@gmail.com',
+            'kelas_id' => '2',
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'npm' => 'G1A023004',
+            'nama' => 'Yoga Sanjaya',
+            'username' => 'yogas7',
+            'role' => 'Mahasiswa',
+            'email' => 'yoga@gmail.com',
+            'kelas_id' => '2',
+            'password' => Hash::make('password')
+        ]);
+        User::create([
+            'npm' => 'G1A023005',
+            'nama' => 'Devi Syahputri',
+            'username' => 'devisah',
+            'role' => 'Mahasiswa',
+            'email' => 'devi@gmail.com',
+            'kelas_id' => '2',
             'password' => Hash::make('password')
         ]);
     }

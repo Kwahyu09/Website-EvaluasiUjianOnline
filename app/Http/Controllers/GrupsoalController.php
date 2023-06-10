@@ -23,14 +23,25 @@ class GrupsoalController extends Controller
         ]);
     }
 
-    public function show(Grup_soal $grup_soal)
+    public function show(Request $request, Grup_soal $grup_soal)
     {
+        $id_modul = $grup_soal->modul_id;
+        $search = $request->get('search');
         return view('grupsoal.soal.soal',[
             "title" => "soal",
             "slug" => $grup_soal->slug,
             "grup" => $grup_soal->nama_grup,
-            "post" => $grup_soal->soal,
-            "soal" => soal::latest()->filter(request(['search','modul']))->paginate(6)
+            "modul" => Modul::find($id_modul,['nama_modul']),
+            "post" => Soal::where('grup_soal_id', $grup_soal->id)->where(function ($query) use ($search) {
+                $query->where('kode_soal', 'like', '%' . $search . '%')
+                  ->orWhere('pertanyaan', 'like', '%' . $search . '%')
+                  ->orWhere('opsi_a', 'like', '%' . $search . '%')
+                  ->orWhere('opsi_b', 'like', '%' . $search . '%')
+                  ->orWhere('opsi_c', 'like', '%' . $search . '%')
+                  ->orWhere('opsi_d', 'like', '%' . $search . '%')
+                  ->orWhere('jawaban', 'like', '%' . $search . '%')
+                  ->orWhere('bobot', 'like', '%' . $search . '%');
+            })->get()
         ]);
     }
 
@@ -90,7 +101,7 @@ class GrupsoalController extends Controller
     {
         $nama_modul = "";
         if ($grup_soal->modul_id == $grup_soal->modul_id){
-           $nama_modul = Modul::find($grup_soal->modul_id, ['slug']);;        
+           $nama_modul = Modul::find($grup_soal->modul_id, ['slug']);        
         }
         return view('grupsoal.edit',[
             "title" => "Grup Soal",
@@ -120,10 +131,12 @@ class GrupsoalController extends Controller
             $rules['slug'] = 'required|min:4|max:255|unique:App\Models\Grup_soal';
         }
 
+        $slug = $grup_soal->modul->slug;
+
         $validatedData = $request->validate($rules);
         Grup_soal::where('id', $grup_soal->id)
             ->update($validatedData);
-        return redirect('/kelas')->with('success', 'Data Berhasil DiUbah!');
+        return redirect('/grupsoal'.'/'.$slug)->with('success', 'Data Berhasil DiUbah!');
     }
 
     /**
@@ -141,6 +154,7 @@ class GrupsoalController extends Controller
     public function checkSlug(Request $request)
     {
         $slug = SlugService::createSlug(Grup_soal::class, 'slug', $request->nama_grup);
+
         return response()->json(['slug' => $slug ]);
     }
 }

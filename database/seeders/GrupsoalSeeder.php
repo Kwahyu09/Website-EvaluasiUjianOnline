@@ -17,14 +17,14 @@ class GrupsoalSeeder extends Seeder
     {
         Grup_soal::create([
             'modul_id' => '1',
-            'user_id' => '3',
+            'user_id' => '5',
             'nama_grup' => 'Ulangan Harian',
             'slug' => 'ulangan-harian'
         ]);
 
         Grup_soal::create([
             'modul_id' => '1',
-            'user_id' => '3',
+            'user_id' => '5',
             'nama_grup' => 'Ujian Tengah Semester',
             'slug' => 'ujian-tengah-semester'
         ]);
@@ -33,7 +33,7 @@ class GrupsoalSeeder extends Seeder
             'modul_id' => '2',
             'user_id' => '4',
             'nama_grup' => 'Ujian Akhir Semester',
-            'slug' => 'ujiana-akhir-semester'
+            'slug' => 'ujian-akhir-semester'
         ]);
     }
 }

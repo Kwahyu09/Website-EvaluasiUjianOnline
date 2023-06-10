@@ -4,13 +4,17 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 class="mb-3">Ujian Mahasiswa</h3>
-                        <form action="/ujian-data">
+                        <div class="flash-dataeror" data-flashdataeror="{{ session('success') }}">
+                        </div>
+                        <form action="{{ route('ujian-data') }}" method="POST">
+                            @csrf
+
                             <label for="kd_ujian">Silahkan Pilih Ujian :</label>
                             <div class="input-group mb-3">
-                                <select class="custom-select" id="inputGroupSelect01">
+                                <select class="custom-select" name="id_modul" id="inputGroupSelect01" required>
                                     <option selected="selected">Pilih...</option>
                                     @foreach ($post as $pos)
-                                    <option value="{{ $pos->nama_ujian }}">{{ $pos->nama_ujian }}</option>
+                                    <option value="{{ $pos->id }}">{{ $pos->nama_ujian }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -29,8 +33,8 @@
                                         </div>
                                         @enderror
                                     </div>
-                        <div class="card-footer mr-3 mb-3 mt-0">
-                            <a href="/ujian-data" class="btn btn-primary float-right">Tambah</a>
+                        <div class="card-footer mr-3 mb-3 mt-0 d-flex justify-content-end">
+                            <input type="submit" value="Masuk Ujian" class="btn btn-primary">
                         </div>
                         </form>
                 <!-- end section -->

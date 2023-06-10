@@ -2,14 +2,8 @@
 @section('container')
     <div class="row">
         <div class="col-12 col-md-6 col-lg-6">
-                @if(session()->has('success'))
-                <div class="alert alert-success alert-block">
-                    {{ session('success') }}
-                    <button type="button" class="close" data-dismiss="alert">
-                        <a href="/{{ $title }}" style="text-decoration: none;">×</a>
-                    </button>
+                <div class="flash-data" data-flashdata="{{ session('success') }}">
                 </div>
-                @endif
                 <div class="card">
                   <div class="card-header">
                     <h4>Edit Akun {{ $title }}</h4>
@@ -38,15 +32,37 @@
                                 </div>
                             @enderror
                             </div>
-                            <div class="form-group">
-                            <label for="inputAddress2">Nik</label>
-                            <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" id="nik" required value="{{ old('nik', $post->nik) }}">
-                            @error('nik')
-                            <div class="invalid-feedback">
-                                    {{ $message }}
-                            </div>
-                            @enderror
-                            </div>
+                            @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Ketua')
+                                <div class="form-group">
+                                <label for="inputAddress2">NIP</label>
+                                <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror" id="nip" required value="{{ old('nip', $post->nip) }}">
+                                @error('nip')
+                                <div class="invalid-feedback">
+                                        {{ $message }}
+                                </div>
+                                @enderror
+                                </div>
+                            @elseif(Auth::user()->role == 'Mahasiswa')
+                                <div class="form-group">
+                                <label for="inputAddress2">NPM</label>
+                                <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror" id="nip" required value="{{ old('nip', $post->nip) }}" readonly>
+                                @error('nip')
+                                <div class="invalid-feedback">
+                                        {{ $message }}
+                                </div>
+                                @enderror
+                                </div>
+                            @elseif(Auth::user()->role == 'Staf')
+                                <div class="form-group">
+                                <label for="inputAddress2">NIK</label>
+                                <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" id="nik" required value="{{ old('nik', $post->nik) }}" readonly>
+                                @error('nik')
+                                <div class="invalid-feedback">
+                                        {{ $message }}
+                                </div>
+                                @enderror
+                                </div>
+                            @endif
                             <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>

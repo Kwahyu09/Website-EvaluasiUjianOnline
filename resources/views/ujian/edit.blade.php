@@ -15,6 +15,11 @@
                                         name="kd_ujian"
                                         class="form-control @error('kd_ujian') is-invalid @enderror"
                                         id="kd_ujian" value="{{ $post->kd_ujian }}">
+                                    <input
+                                        type="hidden"
+                                        name="user_id"
+                                        class="form-control @error('user_id') is-invalid @enderror"
+                                        id="user_id" value="{{ old('user_id') }}">
                                     <div class="form-group">
                                         <label for="nama_ujian">Nama {{ $title }}</label>
                                         <input
