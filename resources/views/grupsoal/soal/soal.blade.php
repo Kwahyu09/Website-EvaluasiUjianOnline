@@ -6,7 +6,10 @@
             Berdasarkan
             {{ $grup }} {{ $modul->nama_modul }}</h5>
         <div class="d-flex justify-content-start mb-3 mt-3">
-            <a href="/soal/create/{{ $slug }}" class="btn btn-primary">Tambah Data <i class="bi bi-plus-circle"></i>
+            <a href="/soal/create/{{ $slug }}" class="btn btn-primary mr-2">Tambah Soal <i class="bi bi-plus-circle"></i>
+            </a>
+            <a href="/soal/import/{{ $slug }}" class="btn btn-success">
+                Import Data <i class="bi bi-file-earmark-arrow-down"></i>
             </a>
         </div>
         @if ($post->count())
@@ -46,6 +49,7 @@
                                         <th>Opsi B</th>
                                         <th>Opsi C</th>
                                         <th>Opsi D</th>
+                                        <th>Opsi E</th>
                                         <th>Jawaban</th>
                                         <th>Bobot</th>
                                         <th>Action</th>
@@ -61,6 +65,7 @@
                                         <td>{!! $pos->opsi_b !!}</td>
                                         <td>{!! $pos->opsi_c !!}</td>
                                         <td>{!! $pos->opsi_d !!}</td>
+                                        <td>{!! $pos->opsi_e !!}</td>
                                         <td>{!! $pos->jawaban !!}</td>
                                         <td>{!! $pos->bobot !!}</td>
                                         <td>

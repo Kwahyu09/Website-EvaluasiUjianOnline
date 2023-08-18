@@ -38,7 +38,6 @@
                                                 5. Segera Selesaikan Semua pertanyaan, jika waktu sudah selesai otomatis sistem
                                                 ujian akan berakhir<br></div>
                                     <a href="/masuk-ujian/{{ $post->slug }}" class="btn btn-primary float-right" type="submit">Mulai Ujian</a>
-
                                             </div>
                                             <!-- end section -->
                                         </div>

@@ -63,25 +63,25 @@ class AuthenticatedSessionController extends Controller
     {
         $role = $request->role;
 
-        if ($role == 'Admin') {
+        if ($role === 'Admin') {
             $credentials = [
                 'nip' => $request->login,
                 'password' => $request->password,
             ];
         }
-        else if ($role == 'Staf') {
+        else if ($role === 'Staf') {
             $credentials = [
                 'nik' => $request->login,
                 'password' => $request->password,
             ];
         }
-        else if ($role == 'Ketua') {
+        else if ($role === 'Ketua') {
             $credentials = [
                 'nip' => $request->login,
                 'password' => $request->password,
             ];
         }
-        else if ($role == 'Mahasiswa') {
+        else if ($role === 'Mahasiswa') {
             $credentials = [
                 'npm' => $request->login,
                 'password' => $request->password,
@@ -94,7 +94,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Login Gagal.',
         ])->onlyInput('email');
     }
 

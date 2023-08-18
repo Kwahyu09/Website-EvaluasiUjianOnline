@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('kelas_id')->nullable();
-            $table->string('nik')->nullable();
-            $table->string('nip')->nullable();
-            $table->string('npm')->nullable();
-            $table->string('nama');
-            $table->string('username');
+            $table->string('nik', 18)->nullable();
+            $table->string('nip', 18)->nullable();
+            $table->string('npm', 11)->nullable();
+            $table->string('nama',50);
+            $table->string('username',20);
             $table->enum('role', ['Admin','Staf','Ketua','Mahasiswa']);
-            $table->string('email')->unique();
+            $table->string('email',70)->unique();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

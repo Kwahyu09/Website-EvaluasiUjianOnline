@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('moduls', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->char('kd_modul')->unique();
-            $table->string('nama_modul');
+            $table->char('kd_modul',8)->unique();
+            $table->string('nama_modul',50);
             $table->string('slug');
             $table->integer('semester');
             $table->integer('sks');

@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('nama_mahasiswa');
             $table->string('npm_mahasiswa');
             $table->string('jawaban');
-            $table->string('skor');
             $table->timestamps();
         });
     }

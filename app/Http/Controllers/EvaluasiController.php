@@ -9,6 +9,7 @@ use App\Models\Ujian;
 use App\Models\Soal;
 use Illuminate\Http\Request;
 
+
 class EvaluasiController extends Controller
 {
     /**
@@ -70,9 +71,15 @@ class EvaluasiController extends Controller
         }else{
             $validatedData['skor'] = 0;
         }
-
+        
+        // Ambil nomor halaman selanjutnya
         evaluasi::create($validatedData);
-        return back()->with('success', 'Jawaban Berhasil Ditambahkan!');
+        $nextPage = $request->page + 1;
+        if($request->page === $request->pageAkhir ){
+            return back();
+        }else{
+            return redirect('/masuk-ujian'.'/'.$request->slug.'?page='.$nextPage);
+        }
     }
 
     /**

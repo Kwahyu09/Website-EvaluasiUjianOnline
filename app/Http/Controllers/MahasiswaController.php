@@ -13,10 +13,14 @@ use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UpdateMahasiswaRequest;
 use App\Models\Evaluasi;
 use App\Models\Grup_soal;
 use App\Models\HasilUjian;
+use App\Imports\UserImport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class MahasiswaController extends Controller
 {
@@ -39,6 +43,29 @@ class MahasiswaController extends Controller
             "post" => User::latest()->Filter(request(['search']))->where('role','Mahasiswa')->paginate(10)
         ]);
     }
+    public function ImportExel(Request $request)
+    {
+        // validasi
+		$this->validate($request, [
+			'file' => 'required|mimes:csv,xls,xlsx'
+		]);
+ 
+		// menangkap file excel
+		$file = $request->file('file');
+ 
+		// membuat nama file unik
+		$nama_file = rand().$file->getClientOriginalName();
+ 
+		// upload ke folder file_user di dalam folder public
+		$file->move('file_user',$nama_file);
+ 
+		// import data
+		Excel::import(new UserImport, public_path('/file_user/'.$nama_file));
+ 
+ 
+		// alihkan halaman kembali
+		return back()->with('success','Data Mahasiswa Berhasil Diimport!');
+    }
     public function ujian_index()
     {
         $kelas = Auth::user()->kelas;
@@ -59,13 +86,26 @@ class MahasiswaController extends Controller
         $slug = $ujian->grupsoal;
         $grup = Grup_soal::where('slug', $slug)->get();
         $id_grup = $grup[0]['id'];
-        $soal = Soal::latest()->where('grup_soal_id',$id_grup)->paginate(100);
+
+        if($ujian->acak_soal === "Y"){
+            $soal = Soal::inRandomOrder()
+                ->where('grup_soal_id', $id_grup)
+                ->paginate(1);
+        }else{
+            $soal = Soal::where('grup_soal_id', $id_grup)
+            ->paginate(1);
+        }
+
+        $soalAsli = Soal::where('grup_soal_id', $id_grup)
+        ->orderBy('id') // Ganti 'id' dengan kolom yang ingin Anda gunakan untuk mengurutkan
+        ->paginate(1);
 
         $npm = Auth::user()->npm;
         $evaluasi = Evaluasi::where('ujian_id', $ujian->id)->where('npm_mahasiswa',$npm)->get();
         return view('masuk_ujian',  [
             "title" => "Ujian Mahasiswa",
             "soal" => $soal,
+            "soalAsli" => $soalAsli,
             "ujian" => $ujian,
             "jam" => $jam,
             "tanggal" => $tanggal,
@@ -75,6 +115,7 @@ class MahasiswaController extends Controller
 
     public function ujian_data(Request $request)
     {
+
         $timezone = 'Asia/Jakarta'; 
         $date = new DateTime('now', new DateTimeZone($timezone)); 
         $tanggal = $date->format('Y-m-d');
@@ -82,24 +123,24 @@ class MahasiswaController extends Controller
 
 
         $request->validate([
-            'id_modul' => 'required',
+            'id_ujian' => 'required',
             'kd_ujian' => 'required'
         ]);
-        $idModul = $request->id_modul;
+        $idUjian = $request->id_ujian;
         $kode = $request->kd_ujian;
         
-        $ujian = Ujian::find($idModul);
-        $hasil = HasilUjian::pluck('ujian_id')->toArray();
-        $npm = HasilUjian::pluck('npm_mahasiswa')->toArray();
+        $ujian = Ujian::find($idUjian);
+        $npm = Auth::user()->npm;
+        $hasil = HasilUjian::where('ujian_id', $ujian->id)->where('npm_mahasiswa',$npm)->count();
         if ($kode == $ujian->kd_ujian) {
             if($ujian->tanggal === $tanggal && $ujian->waktu_mulai <= $jam && $ujian->waktu_selesai >= $jam){
-                if(in_array($ujian->id, $hasil) && in_array(auth()->user()->npm, $npm)){
-                    return back()->with('success', 'Anda Sudah Mengerjakan Ujian');
-                }else{
+                if($hasil === 0){
                     return view('data_ujian', [
-                        "title" => "Ujian Mahasiswa",
+                        "title" => "Ujian Siswa",
                         "post" => $ujian
-                        ]);
+                    ]);
+                }else{
+                    return back()->with('success', 'Anda Sudah Mengerjakan Ujian');
                 }
             }else {
             return back()->with('success', 'Waktu Ujian Belum dimulai');
@@ -120,6 +161,16 @@ class MahasiswaController extends Controller
     public function create(Kelas $kelas)
     {
         return view('mahasiswa.create', [
+            "title" => "Mahasiswa",
+            "role" => "Mahasiswa",
+            "kelas_id" => $kelas->id,
+            "slug_kelas" => $kelas->slug
+        ]);
+    }
+
+    public function createImport(Kelas $kelas)
+    {
+        return view('mahasiswa.import', [
             "title" => "Mahasiswa",
             "role" => "Mahasiswa",
             "kelas_id" => $kelas->id,

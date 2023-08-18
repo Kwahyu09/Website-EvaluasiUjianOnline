@@ -64,6 +64,16 @@
                                             <input id="opsi_d" type="hidden" name="opsi_d" value="{{ old('opsi_d') }}">
                                             <trix-editor input="opsi_d"></trix-editor>
                                         </div>
+                                        <div class="col-md-2">
+                                            <h5 class="card-title mt-2">Opsi E</h5>
+                                        </div>
+                                        <div class="col-md-10 mb-2">
+                                            @error('opsi_e')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                            <input id="opsi_e" type="hidden" name="opsi_e" value="{{ old('opsi_e') }}">
+                                            <trix-editor input="opsi_e"></trix-editor>
+                                        </div>
                                     </div>
                                     <div class="row mb-4">
                                         <div class="col-md-2">
@@ -76,26 +86,37 @@
                                                     <option value="opsi_b">Opsi B</option>
                                                     <option value="opsi_c">Opsi C</option>
                                                     <option value="opsi_d">Opsi D</option>
+                                                    <option value="opsi_e">Opsi E</option>
                                                 @elseif(old('jawaban') == "opsi_b")
                                                     <option value="opsi_a">Opsi A</option>
                                                     <option value="opsi_b" selected>Opsi B</option>
                                                     <option value="opsi_c">Opsi C</option>
                                                     <option value="opsi_d">Opsi D</option>
+                                                    <option value="opsi_e">Opsi E</option>
                                                 @elseif(old('jawaban') == "opsi_c")
                                                     <option value="opsi_a">Opsi A</option>
                                                     <option value="opsi_b">Opsi B</option>
                                                     <option value="opsi_c" selected>Opsi C</option>
                                                     <option value="opsi_d">Opsi D</option>
+                                                    <option value="opsi_e">Opsi E</option>
                                                 @elseif(old('jawaban') == "opsi_d")
                                                     <option value="opsi_a">Opsi A</option>
                                                     <option value="opsi_b">Opsi B</option>
                                                     <option value="opsi_c">Opsi C</option>
                                                     <option value="opsi_d" selected>Opsi D</option>
+                                                    <option value="opsi_e">Opsi E</option>
+                                                @elseif(old('jawaban') == "opsi_e")
+                                                    <option value="opsi_a">Opsi A</option>
+                                                    <option value="opsi_b">Opsi B</option>
+                                                    <option value="opsi_c">Opsi C</option>
+                                                    <option value="opsi_d">Opsi D</option>
+                                                    <option value="opsi_d" selected>Opsi E</option>
                                                 @else
                                                     <option value="opsi_a">Opsi A</option>
                                                     <option value="opsi_b">Opsi B</option>
                                                     <option value="opsi_c">Opsi C</option>
                                                     <option value="opsi_d">Opsi D</option>
+                                                    <option value="opsi_e">Opsi E</option>
                                                 @endif
                                             </select>
                                         </div>
@@ -107,7 +128,7 @@
                                         <div class="col-md-2">
                                             <select class="custom-select @error('bobot') is-invalid @enderror" id="bobot" name="bobot" value="{{ old('bobot') }}" required>
                                             <?php
-                                            for ($i = 1; $i <= 100; $i++){ ?>
+                                            for ($i = 1; $i <= 2; $i++){ ?>
                                                 @if(old('bobot')  == $i )
                                                     <option value="<?= $i ?>" selected><?= $i ?></option>
                                                 @else

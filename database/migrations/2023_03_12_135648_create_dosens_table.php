@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('dosens', function (Blueprint $table) {
             $table->id();
-            $table->string('nip')->unique();
-            $table->string('nama_dos');
+            $table->string('nip',18)->unique();
+            $table->string('nama_dos',50);
             $table->string('slug');
-            $table->string('jabatan')->nullable();
-            $table->string('gol_regu')->nullable();
-            $table->string('jenis_kel');
-            $table->string('prodi');
-            $table->string('email');
+            $table->string('jabatan',20)->nullable();
+            $table->string('gol_regu',8)->nullable();
+            $table->string('jenis_kel',10);
+            $table->string('prodi',30);
+            $table->string('email',70);
             $table->timestamps();
         });
     }

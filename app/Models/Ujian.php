@@ -28,10 +28,6 @@ class Ujian extends Model
         });
     }
 
-    public function ketuasekretaris()
-    {
-        return $this->belongsTo(ketuasekretaris::class);
-    }
 
     public function modul()
     {

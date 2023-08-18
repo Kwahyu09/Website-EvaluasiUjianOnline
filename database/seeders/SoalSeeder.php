@@ -24,8 +24,9 @@ class SoalSeeder extends Seeder
             'opsi_b' => 'Community leader',
             'opsi_c' => 'Experienced',
             'opsi_d' => 'Communicator',
+            'opsi_e' => 'Komunikasi',
             'jawaban' => 'Community leader',
-            'bobot' => 10
+            'bobot' => 1
         ]);
 
         soal::create([
@@ -37,8 +38,9 @@ class SoalSeeder extends Seeder
             'opsi_b' => 'Pelunakan otak',
             'opsi_c' => 'Penumpukan darah pada otak',
             'opsi_d' => 'Pelabaran selaput otak',
+            'opsi_e' => 'Penyakit Tumor',
             'jawaban' => 'Peradangan otak',
-            'bobot' => 10
+            'bobot' => 1
         ]);
 
         soal::create([
@@ -50,8 +52,9 @@ class SoalSeeder extends Seeder
             'opsi_b' => 'Mengenali dan menghancurkan sel-sel normal',
             'opsi_c' => 'Mempertahankan tubuh dari patogen invasif',
             'opsi_d' => 'Melindungi tubuh terhadap serangan antigen dari lingkungan',
+            'opsi_e' => 'Menjaga Imun',
             'jawaban' => 'Mengenali dan menghancurkan sel-sel normal',
-            'bobot' => 10
+            'bobot' => 1
         ]);
         soal::create([
             'kode_soal' => '32aieadf',
@@ -62,8 +65,9 @@ class SoalSeeder extends Seeder
             'opsi_b' => 'Masuknya virus',
             'opsi_c' => 'Pemanasan udara',
             'opsi_d' => 'Mengeluarkan virus',
+            'opsi_e' => 'Bulu ayam',
             'jawaban' => 'Mengeluarkan virus',
-            'bobot' => 10
+            'bobot' => 1
         ]);
         soal::create([
             'kode_soal' => '32aiead4df',
@@ -74,8 +78,9 @@ class SoalSeeder extends Seeder
             'opsi_b' => 'Karbondioksida',
             'opsi_c' => 'Amoniak',
             'opsi_d' => 'Nitrogen',
+            'opsi_e' => 'CO2',
             'jawaban' => 'Oksigen',
-            'bobot' => 10
+            'bobot' => 1
         ]);
         soal::create([
             'kode_soal' => '32a62tw',
@@ -86,8 +91,9 @@ class SoalSeeder extends Seeder
             'opsi_b' => 'Keluarnya feses dari anus',
             'opsi_c' => 'Pengeluaran saliva dari glandula saliva',
             'opsi_d' => 'Pengeluaran CO2 paru paru',
+            'opsi_e' => 'imunisasi',
             'jawaban' => 'Pengeluaran CO2 paru paru',
-            'bobot' => 10
+            'bobot' => 1
         ]);
         soal::create([
             'kode_soal' => '32a64fsa',
@@ -98,8 +104,9 @@ class SoalSeeder extends Seeder
             'opsi_b' => 'Human Immunodeficiency Virus',
             'opsi_c' => 'Humane Immunodeficiency Virus',
             'opsi_d' => 'Human Immunoficiency Virus',
+            'opsi_e' => 'Human Imun Virus',
             'jawaban' => 'Human Immunodeficiency Virus',
-            'bobot' => 10
+            'bobot' => 1
         ]);
         soal::create([
             'kode_soal' => '32a64f21a',
@@ -110,8 +117,9 @@ class SoalSeeder extends Seeder
             'opsi_b' => 'Konsentrasi kuman diudara di dalam rumah yang sumber cahayanya sangat minim',
             'opsi_c' => 'Faktor lingkungan rumah dengan ventilasi dan penyaringan udara yang memadai.',
             'opsi_d' => 'Kedekatan kontak dengan sumber penularan.',
+            'opsi_e' => 'Faktor sumber yang menular',
             'jawaban' => 'Faktor lingkungan rumah dengan ventilasi dan penyaringan udara yang memadai.',
-            'bobot' => 10
+            'bobot' => 1
         ]);
         soal::create([
             'kode_soal' => '83jsf21a',
@@ -122,8 +130,9 @@ class SoalSeeder extends Seeder
             'opsi_b' => 'Nyamuk Anopheles',
             'opsi_c' => 'Nyamuk Culex',
             'opsi_d' => 'Nyamuk Filaria',
+            'opsi_e' => 'Nyamuk Aedes',
             'jawaban' => 'Nyamuk Anopheles',
-            'bobot' => 10
+            'bobot' => 1
         ]);
         soal::create([
             'kode_soal' => '83jsfusua',
@@ -134,8 +143,9 @@ class SoalSeeder extends Seeder
             'opsi_b' => 'Angka Bebas Jentik',
             'opsi_c' => 'Angka Bebas Nyamuk',
             'opsi_d' => 'Mosquito Index',
+            'opsi_e' => 'Nyamuk Aedes',
             'jawaban' => 'Angka Bebas Jentik',
-            'bobot' => 10
+            'bobot' => 1
         ]);
         soal::create([
             'kode_soal' => '83jsfunlka',
@@ -146,8 +156,9 @@ class SoalSeeder extends Seeder
             'opsi_b' => 'Nyamuk Anopheles',
             'opsi_c' => 'Nyamuk Aedes aegypti',
             'opsi_d' => 'Nyamuk Filaria',
+            'opsi_e' => 'Nyamuk Aedes',
             'jawaban' => 'Nyamuk Aedes aegypti',
-            'bobot' => 10
+            'bobot' => 1
         ]);
         soal::create([
             'kode_soal' => '83jsfuaas',
@@ -158,8 +169,9 @@ class SoalSeeder extends Seeder
             'opsi_b' => 'demam 104 F',
             'opsi_c' => 'demam 30 F',
             'opsi_d' => 'demam 104 C',
+            'opsi_e' => 'demam 100 C',
             'jawaban' => 'demam 104 F',
-            'bobot' => 10
+            'bobot' => 1
         ]);
     }
 }

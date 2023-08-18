@@ -1,4 +1,5 @@
 @extends('layoutdashboard.main') 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @section('container')
 <div class="card">
     <div class="card-body">

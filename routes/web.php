@@ -28,6 +28,7 @@ Route::get('/profile/{user:username}/edit', [AktorController::class, 'edit'])->m
 Route::put('/Admin/{user:username}', [AktorController::class,'update_admin'])->middleware(['auth', 'role:Admin'])->name('updateAdmin');
 
 Route::get('/', [DashboardHomeController::class, 'index'])->middleware(['auth'])->name('home');
+
 Route::get('/staff', [AktorController::class, 'index_staff'])->middleware(['auth' , 'role:Admin'])->name('Staff');
 Route::get('/staff/create', [AktorController::class, 'create_staff'])->middleware(['auth', 'role:Admin'])->name('CreateStaff');
 Route::post('/staff/store', [AktorController::class, 'store_staff'])->middleware(['auth', 'role:Admin'])->name('StoreStaff');
@@ -43,7 +44,10 @@ Route::get('/ketua/{user:username}/delete', [AktorController::class, 'destroy_ke
 Route::put('/Ketua/{user:username}', [AktorController::class,'update_admin'])->middleware(['auth'])->name('ProfileKetua');
 Route::put('/Ketua/{user:username}/update', [AktorController::class,'update_ketua'])->middleware(['auth'])->name('updateKetua');
 Route::get('/ketua/{user:username}/edit', [AktorController::class, 'edit_ketua'])->middleware(['auth', 'role:Admin|Staf'])->name('editKetua');
+Route::get('/ujian-mahasiswa', [MahasiswaController::class,'ujian_index'])->middleware(['auth', 'role:Mahasiswa'])->name('mahasiswa-index');
 
+Route::get('/mahasiswa-home', [MahasiswaController::class,'mahasiswa_index'])->middleware(['auth', 'role:Mahasiswa'])->name('mahasiswa-home');
+Route::get('/masuk-ujian/{ujian:slug}', [MahasiswaController::class,'ujian_masuk'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-mahasiswa-index');
 
 Route::get('/kelas', [KelasController::class,'index'])->middleware(['auth', 'role:Admin|Staf'])->name('Kelas');
 Route::get('/kelas/create', [KelasController::class,'create'])->middleware(['auth', 'role:Admin|Staf'])->name('createKelas');
@@ -53,6 +57,7 @@ Route::get('/kelas/{kelas:slug}/edit', [KelasController::class, 'edit'])->middle
 Route::get('/kelas/{kelas:slug}',[KelasController::class, 'show'])->middleware(['auth', 'role:Admin|Staf'])->name('ShowMahasiswa');
 Route::put('/kelas/{kelas:slug}/update', [KelasController::class,'update'])->middleware(['auth', 'role:Admin|Staf'])->name('UpdateKelas');
 Route::get('/kelas/create/checkSlug',[KelasController::class, 'checkslug'])->middleware(['auth']);
+Route::post('/ujian-data', [MahasiswaController::class,'ujian_data'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-data');
 
 Route::resource('/dosen', DosenController::class)->middleware(['auth', 'role:Admin|Staf']);
 Route::get('/dosen/{dosen:slug}/delete', [DosenController::class, 'destroy'])->middleware(['auth', 'role:Admin|Staf'])->name('destroyDosen');
@@ -63,6 +68,8 @@ Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->middleware(['au
 Route::get('/mahasiswa/{user:username}/delete', [MahasiswaController::class, 'destroy'])->middleware(['auth', 'role:Admin|Staf'])->name('MahasiswaHapus');
 Route::post('/mahasiswa/store', [MahasiswaController::class,'store'])->middleware(['auth', 'role:Admin|Staf'])->name('Mahasiswa-tambah');
 Route::get('/mahasiswa/create/{kelas:slug}', [MahasiswaController::class, 'create'])->middleware(['auth', 'role:Admin|Staf'])->name('CreateKetua');
+Route::get('/mahasiswa/import/{kelas:slug}', [MahasiswaController::class, 'createImport'])->middleware(['auth', 'role:Admin|Staf'])->name('CreateKetua');
+Route::post('/mahasiswa/import_excel', [MahasiswaController::class, 'ImportExel'])->middleware(['auth', 'role:Admin|Staf'])->name('CreateKetua');
 Route::put('/Mahasiswa/{user:username}', [AktorController::class,'update_admin'])->middleware(['auth'])->name('ProfileMahasiswa');
 Route::get('/mahasiswa/{user:username}/edit', [MahasiswaController::class, 'edit'])->middleware(['auth', 'role:Admin|Staf'])->name('editMahasiswa');
 Route::put('/Mahasiswa/{user:username}/update', [MahasiswaController::class,'update'])->middleware(['auth'])->name('UpdateMahasiswa');
@@ -88,6 +95,9 @@ Route::post('/soal/store', [SoalController::class, 'store'])->middleware(['auth'
 Route::get('/soal/{soal:slug}/delete', [SoalController::class, 'destroy'])->middleware(['auth','role:Admin|Ketua'])->name('destroySoal');
 Route::get('/soal/{grup_soal:slug}', [GrupsoalController::class,'show'])->middleware(['auth','role:Admin|Ketua'])->name('soal_show');
 Route::get('/soal/create/{grup_soal:slug}', [SoalController::class,'create'])->middleware(['auth','role:Admin|Ketua'])->name('soal_create');
+Route::get('/soal/import/{grup_soal:slug}', [SoalController::class,'createImport'])->middleware(['auth','role:Admin|Ketua'])->name('soal_create');
+Route::get('/soal/create1/{grup_soal:slug}', [SoalController::class,'create1'])->middleware(['auth','role:Admin|Ketua'])->name('soal_create');
+Route::get('/soal/create2/{grup_soal:slug}', [SoalController::class,'create2'])->middleware(['auth','role:Admin|Ketua'])->name('soal_create');
 
 Route::resource('/ujian', UjianController::class)->middleware(['auth','role:Admin|Ketua']);
 Route::get('/ujian/{ujian:slug}/delete', [UjianController::class, 'destroy'])->middleware(['auth','role:Admin|Ketua'])->name('destroyUjian');
@@ -101,10 +111,6 @@ Route::post('/evaluasi/soal', [EvaluasiController::class, 'soalEvaluasi'])->midd
 Route::post('/evaluasi/show', [EvaluasiController::class, 'show'])->middleware(['auth','role:Admin|Ketua'])->name('showsoal');
 Route::post('/cetak', [HasilujianController::class, 'cetak'])->middleware(['auth','role:Admin|Ketua'])->name('cetak');
 
-Route::get('/mahasiswa-home', [MahasiswaController::class,'mahasiswa_index'])->middleware(['auth', 'role:Mahasiswa'])->name('mahasiswa-home');
-Route::post('/ujian-data', [MahasiswaController::class,'ujian_data'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-data');
-Route::get('/ujian-mahasiswa', [MahasiswaController::class,'ujian_index'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-mahasiswa-index');
-Route::get('/masuk-ujian/{ujian:slug}', [MahasiswaController::class,'ujian_masuk'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-mahasiswa-index');
 Route::post('/evaluasi/store', [EvaluasiController::class,'store'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-mahasiswa-tambah');
 Route::put('/evaluasi/update/{id}', [EvaluasiController::class,'update'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-mahasiswa-update');
 Route::get('/selesaiujian', [HasilujianController::class,'selesai_ujian'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian.berakhir');

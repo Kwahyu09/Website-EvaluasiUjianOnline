@@ -11,7 +11,7 @@
 
                             <label for="kd_ujian">Silahkan Pilih Ujian :</label>
                             <div class="input-group mb-3">
-                                <select class="custom-select" name="id_modul" id="inputGroupSelect01" required>
+                                <select class="custom-select" name="id_ujian" id="id_ujian" required>
                                     <option selected="selected">Pilih...</option>
                                     @foreach ($post as $pos)
                                     <option value="{{ $pos->id }}">{{ $pos->nama_ujian }}</option>

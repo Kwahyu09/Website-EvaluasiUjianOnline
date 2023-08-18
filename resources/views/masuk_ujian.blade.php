@@ -33,13 +33,16 @@
                                 @csrf
                         @endif
                         <div class="form-row">
+                            <input type="hidden" name="page" id="page" value="{{ $soal->currentPage() }}">
+                            <input type="hidden" name="pageAkhir" id="pageAkhir" value="{{ $soal->lastPage() }}">
                             <input type="hidden" name="soal_id" id="soal_id" value="{{ $s->id }}">
                             <input type="hidden" name="skor" id="skor" value="{{ $s->bobot }}">
+                            <input type="hidden" name="slug" id="slug" value="{{ $ujian->slug }}">
                             <input type="hidden" name="ujian_id" id="ujian_id" value="{{ $ujian->id }}">
                             <input type="hidden" name="nama_mahasiswa" id="nama_mahasiswa" value="{{ Auth::user()->nama }}">
                             <input type="hidden" name="npm_mahasiswa" id="npm_mahasiswa" value="{{ Auth::user()->npm }}">
                         <div class="col-md-0">
-                            <p>{{ ( $soal->currentPage() - 1)  * $soal->links()->paginator->perPage() + $loop->iteration }} .</p>
+                            <p>{{ $soal->currentPage() }} .</p>
                         </div>
                         <div class="col-md-11">
                         {!! $s->pertanyaan !!}</p>
@@ -137,7 +140,7 @@
                                 </label><br>
                             </div>
                             <div class="d-flex justify-content-center">
-                                {{ $soal->onEachSide(2)->links() }}
+                                {{ $soal->links() }}
                             </div>
                             <div class="d-flex justify-content-center">
                                 <form action="/selesaiujian" action="post">

@@ -42,6 +42,19 @@ class SoalController extends Controller
         ]);
     }
 
+    public function createImport(Grup_soal $grup_soal)
+    {
+        return view('grupsoal.soal.import',[
+            "title" => "Soal",
+            "kd_soal" => uniqid(),
+            "nama_grup" => $grup_soal->nama_grup,
+            "grupsoal_id" => $grup_soal->id,
+            "grupsoal_nama" => $grup_soal->nama_grup,
+            "modul" => Modul::find($grup_soal->modul_id,['nama_modul']),
+            "grupsoal_slug" => $grup_soal->slug
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

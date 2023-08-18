@@ -4,8 +4,11 @@
     <div class="card-body">
         <h5 class="mb-2">Data {{ $title }} Kelas {{ $nama_kelas }}</h5>
         <div class="d-flex justify-content-start">
-            <a href="/mahasiswa/create/{{ $kelas }}" class="btn btn-primary">
-                <span class="fe fe-plus-circle fe-12 mr-2"></span>Tambah
+            <a href="/mahasiswa/create/{{ $kelas }}" class="btn btn-primary mr-3">
+                <span class="fe fe-plus-circle fe-12 mr-2"></span>Tambah <i class="bi bi-plus-circle"></i>
+            </a>
+            <a href="/mahasiswa/import/{{ $kelas }}" class="btn btn-success">
+                Import Data <i class="bi bi-file-earmark-arrow-down"></i>
             </a>
         </div>
         @if ($post->count())
