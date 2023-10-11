@@ -224,7 +224,8 @@ class MahasiswaController extends Controller
             "title" => "Mahasiswa",
             "post" => $user,
             "role" => $user->role,
-            "kelas_id" => $user->kelas_id
+            "kelas_id" => $user->kelas_id,
+            "slug_kelas" => $user->kelas->slug
         ]);
     }
 

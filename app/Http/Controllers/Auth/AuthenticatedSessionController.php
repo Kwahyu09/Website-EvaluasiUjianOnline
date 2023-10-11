@@ -67,24 +67,28 @@ class AuthenticatedSessionController extends Controller
             $credentials = [
                 'nip' => $request->login,
                 'password' => $request->password,
+                'role' => $request->role,
             ];
         }
         else if ($role === 'Staf') {
             $credentials = [
                 'nik' => $request->login,
                 'password' => $request->password,
+                'role' => $request->role,
             ];
         }
         else if ($role === 'Ketua') {
             $credentials = [
                 'nip' => $request->login,
                 'password' => $request->password,
+                'role' => $request->role,
             ];
         }
         else if ($role === 'Mahasiswa') {
             $credentials = [
                 'npm' => $request->login,
                 'password' => $request->password,
+                'role' => $request->role,
             ];
         }
 

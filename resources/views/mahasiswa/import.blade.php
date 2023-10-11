@@ -12,6 +12,7 @@
                 <input type="file" name="file" required="required"></div>
                 <div class="d-flex justify-content-start mb-3">
                     <button type="submit" class="btn btn-primary">Import</button>
+                    <a class="ml-1 btn btn-danger float-right" href="/kelas/{{ $slug_kelas }}">Batal</a>
                 </div>
                 <label>Berikut contoh Format kolom pada exel</label><br>
                 <label>Catatan:</label><br>

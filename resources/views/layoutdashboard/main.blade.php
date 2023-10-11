@@ -19,7 +19,7 @@
   {{-- Trik EDITOR --}}
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
-    <script src="/js/jam.js"></script>
+    <script src="{{ asset('/js/jam.js') }}"></script>
     <style>
       trix-toolbar [data-trix-button-group="file-tools"] {
         display: none;
@@ -86,9 +86,8 @@
               <div class="section-header">
                 <h3>Fakultas Kedokteran dan Ilmu Kesehatan UNIB</h3>
               </div>
-                <div class="container">
                     @yield('container')
-                </div>
+                
               </div>
             </section>
           </div>
@@ -96,8 +95,8 @@
       </div>
       <!-- General JS Scripts -->
       <script src="https://code.jquery.com/jquery-3.7.0.slim.js" integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
-      <script src="/dist/sweetalert2.all.min.js"></script>
-      <script src="/dist/myscript.js"></script>
+      <script src="{{ asset('/dist/sweetalert2.all.min.js') }}"></script>
+      <script src="{{ asset('/dist/myscript.js') }}"></script>
       <script src="{{ asset('/backend/assets/modules/jquery.min.js') }}"></script>
       <script src="{{ asset('/backend/assets/modules/popper.js') }}"></script>
       <script src="{{ asset('/backend/assets/modules/tooltip.js') }}"></script>

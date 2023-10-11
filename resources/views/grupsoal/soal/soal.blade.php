@@ -6,10 +6,13 @@
             Berdasarkan
             {{ $grup }} {{ $modul->nama_modul }}</h5>
         <div class="d-flex justify-content-start mb-3 mt-3">
-            <a href="/soal/create/{{ $slug }}" class="btn btn-primary mr-2">Tambah Soal <i class="bi bi-plus-circle"></i>
+            <a href="/soal/create/{{ $slug }}" class="btn btn-primary mr-1">Tambah<i class="bi bi-plus-circle"></i>
             </a>
-            <a href="/soal/import/{{ $slug }}" class="btn btn-success">
-                Import Data <i class="bi bi-file-earmark-arrow-down"></i>
+            <a href="/soal/import/{{ $slug }}" class="btn btn-success mr-1">
+                Import<i class="bi bi-file-earmark-arrow-down"></i>
+            </a>
+            <a href="/soal/tambahgambar/{{ $slug }}" class="btn btn-info">
+                Tambah Soal Bergambar<i class="bi bi-file-earmark-arrow-down"></i>
             </a>
         </div>
         @if ($post->count())

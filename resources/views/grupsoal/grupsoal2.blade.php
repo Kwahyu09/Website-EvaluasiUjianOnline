@@ -17,7 +17,7 @@
     <div class="row">
         @foreach ($post as $pos)
         <div class="col-md-3">
-            <a class="text-decoration-none" href="/soal/{{ $pos->slug }}">
+            <a style="text-decoration:none" href="/soal/{{ $pos->slug }}">
                 <div class="card shadow mb-4">
                     <div class="card-body text-center text-dark">
                         <div class="card-text my-2">

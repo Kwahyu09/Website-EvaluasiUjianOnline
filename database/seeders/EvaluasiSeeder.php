@@ -19,7 +19,6 @@ class EvaluasiSeeder extends Seeder
             'nama_mahasiswa'=> 'Ahmad Muhaimin',
             'npm_mahasiswa'=> 'G1A023001',
             'jawaban'=> 'opsi_a',
-            'skor'=> '10',
             'soal_id' => '4',
             'ujian_id' => '2'
         ]);

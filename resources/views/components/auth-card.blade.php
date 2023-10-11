@@ -3,8 +3,9 @@
         {{ $logo }}
     </div>
     <div class="text-center mb-3">
-        <h3 class="text-warning" style="font-weight: bold">Sistem Informasi Evaluasi Ujian</h3>
-        <h5 class="text-warning" style="font-weight: bold">Fakultas Kedokteran dan Ilmu Kesehatan</h5>
+        <h3 style="font-weight: bold; color: yellow; text-shadow: 1px 1px 2px rgba(252, 2, 2, 0.8)">Sistem Informasi Evaluasi Ujian</h3>
+        <h5 style="font-weight: bold; color: yellow; text-shadow: 1px 1px 2px rgba(252, 2, 2, 0.8);">Fakultas Kedokteran dan Ilmu Kesehatan</h5>
+        <h5 style="font-weight: bold; color: yellow; text-shadow: 1px 1px 2px rgba(252, 2, 2, 0.8);">Universitas Bengkulu</h5>
     </div>
 
     {{-- <div class="card shadow-sm bg-white rounded">

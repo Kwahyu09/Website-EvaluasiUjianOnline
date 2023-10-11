@@ -107,7 +107,8 @@ class GrupsoalController extends Controller
             "title" => "Grup Soal",
             "post" => $grup_soal,
             "nama_modul" => $nama_modul,
-            "slug_modul" => $nama_modul
+            "slug_modul" => $nama_modul,
+            "link" => $grup_soal->modul->slug
 
         ]);
     }

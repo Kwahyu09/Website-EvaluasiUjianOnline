@@ -170,7 +170,7 @@ class AktorController extends Controller
     {
         $kelas_id = "";
         return view('aktor.edit2', [
-            "title" => "Staff",
+            "title" => "staff",
             "post" => $user,
             "role" => "Staf",
             "kelas_id" => $kelas_id
@@ -180,7 +180,7 @@ class AktorController extends Controller
     {
         $kelas_id = "";
         return view('aktor.edit2', [
-            "title" => "Ketua",
+            "title" => "ketua",
             "post" => $user,
             "role" => "Ketua",
             "kelas_id" => $kelas_id

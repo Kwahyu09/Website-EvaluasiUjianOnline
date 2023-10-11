@@ -46,7 +46,6 @@
                                         <th scope="col">Grup Soal</th>
                                         <th scope="col">Tanggal</th>
                                         <th scope="col">Acak Soal</th>
-                                        <th scope="col">Acak Jawaban</th>
                                         <th scope="col">Waktu Mulai</th>
                                         <th scope="col">Waktu Selesai</th>
                                         <th scope="col">Action</th>
@@ -63,7 +62,6 @@
                                         <td>{{ $pos->grupsoal }}</td>
                                         <td>{{ $pos->tanggal }}</td>
                                         <td>{{ $pos->acak_soal }}</td>
-                                        <td>{{ $pos->acak_jawaban }}</td>
                                         <td>{{ $pos->waktu_mulai }}</td>
                                         <td>{{ $pos->waktu_selesai }}</td>
                                         <td>

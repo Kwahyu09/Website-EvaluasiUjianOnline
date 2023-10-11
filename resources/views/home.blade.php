@@ -1,10 +1,10 @@
 @extends('layoutdashboard.main')
 
 @section('container')
+<h6>Selamat Datang {{ Auth::user()->nama }} !</h6><br>
 <div class="row">
     <div class="flash-data" data-flashdata="{{ session('success') }}">
     </div>
-    <h6>Selamat Datang {{ Auth::user()->nama }} !</h6>
      @if (Auth::user()->role == 'Admin')
     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
         <div class="card card-statistic-1">
