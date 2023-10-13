@@ -15,7 +15,6 @@ class SoalImport implements ToModel
     public function model(array $row)
     {
         return new Soal([
-            'kode_soal' => $row[0], 
             'slug' => $row[0], 
             'grup_soal_id' => $row[1],
             'pertanyaan' => $row[2],

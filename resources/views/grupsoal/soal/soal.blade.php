@@ -46,7 +46,6 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
-                                        <th>Kode Soal</th>
                                         <th>Pertanyaan</th>
                                         <th>Opsi A</th>
                                         <th>Opsi B</th>
@@ -62,7 +61,6 @@
                                     @foreach ($post as $pos)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{!! $pos->kode_soal !!}</td>
                                         <td>{!! $pos->pertanyaan !!}</td>
                                         <td>{!! $pos->opsi_a !!}</td>
                                         <td>{!! $pos->opsi_b !!}</td>

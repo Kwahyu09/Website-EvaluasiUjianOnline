@@ -11,8 +11,7 @@
                     <div class="card-body">
                         <div class="row mb-4">
                                         <div class="col-md-2">
-                                            <input type="hidden" name="kode_soal" id="kode_soal" value="{{ $kd_soal }}">
-                                            <input type="hidden" name="slug" id="slug" value="{{ $kd_soal }}">
+                                            <input type="hidden" name="slug" id="slug" value="{{ $slug }}">
                                             <input type="hidden" name="grupsoal_slug" id="grupsoal_slug" value="{{ $grupsoal_slug }}">
                                             <input type="hidden" name="grup_soal_id" id="grup_soal_id" value="{{ $grupsoal_id }}">
                                             <h5 class="card-title">Pertanyaan</h5>

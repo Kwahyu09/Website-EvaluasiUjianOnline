@@ -202,8 +202,8 @@ class AktorController extends Controller
             'password' => 'required|min:5|max:255'
         ];
 
-        if($request->nik != $user->nik){
-            $rules['nik'] = 'required|min:2|max:18|unique:App\Models\User';
+        if($request->nip != $user->nip){
+            $rules['nip'] = 'required|min:2|max:18|unique:App\Models\User';
         }
         if($request->username != $user->username){
             $rules['username'] = 'required|min:4|max:255|unique:App\Models\User';

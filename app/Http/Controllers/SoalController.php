@@ -31,9 +31,15 @@ class SoalController extends Controller
      */
     public function create(Grup_soal $grup_soal)
     {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $kode_unik = '';
+        for ($i = 0; $i < 8; $i++) {
+            $kode_unik .= $characters[random_int(0, strlen($characters) - 1)];
+        }
+
         return view('grupsoal.soal.create',[
             "title" => "Soal",
-            "kd_soal" => uniqid(),
+            "slug" => $kode_unik,
             "nama_grup" => $grup_soal->nama_grup,
             "grupsoal_id" => $grup_soal->id,
             "grupsoal_nama" => $grup_soal->nama_grup,
@@ -44,9 +50,14 @@ class SoalController extends Controller
 
     public function createImport(Grup_soal $grup_soal)
     {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $kode_unik = '';
+        for ($i = 0; $i < 8; $i++) {
+            $kode_unik .= $characters[random_int(0, strlen($characters) - 1)];
+        }
         return view('grupsoal.soal.import',[
             "title" => "Soal",
-            "kd_soal" => uniqid(),
+            "slug" => $kode_unik,
             "nama_grup" => $grup_soal->nama_grup,
             "grupsoal_id" => $grup_soal->id,
             "grupsoal_nama" => $grup_soal->nama_grup,
@@ -64,14 +75,14 @@ class SoalController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'kode_soal' => 'required|min:5|max:50',
             'pertanyaan' => 'required|min:2|max:255',
             'grup_soal_id' => 'required',
-            'slug' => 'required|min:5|max:50|unique:App\Models\Soal',
+            'slug' => 'required|min:3|max:8|unique:App\Models\Soal',
             'opsi_a' => 'required',
             'opsi_b' => 'required',
             'opsi_c' => 'required',
             'opsi_d' => 'required',
+            'opsi_e' => 'required',
             'bobot' => 'required'
         ]);
         if($request['jawaban'] == "opsi_a"){
@@ -80,8 +91,10 @@ class SoalController extends Controller
             $validatedData['jawaban'] = $request['opsi_b'];
         }elseif($request['jawaban'] == "opsi_c"){
             $validatedData['jawaban'] = $request['opsi_c'];
-        }else{
+        }elseif($request['jawaban'] == "opsi_d"){
             $validatedData['jawaban'] = $request['opsi_d'];
+        }else{
+            $validatedData['jawaban'] = $request['opsi_e'];
         }
 
         soal::create($validatedData);
@@ -123,13 +136,13 @@ class SoalController extends Controller
     public function update(Request $request, soal $soal)
     {
         $rules = [
-            'kode_soal' => 'required|min:5|max:50',
             'pertanyaan' => 'required|min:2|max:255',
             'grup_soal_id' => 'required',
             'opsi_a' => 'required',
             'opsi_b' => 'required',
             'opsi_c' => 'required',
             'opsi_d' => 'required',
+            'opsi_e' => 'required',
             'bobot' => 'required'
         ];
         
@@ -143,8 +156,10 @@ class SoalController extends Controller
             $validatedData['jawaban'] = $request['opsi_b'];
         }elseif($request['jawaban'] == "opsi_c"){
             $validatedData['jawaban'] = $request['opsi_c'];
-        }else{
+        }elseif($request['jawaban'] == "opsi_d"){
             $validatedData['jawaban'] = $request['opsi_d'];
+        }else{
+            $validatedData['jawaban'] = $request['opsi_e'];
         }
 
         Soal::where('id', $soal->id)

@@ -14,13 +14,13 @@
                 <label>Berikut contoh Format kolom pada exel</label><br>
                 <label>Catatan:</label><br>
                 <label>1. nilai Grup_Soal_id yang mau diimport harus sama dengan Grup_Soal_Id yang ditampilkan di tabel ini</label><br>
-                <label>2. data kode soal tidak boleh sama dengan data kode soal yang lain/ bersifat unik</label><br>
-                <label> 3. Kolom diexel harus berformat seperti tabel berikut, Misal Kolom A pada exel berisi nilai kode soal dan seterusnya</label>
+                <label>2. Slug tidak boleh sama dengan data kode soal yang lain/ bersifat unik minimal 3 dan maksimal 8 karakter</label><br>
+                <label>3. Kolom diexel harus berformat seperti tabel berikut, Misal Kolom A pada exel berisi nilai kode soal dan seterusnya</label>
                 <div class="table-responsive">
                 <table class="table table-striped" id="sortable-table">
                     <thead>
                         <tr>
-                            <th>Kode Soal</th>
+                            <th>Slug</th>
                             <th>Grup_Soal_Id</th>
                             <th>Pertanyaan</th>
                             <th>Opsi A</th>

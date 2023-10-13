@@ -11,7 +11,6 @@
                     @csrf
                     <div class="card-body">
                         <div class="row mb-4">
-                                        <input type="hidden" name="kode_soal" id="kode_soal" value="{{ $post->kode_soal }}">
                                         <input type="hidden" name="slug" id="slug" value="{{ $post->slug }}">
                                         <input type="hidden" name="grup_soal_id" id="grup_soal_id" value="{{ $post->grup_soal_id }}">
                                         <div class="col-md-2">
