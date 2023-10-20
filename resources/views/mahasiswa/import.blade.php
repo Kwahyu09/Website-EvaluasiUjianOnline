@@ -5,11 +5,18 @@
         <h4 class="mt-3 mb-3">Import Data {{ $title }}</h4>
         <form method="post" action="/mahasiswa/import_excel" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="slug_kelas" id="slug_kelas" value="{{ $slug_kelas }}">
             <label>Pilih file excel</label>
             <div class="flash-data" data-flashdata="{{ session('success') }}">
             </div>
             <div class="form-group">
-                <input type="file" name="file" required="required"></div>
+                <input type="file" name="file" required="required" class="@error('file') is-invalid @enderror" >
+                @error('file')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
                 <div class="d-flex justify-content-start mb-3">
                     <button type="submit" class="btn btn-primary">Import</button>
                     <a class="ml-1 btn btn-danger float-right" href="/kelas/{{ $slug_kelas }}">Batal</a>

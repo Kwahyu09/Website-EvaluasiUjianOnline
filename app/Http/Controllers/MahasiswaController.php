@@ -47,7 +47,7 @@ class MahasiswaController extends Controller
     {
         // validasi
 		$this->validate($request, [
-			'file' => 'required|mimes:csv,xls,xlsx'
+			'file' => 'required'
 		]);
  
 		// menangkap file excel
@@ -64,7 +64,7 @@ class MahasiswaController extends Controller
  
  
 		// alihkan halaman kembali
-		return back()->with('success','Data Mahasiswa Berhasil Diimport!');
+		return redirect('/kelas'.'/'.$request->slug_kelas)->with('success','Data Mahasiswa Berhasil Diimport!');
     }
     public function ujian_index()
     {
@@ -188,12 +188,12 @@ class MahasiswaController extends Controller
     {
          $validatedData = $request->validate([
             'kelas_id' => 'required',
-            'npm' => 'required|min:9|max:9|unique:App\Models\User',
-            'nama' => 'required|max:255',
-            'username' => 'required|min:4|max:255|unique:App\Models\User',
+            'npm' => 'required|min:9|max:10|unique:App\Models\User',
+            'nama' => 'required|max:60|min:3',
+            'username' => 'required|min:6|max:8|unique:App\Models\User',
             'role' => 'required|min:4|max:9',
-            'email' => 'required|email|max:255|min:4|unique:App\Models\User',
-            'password' => 'required|min:5|max:255'
+            'email' => 'required|email|max:60|min:6|unique:App\Models\User',
+            'password' => 'required|min:6|max:8'
         ]);
         
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -239,19 +239,19 @@ class MahasiswaController extends Controller
     public function update(Request $request, User $user)
     {
         $rules = [
-            'nama' => 'required|max:255',
+            'nama' => 'required|max:60|min:3',
             'role' => 'required|min:4|max:9',
-            'password' => 'required|min:5|max:255'
+            'password' => 'required|min:6|max:8'
         ];
 
-        if($request->nik != $user->nik){
-            $rules['nik'] = 'required|min:2|max:18|unique:App\Models\User';
+        if($request->npm != $user->npm){
+            $rules['npm'] = 'required|min:9|max:10|unique:App\Models\User';
         }
         if($request->username != $user->username){
-            $rules['username'] = 'required|min:4|max:255|unique:App\Models\User';
+            $rules['username'] = 'required|min:6|max:8|unique:App\Models\User';
         }
         if($request->email != $user->email){
-            $rules['email'] = 'required|email:dns|max:255|min:4|unique:App\Models\User';
+            $rules['email'] = 'required|email:dns|max:60|min:6|unique:App\Models\User';
         }
 
         $slug = $user->kelas->slug;

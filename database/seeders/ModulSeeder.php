@@ -16,7 +16,7 @@ class ModulSeeder extends Seeder
     public function run()
     {
         Modul::create([
-            'kd_modul' => 'SS18262s',
+            'kd_modul' => 'SS18262S',
             'nama_modul' => 'Demam',
             'slug' => 'demam',
             'semester' => 5,
@@ -24,7 +24,7 @@ class ModulSeeder extends Seeder
             'user_id' => 5
         ]);
         Modul::create([
-            'kd_modul' => 'SS123W7',
+            'kd_modul' => 'SS123W7G',
             'nama_modul' => 'Sistem Saraf',
             'slug' => 'sistem-saraf',
             'semester' => 5,
@@ -40,7 +40,7 @@ class ModulSeeder extends Seeder
             'user_id' => 4
         ]);
         Modul::create([
-            'kd_modul' => 'YYS23W7',
+            'kd_modul' => 'YYS23WG7',
             'nama_modul' => 'Ilmu Penyakit Dalam',
             'slug' => 'ilmu-penyakit-dalam',
             'semester' => 3,

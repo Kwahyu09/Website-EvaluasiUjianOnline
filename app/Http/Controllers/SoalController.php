@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Grup_soal;
 use App\Models\Modul;
 use App\Models\soal;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class SoalController extends Controller
@@ -78,6 +79,7 @@ class SoalController extends Controller
             'pertanyaan' => 'required|min:2|max:255',
             'grup_soal_id' => 'required',
             'slug' => 'required|min:3|max:8|unique:App\Models\Soal',
+            'gambar' => 'image|file|max:10240',
             'opsi_a' => 'required',
             'opsi_b' => 'required',
             'opsi_c' => 'required',
@@ -85,6 +87,11 @@ class SoalController extends Controller
             'opsi_e' => 'required',
             'bobot' => 'required'
         ]);
+
+        if($request->file('gambar')){
+            $validatedData['gambar'] = $request->file('gambar')->store('gambar-soal');
+        }
+
         if($request['jawaban'] == "opsi_a"){
             $validatedData['jawaban'] = $request['opsi_a'];
         }elseif($request['jawaban'] == "opsi_b"){
@@ -122,6 +129,7 @@ class SoalController extends Controller
     {
         return view('grupsoal.soal.edit',[
             "title" => "Soal",
+            "grupsoal_slug" => $soal->grup_soal->slug,
             "post" => $soal
         ]);
     }
@@ -162,6 +170,13 @@ class SoalController extends Controller
             $validatedData['jawaban'] = $request['opsi_e'];
         }
 
+        if($request->file('gambar')){
+            if($request->oldGambar){
+                Storage::delete($request->oldGambar);
+            }
+            $validatedData['gambar'] = $request->file('gambar')->store('gambar-soal');
+        }
+
         Soal::where('id', $soal->id)
             ->update($validatedData);
         return redirect('/soal'.'/'.$soal->grup_soal->slug)->with('success', 'Data Berhasil DiUbah!');
@@ -175,6 +190,9 @@ class SoalController extends Controller
      */
     public function destroy(soal $soal)
     {
+        if($soal->gambar){
+            Storage::delete($soal->gambar);
+        }
         soal::destroy($soal->id);
         return back()->with('success', 'Data Berhasil DiHapus!');
     }

@@ -33,12 +33,12 @@ class GrupsoalController extends Controller
             "grup" => $grup_soal->nama_grup,
             "modul" => Modul::find($id_modul,['nama_modul']),
             "post" => Soal::where('grup_soal_id', $grup_soal->id)->where(function ($query) use ($search) {
-                $query->where('kode_soal', 'like', '%' . $search . '%')
-                  ->orWhere('pertanyaan', 'like', '%' . $search . '%')
+                $query->where('pertanyaan', 'like', '%' . $search . '%')
                   ->orWhere('opsi_a', 'like', '%' . $search . '%')
                   ->orWhere('opsi_b', 'like', '%' . $search . '%')
                   ->orWhere('opsi_c', 'like', '%' . $search . '%')
                   ->orWhere('opsi_d', 'like', '%' . $search . '%')
+                  ->orWhere('opsi_e', 'like', '%' . $search . '%')
                   ->orWhere('jawaban', 'like', '%' . $search . '%')
                   ->orWhere('bobot', 'like', '%' . $search . '%');
             })->get()

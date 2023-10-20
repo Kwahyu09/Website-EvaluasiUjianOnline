@@ -43,10 +43,10 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_kelas' => 'required|max:255',
+            'nama_kelas' => 'required|max:30',
             'tahun_ajaran' => 'required|min:4|max:4',
             'slug' => 'required|max:255|unique:App\Models\Kelas',
-            'jurusan' => 'required|max:255'
+            'jurusan' => 'required|max:30'
         ]);
         Kelas::create($validatedData);
 
@@ -100,9 +100,9 @@ class KelasController extends Controller
     public function update(Request $request, Kelas $kelas)
     {
         $rules = [
-            'nama_kelas' => 'required|max:255',
+            'nama_kelas' => 'required|max:30',
             'tahun_ajaran' => 'required|min:4|max:4',
-            'jurusan' => 'required|max:255'
+            'jurusan' => 'required|max:30'
         ];
 
         if($request->slug != $kelas->slug){

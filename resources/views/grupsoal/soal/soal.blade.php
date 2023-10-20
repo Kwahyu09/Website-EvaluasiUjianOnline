@@ -47,6 +47,7 @@
                                     <tr>
                                         <th scope="col">No</th>
                                         <th>Pertanyaan</th>
+                                        <th>Gambar</th>
                                         <th>Opsi A</th>
                                         <th>Opsi B</th>
                                         <th>Opsi C</th>
@@ -54,7 +55,7 @@
                                         <th>Opsi E</th>
                                         <th>Jawaban</th>
                                         <th>Bobot</th>
-                                        <th>Action</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tr>
@@ -62,6 +63,11 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{!! $pos->pertanyaan !!}</td>
+                                        @if($pos->gambar)
+                                        <td><img src="{{ asset('storage/' . $pos->gambar) }}" alt="Gambar" width="100px"></td>
+                                        @else
+                                        <td><p style="font-style: italic">Tidak Ada</p></td>
+                                        @endif
                                         <td>{!! $pos->opsi_a !!}</td>
                                         <td>{!! $pos->opsi_b !!}</td>
                                         <td>{!! $pos->opsi_c !!}</td>

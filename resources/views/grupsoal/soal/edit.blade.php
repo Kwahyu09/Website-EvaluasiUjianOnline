@@ -6,12 +6,13 @@
                   <div class="card-header">
                     <h4>Ubah Data {{ $title }}</h4>
                   </div>
-                  <form action="/soal/{{ $post->slug }}/update" method="post">
+                  <form action="/soal/{{ $post->slug }}/update" method="post" enctype="multipart/form-data">
                     @method('put')
                     @csrf
                     <div class="card-body">
                         <div class="row mb-4">
                                         <input type="hidden" name="slug" id="slug" value="{{ $post->slug }}">
+                                        <input type="hidden" name="oldGambar" id="oldGambar" value="{{ $post->gambar }}">
                                         <input type="hidden" name="grup_soal_id" id="grup_soal_id" value="{{ $post->grup_soal_id }}">
                                         <div class="col-md-2">
                                             <h5 class="card-title">Pertanyaan</h5>
@@ -22,6 +23,22 @@
                                             @enderror
                                             <input id="pertanyaan" type="hidden" name="pertanyaan" value="{{ old('pertanyaan',$post->pertanyaan) }}">
                                             <trix-editor input="pertanyaan"></trix-editor>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <h5 class="card-title mt-2">Gambar</h5>
+                                        </div>
+                                        <div class="col-md-10 mb-4">
+                                            @error('gambar')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                            @if($post->gambar)
+                                                <img src="{{ asset('storage/'. $post->gambar) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                                            @else
+                                                <img class="img-preview img-fluid mb-3 col-sm-5">
+                                            @endif
+                                            <div class="mb-3">
+                                                <input class="form-control @error('gambar') is-invalid @enderror" type="file" name="gambar" id="gambar" onchange="previewImage()">
+                                            </div>
                                         </div>
                                         <div class="col-md-2">
                                             <h5 class="card-title mt-2">Opsi A</h5>
@@ -146,6 +163,7 @@
                                     </div>
                                     <!-- end section -->
                                     <div class="card-footer mr-3 mb-3 mt-0">
+                                        <a class="ml-1 btn btn-danger float-right" href="/soal/{{ $grupsoal_slug }}">Batal</a>
                                         <button class="btn btn-primary float-right" type="submit">Ubah</button>
                                     </div>
                     </div>
@@ -164,5 +182,19 @@
         .then(response => response.json())
         .then(data => slug.value = data.slug)
     });
+
+    function previewImage(){
+        const gambar = document.querySelector('#gambar');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(gambar.files[0]);
+        
+        oFReader.onload = function(oFREvent){
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
 </script>
 @endsection

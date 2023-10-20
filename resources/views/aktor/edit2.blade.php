@@ -32,7 +32,7 @@
                                 </div>
                             @enderror
                             </div>
-                            @if($title == "Staff")
+                            @if($role == "Staf")
                                 <div class="form-group">
                                 <label for="inputAddress2">NIK</label>
                                 <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" id="nik" required value="{{ old('nik', $post->nik) }}">
@@ -42,7 +42,7 @@
                                 </div>
                                 @enderror
                                 </div>
-                            @elseif($title == "Ketua")
+                            @elseif($role == "Ketua")
                                 <div class="form-group">
                                 <label for="inputAddress2">NIP</label>
                                 <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror" id="nip" required value="{{ old('nip', $post->nip) }}">
@@ -83,7 +83,7 @@
                                 @enderror
                             </div>
                             </div>
-                            <div class="card-footer mr-3 mb-3 mt-0">
+                            <div class="card-footer mb-3 mt-0">
                                 <a class="ml-1 btn btn-danger float-right" href="/{{ $title }}">Batal</a>
                                 <button class="btn btn-primary float-right" type="submit">Ubah</button>
                             </div>

@@ -233,7 +233,7 @@
                                 @enderror
                             </div>
                             </div>
-                            <div class="card-footer mr-3 mb-3 mt-0">
+                            <div class="card-footer mb-3 mt-0">
                                 <a class="ml-1 btn btn-danger float-right" href="/dosen">Batal</a>
                                 <button class="btn btn-primary float-right" type="submit">Ubah</button>
                             </div>

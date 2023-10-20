@@ -29,9 +29,14 @@ class ModulController extends Controller
      */
     public function create()
     {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $kode_unik = '';
+        for ($i = 0; $i < 8; $i++) {
+            $kode_unik .= $characters[random_int(0, strlen($characters) - 1)];
+        }
         return view('fakultas.modul.create',[
             "title" => "Modul",
-            "kd_modul" => uniqid(),
+            "kd_modul" => $kode_unik,
             "post" => User::all()->where('role','Ketua')
         ]);
     }
@@ -46,7 +51,7 @@ class ModulController extends Controller
     {
         $validatedData = $request->validate([
             'kd_modul' => 'required|unique:App\Models\modul',
-            'nama_modul' => 'required|min:1|max:255|unique:App\Models\modul',
+            'nama_modul' => 'required|min:1|max:30|unique:App\Models\modul',
             'slug' => 'required|unique:App\Models\modul',
             'semester' => 'required',
             'sks' => 'required',

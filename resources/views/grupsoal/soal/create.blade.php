@@ -6,7 +6,7 @@
                   <div class="card-header">
                     <h4>Tambah Data {{ $title }} {{ $grupsoal_nama }} {{ $modul->nama_modul }}</h4>
                   </div>
-                  <form action="/soal/store" method="post">
+                  <form action="/soal/store" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="row mb-4">
@@ -20,8 +20,20 @@
                                             @error('pertanyaan')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
-                                            <input id="pertanyaan" type="hidden" name="pertanyaan" value="{{ old('pertanyaan') }}">
+                                            <input id="pertanyaan" type="hidden" name="pertanyaan" value="{{ old('pertanyaan') }}" class="@error('pertanyaan') is-invalid @enderror">
                                             <trix-editor input="pertanyaan"></trix-editor>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <h5 class="card-title mt-2">Gambar</h5>
+                                        </div>
+                                        <div class="col-md-10 mb-4">
+                                            @error('gambar')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                            <img class="img-preview img-fluid mb-3 col-sm-5">
+                                            <div class="mb-3">
+                                                <input class="form-control @error('gambar') is-invalid @enderror" type="file" name="gambar" id="gambar" onchange="previewImage()">
+                                            </div>
                                         </div>
                                         <div class="col-md-2">
                                             <h5 class="card-title mt-2">Opsi A</h5>
@@ -30,7 +42,7 @@
                                             @error('opsi_a')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
-                                            <input id="opsi_a" type="hidden" name="opsi_a" value="{{ old('opsi_a') }}">
+                                            <input id="opsi_a" type="hidden" name="opsi_a" value="{{ old('opsi_a') }}" class="@error('opsi_a') is-invalid @enderror">
                                             <trix-editor input="opsi_a"></trix-editor>
                                         </div>
                                         <div class="col-md-2">
@@ -40,7 +52,7 @@
                                             @error('opsi_b')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
-                                            <input id="opsi_b" type="hidden" name="opsi_b" value="{{ old('opsi_b') }}">
+                                            <input id="opsi_b" type="hidden" name="opsi_b" value="{{ old('opsi_b') }}" class="@error('opsi_b') is-invalid @enderror">
                                             <trix-editor input="opsi_b"></trix-editor>
                                         </div>
                                         <div class="col-md-2">
@@ -50,7 +62,7 @@
                                             @error('opsi_c')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
-                                            <input id="opsi_c" type="hidden" name="opsi_c" value="{{ old('opsi_c') }}">
+                                            <input id="opsi_c" type="hidden" name="opsi_c" value="{{ old('opsi_c') }}" class="@error('opsi_c') is-invalid @enderror">
                                             <trix-editor input="opsi_c"></trix-editor>
                                         </div>
                                         <div class="col-md-2">
@@ -60,7 +72,7 @@
                                             @error('opsi_d')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
-                                            <input id="opsi_d" type="hidden" name="opsi_d" value="{{ old('opsi_d') }}">
+                                            <input id="opsi_d" type="hidden" name="opsi_d" value="{{ old('opsi_d') }}" class="@error('opsi_d') is-invalid @enderror">
                                             <trix-editor input="opsi_d"></trix-editor>
                                         </div>
                                         <div class="col-md-2">
@@ -70,7 +82,7 @@
                                             @error('opsi_e')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
-                                            <input id="opsi_e" type="hidden" name="opsi_e" value="{{ old('opsi_e') }}">
+                                            <input id="opsi_e" type="hidden" name="opsi_e" value="{{ old('opsi_e') }}" class="@error('opsi_e') is-invalid @enderror">
                                             <trix-editor input="opsi_e"></trix-editor>
                                         </div>
                                     </div>
@@ -146,6 +158,7 @@
                                     </div>
                                     <!-- end section -->
                                     <div class="card-footer mr-3 mb-3 mt-0">
+                                        <a class="ml-1 btn btn-danger float-right" href="/soal/{{ $grupsoal_slug }}">Batal</a>
                                         <button class="btn btn-primary float-right" type="submit">Tambah</button>
                                     </div>
                     </div>
@@ -164,5 +177,19 @@
         .then(response => response.json())
         .then(data => slug.value = data.slug)
     });
+
+    function previewImage(){
+        const gambar = document.querySelector('#gambar');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(gambar.files[0]);
+        
+        oFReader.onload = function(oFREvent){
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
 </script>
 @endsection
