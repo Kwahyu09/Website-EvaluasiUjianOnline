@@ -52,6 +52,16 @@ class User extends Authenticatable
                 ->orWhere('email', 'like', '%' . $search . '%');
         });
     }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($user) {
+            $user->ujian()->delete(); // Hapus data ujian yang berelasi
+            $user->modul()->delete(); // Hapus data modul yang berelasi
+            $user->grup_soal()->delete(); // Hapus data grupSOAL yang berelasi
+        });
+    }
     
     public function modul()
     {

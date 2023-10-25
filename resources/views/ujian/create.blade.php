@@ -115,25 +115,7 @@
                                                 </div>
                                                 @enderror
                                     </div>
-                                    <div class="form-group">
-                                        <div class="form-check-inline mt-2">
-                                            <label for="acak_jawaban">Acak Jawaban : </label>
-                                        </div>
-                                        <div class="form-check form-check-inline mb-2">
-                                            <input class="form-check-input" type="radio" name="acak_jawaban" id="acak_jawaban" value="Y">
-                                            <label class="form-check-label" for="acak_jawaban">Ya</label>
-                                        </div>
-                                        <div class="form-check form-check-inline mb-2">
-                                            <input class="form-check-input" type="radio" name="acak_jawaban" id="acak_jawaban" value="T">
-                                            <label class="form-check-label" for="acak_jawaban">Tidak</label>
-                                        </div>
-                                        @error('acak_jawaban')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                                @enderror
-                                    </div>
-                                    <div class="form-group">
+                                    <div class="form-group mb-2">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label for="tanggal">Tanggal</label>
@@ -186,7 +168,8 @@
                                                 </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer mr-3 mb-3 mt-0">
+                                    <div class="card-footer mb-3 mt-0">
+                                        <a class="ml-1 btn btn-danger float-right" href="/ujian">Batal</a>
                                         <button class="btn btn-primary float-right" type="submit">Tambah</button>
                                     </div>
                                 </form>

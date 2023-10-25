@@ -20,10 +20,10 @@ class UjianController extends Controller
      */
     public function index()
     {
-        $ujian = Ujian::latest()->filter(request(['search']))->paginate(1000);
+        $ujian = Ujian::latest()->filter(request(['search']))->paginate(10);
 
         if(auth()->user()->role == "Ketua"){
-            $ujian = Ujian::where('user_id', auth()->user()->id)->latest()->filter(request(['search']))->paginate(1000);
+            $ujian = Ujian::where('user_id', auth()->user()->id)->latest()->filter(request(['search']))->paginate(10);
         }
         return view('ujian.index', [
             "title" => "Ujian",
@@ -41,14 +41,19 @@ class UjianController extends Controller
         $modul = Modul::all();
         $grupsoal = Grup_soal::all();
         $kelas = Kelas::all();
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $kode_unik = '';
+        for ($i = 0; $i < 8; $i++) {
+            $kode_unik .= $characters[random_int(0, strlen($characters) - 1)];
+        }
 
         if(auth()->user()->role == "Ketua"){
-            $Modul = Modul::where('user_id', auth()->user()->id)->latest()->filter(request(['search']))->paginate(1000);
+            $modul = Modul::where('user_id', auth()->user()->id)->latest()->filter(request(['search']))->paginate(1000);
             $grupsoal = Grup_soal::where('user_id', auth()->user()->id)->latest()->filter(request(['search']))->paginate(1000);
         }
         return view('ujian.create',[
             "title" => "Ujian",
-            "kd_ujian" => uniqid(),
+            "kd_ujian" => $kode_unik,
             "modul" => $modul,
             "grup_soal" => $grupsoal,
             "kelas" => $kelas
@@ -65,14 +70,13 @@ class UjianController extends Controller
     {
         $validatedData = $request->validate([
             'user_id' => 'required',
-            'kd_ujian' => 'required|min:5|max:150',
-            'nama_ujian' => 'required|min:5|max:150',
-            'kelas' => 'required|max:255',
-            'modul' => 'required|max:255',
+            'kd_ujian' => 'required|min:6|max:8',
+            'nama_ujian' => 'required|min:5|max:60',
+            'kelas' => 'required|max:30',
+            'modul' => 'required|max:30',
             'slug' => 'required|min:5|max:50|unique:App\Models\Ujian',
             'grupsoal' => 'required|max:255',
             'acak_soal' => 'required',
-            'acak_jawaban' => 'required',
             'tanggal' => 'required',
             'waktu_mulai' => 'required',
             'waktu_selesai' => 'required'
@@ -106,7 +110,7 @@ class UjianController extends Controller
         $kelas = Kelas::all();
 
         if(auth()->user()->role == "Ketua"){
-            $Modul = Modul::where('user_id', auth()->user()->id)->latest()->filter(request(['search']))->paginate(1000);
+            $modul = Modul::where('user_id', auth()->user()->id)->latest()->filter(request(['search']))->paginate(1000);
             $grupsoal = Grup_soal::where('user_id', auth()->user()->id)->latest()->filter(request(['search']))->paginate(1000);
         }
 

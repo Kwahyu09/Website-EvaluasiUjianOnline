@@ -92,9 +92,12 @@ Route::get('/grupsoal/create/{modul:slug}/checkSlug', [GrupsoalController::class
 Route::get('/soal/{soal:slug}/edit', [SoalController::class,'edit'])->middleware(['auth','role:Admin|Ketua'])->name('soal_edit');
 Route::put('/soal/{soal:slug}/update', [SoalController::class,'update'])->middleware(['auth','role:Admin|Ketua'])->name('soal_update');
 Route::post('/soal/store', [SoalController::class, 'store'])->middleware(['auth','role:Admin|Ketua'])->name('soal_store');
+Route::post('/soal/storegambar', [SoalController::class, 'storegambar'])->middleware(['auth','role:Admin|Ketua'])->name('soal_store');
 Route::get('/soal/{soal:slug}/delete', [SoalController::class, 'destroy'])->middleware(['auth','role:Admin|Ketua'])->name('destroySoal');
 Route::get('/soal/{grup_soal:slug}', [GrupsoalController::class,'show'])->middleware(['auth','role:Admin|Ketua'])->name('soal_show');
 Route::get('/soal/create/{grup_soal:slug}', [SoalController::class,'create'])->middleware(['auth','role:Admin|Ketua'])->name('soal_create');
+Route::get('/soal/tambahgambar/{grup_soal:slug}', [SoalController::class,'create_gambar'])->middleware(['auth','role:Admin|Ketua'])->name('soal_create');
+Route::post('/soal/import_excel', [SoalController::class, 'ImportExel'])->middleware(['auth', 'role:Admin|Staf'])->name('CreateKetua');
 Route::get('/soal/import/{grup_soal:slug}', [SoalController::class,'createImport'])->middleware(['auth','role:Admin|Ketua'])->name('soal_create');
 Route::get('/soal/create1/{grup_soal:slug}', [SoalController::class,'create1'])->middleware(['auth','role:Admin|Ketua'])->name('soal_create');
 Route::get('/soal/create2/{grup_soal:slug}', [SoalController::class,'create2'])->middleware(['auth','role:Admin|Ketua'])->name('soal_create');

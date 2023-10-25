@@ -27,8 +27,11 @@ class GrupsoalController extends Controller
     {
         $id_modul = $grup_soal->modul_id;
         $search = $request->get('search');
+        $id_grup = $grup_soal->id;
+        $total = Soal::where('grup_soal_id',$grup_soal->id)->sum('bobot');;
         return view('grupsoal.soal.soal',[
             "title" => "soal",
+            "total" => $total,
             "slug" => $grup_soal->slug,
             "grup" => $grup_soal->nama_grup,
             "modul" => Modul::find($id_modul,['nama_modul']),

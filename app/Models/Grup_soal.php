@@ -24,7 +24,14 @@ class Grup_soal extends Model
         //         $query->where('nama_modul', $modul)
         //     )
         // );
+    }
+    protected static function boot()
+    {
+        parent::boot();
 
+        static::deleting(function ($grupsoal) {
+            $grupsoal->soal()->delete(); // Hapus data soal yang berelasi
+        });
     }
 
     public function modul()

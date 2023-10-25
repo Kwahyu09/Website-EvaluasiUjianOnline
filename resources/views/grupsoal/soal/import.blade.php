@@ -5,7 +5,8 @@
         <h4 class="mt-3 mb-3">Import Data {{ $title }}</h4>
         <form method="post" action="/soal/import_excel" enctype="multipart/form-data">
             @csrf
-            <label>Pilih file excel</label>
+            <input type="hidden" name="slug_grup" id="slug_grup" value="{{ $grupsoal_slug }}">
+            <label>Pilih file excel : harus berformat (csv)</label>
             <div class="form-group">
                 <div class="mb-3">
                     <input class="form-control @error('gambar') is-invalid @enderror" type="file" name="file" required>
@@ -13,6 +14,7 @@
             </div>
                 <div class="d-flex justify-content-start mb-3">
                     <button type="submit" class="btn btn-primary">Import</button>
+                    <a class="ml-1 btn btn-danger float-right" href="/soal/{{ $grupsoal_slug }}">Batal</a>
                 </div>
                 <label>Berikut contoh Format kolom pada exel</label><br>
                 <label>Catatan:</label><br>
@@ -37,8 +39,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>i5jn27d</td>
-                            <td>{{ $grupsoal_id }}</td>
+                            <td>de2qa</td>
+                            <td class="text-center">{{ $grupsoal_id }}</td>
                             <td>Etika berasal dari Bahasa Yunani, yaitu</td>
                             <td>Ethus</td>
                             <td>Ethas</td>
@@ -46,6 +48,18 @@
                             <td>Ethos</td>
                             <td>Ethes</td>
                             <td>Ethos</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>de16w</td>
+                            <td class="text-center">{{ $grupsoal_id }}</td>
+                            <td>Berapa Jumlah Provinsi Indonesia Sekarang?</td>
+                            <td>34</td>
+                            <td>35</td>
+                            <td>29</td>
+                            <td>40</td>
+                            <td>38</td>
+                            <td>38</td>
                             <td>1</td>
                         </tr>
                     </tbody>

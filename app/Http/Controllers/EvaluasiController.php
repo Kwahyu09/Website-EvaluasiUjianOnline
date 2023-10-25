@@ -19,9 +19,14 @@ class EvaluasiController extends Controller
      */
     public function index()
     {
+        $ujian = Ujian::latest()->filter(request(['search','ujian']))->paginate(10);
+
+        if(auth()->user()->role == "Ketua"){
+            $ujian = Ujian::where('user_id', auth()->user()->id)->latest()->filter(request(['search','ujian']))->paginate(10);
+        }
         return view('evaluasiujian', [
             "title" => "Evaluasi Ujian",
-            "post" => Ujian::latest()->filter(request(['search','ujian']))->paginate(100)
+            "post" => $ujian
         ]);
     }
     public function soalEvaluasi(Request $request)

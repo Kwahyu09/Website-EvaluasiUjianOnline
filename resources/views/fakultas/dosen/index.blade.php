@@ -55,8 +55,16 @@
                                         <td style="width: 50px">{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}</td>
                                         <td style="width: 80px">{{ $pos->nip }}</td>
                                         <td>{{ $pos->nama_dos }}</td>
-                                        <td>{{ $pos->jabatan }}</td>
-                                        <td>{{ $pos->gol_regu }}</td>
+                                        @if($pos->jabatan == 0)
+                                            <td>Tidak Ada</td>
+                                        @else
+                                            <td>{{ $pos->jabatan }}</td>
+                                        @endif
+                                        @if( $pos->gol_regu == 0 )
+                                            <td>Tidak Ada</td>
+                                        @else
+                                            <td>{{ $pos->gol_regu }}</td>
+                                        @endif
                                         <td>{{ $pos->jenis_kel }}</td>
                                         <td>{{ $pos->prodi }}</td>
                                         <td>{{ $pos->email }}</td>

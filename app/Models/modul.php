@@ -23,6 +23,15 @@ class Modul extends Model
         });
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($mapel) {
+            $mapel->grup_soal()->delete(); // Hapus data grupsoal yang berelasi
+        });
+    }
+
     public function ketuasekretaris()
     {
         return $this->belongsTo(ketuasekretaris::class);

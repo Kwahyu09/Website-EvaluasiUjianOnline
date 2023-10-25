@@ -13,8 +13,6 @@ use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
-use App\Http\Requests\UpdateMahasiswaRequest;
 use App\Models\Evaluasi;
 use App\Models\Grup_soal;
 use App\Models\HasilUjian;

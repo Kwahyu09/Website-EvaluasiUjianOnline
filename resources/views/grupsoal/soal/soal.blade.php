@@ -8,15 +8,16 @@
         <div class="d-flex justify-content-start mb-3 mt-3">
             <a href="/soal/create/{{ $slug }}" class="btn btn-primary mr-1">Tambah<i class="bi bi-plus-circle"></i>
             </a>
-            <a href="/soal/import/{{ $slug }}" class="btn btn-success mr-1">
-                Import<i class="bi bi-file-earmark-arrow-down"></i>
+            <a href="/soal/tambahgambar/{{ $slug }}" class="btn btn-info mr-1">
+                Tambah Jawaban Gambar<i class="bi bi-plus-circle"></i>
             </a>
-            <a href="/soal/tambahgambar/{{ $slug }}" class="btn btn-info">
-                Tambah Soal Bergambar<i class="bi bi-file-earmark-arrow-down"></i>
+            <a href="/soal/import/{{ $slug }}" class="btn btn-success">
+                Import<i class="bi bi-file-earmark-arrow-down"></i>
             </a>
         </div>
         @if ($post->count())
         <div class="d-flex justify-content-end mb-2">
+            <div class="mr-5"><b>Total Bobot : {{ $total }}</b></div>
             <div class="col-md-4">
                 <form action="{{ url()->full() }}">
                     <div class="input-group mb-3">
@@ -68,12 +69,48 @@
                                         @else
                                         <td><p style="font-style: italic">Tidak Ada</p></td>
                                         @endif
-                                        <td>{!! $pos->opsi_a !!}</td>
-                                        <td>{!! $pos->opsi_b !!}</td>
-                                        <td>{!! $pos->opsi_c !!}</td>
-                                        <td>{!! $pos->opsi_d !!}</td>
-                                        <td>{!! $pos->opsi_e !!}</td>
-                                        <td>{!! $pos->jawaban !!}</td>
+                                        <td>
+                                            @if (preg_match('/^gambar-soal\//', $pos->opsi_a))
+                                                <img src="{{ asset('storage/' . $pos->opsi_a) }}" alt="Gambar" width="100px">
+                                            @else
+                                                {!! $pos->opsi_a !!}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if (preg_match('/^gambar-soal\//', $pos->opsi_b))
+                                                <img src="{{ asset('storage/' . $pos->opsi_b) }}" alt="Gambar" width="100px">
+                                            @else
+                                                {!! $pos->opsi_b !!}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if (preg_match('/^gambar-soal\//', $pos->opsi_c))
+                                                <img src="{{ asset('storage/' . $pos->opsi_c) }}" alt="Gambar" width="100px">
+                                            @else
+                                                {!! $pos->opsi_c !!}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if (preg_match('/^gambar-soal\//', $pos->opsi_d))
+                                                <img src="{{ asset('storage/' . $pos->opsi_d) }}" alt="Gambar" width="100px">
+                                            @else
+                                                {!! $pos->opsi_e !!}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if (preg_match('/^gambar-soal\//', $pos->opsi_e))
+                                                <img src="{{ asset('storage/' . $pos->opsi_e) }}" alt="Gambar" width="100px">
+                                            @else
+                                                {!! $pos->opsi_e !!}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if (preg_match('/^gambar-soal\//', $pos->jawaban))
+                                                <img src="{{ asset('storage/' . $pos->jawaban) }}" alt="Gambar" width="100px">
+                                            @else
+                                                {!! $pos->jawaban !!}
+                                            @endif
+                                        </td>
                                         <td>{!! $pos->bobot !!}</td>
                                         <td>
                                             <a
