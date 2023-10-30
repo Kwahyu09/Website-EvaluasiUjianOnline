@@ -18,9 +18,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('soal_id');
             $table->foreignId('ujian_id');
-            $table->string('nama_mahasiswa');
-            $table->string('npm_mahasiswa');
+            $table->string('nama_mahasiswa',100);
+            $table->string('npm_mahasiswa',11);
             $table->string('jawaban');
+            $table->string('skor', 3);
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ class DosenSeeder extends Seeder
     public function run()
     {
         Dosen::create([
-            'nip' => '11334211342',
+            'nip' => '113342113421426487',
             'nama_dos' => 'dr.AHMAD AZMI NASUTION M.Biomed',
             'slug' => 'ahmad-asmi-nasution',
             'jabatan' => 'Lektor',
@@ -28,7 +28,7 @@ class DosenSeeder extends Seeder
         ]);
 
         Dosen::create([
-            'nip' => '113342110912',
+            'nip' => '113342110912742346',
             'nama_dos' => 'DEBIE RIZQOH S.Si,M.Biomed',
             'slug' => 'Debie-risqoh',
             'jabatan' => 'Sekretaris',
@@ -38,7 +38,7 @@ class DosenSeeder extends Seeder
             'email' => 'debie@gmail.com'
         ]);
         Dosen::create([
-            'nip' => '918392183912',
+            'nip' => '918392183912524584',
             'nama_dos' => 'dr. DESSY TRIANA M.Biomed',
             'slug' => 'desy-tryana',
             'jabatan' => 'Lektor',
@@ -48,7 +48,7 @@ class DosenSeeder extends Seeder
             'email' => 'dessy@gmail.com'
         ]);
         Dosen::create([
-            'nip' => '918392183987',
+            'nip' => '918392183987987523',
             'nama_dos' => 'dr. MAKBRURI M.Biomed',
             'slug' => 'makbruri',
             'jabatan' => '',
@@ -58,7 +58,7 @@ class DosenSeeder extends Seeder
             'email' => 'makbruri@gmail.com'
         ]);
         Dosen::create([
-            'nip' => '918392183990',
+            'nip' => '918392183990764357',
             'nama_dos' => 'Ners DIAH AYU AGUSPA DITA M.Biomed',
             'slug' => 'diah-ayu',
             'jabatan' => 'Asisten Ahli',
@@ -68,7 +68,7 @@ class DosenSeeder extends Seeder
             'email' => 'diahayu@gmail.com'
         ]);
         Dosen::create([
-            'nip' => '918392183980',
+            'nip' => '918392183980758005',
             'nama_dos' => 'dr. SWANDITO WICAKSONO M.Biomed',
             'slug' => 'swandito-wicaksono',
             'jabatan' => 'Asisten Ahli',
@@ -78,7 +78,7 @@ class DosenSeeder extends Seeder
             'email' => 'swandito@gmail.com'
         ]);
         Dosen::create([
-            'nip' => '918392183988',
+            'nip' => '918392183988563269',
             'nama_dos' => 'NIKKI ALDI MASSARDI S.Si, M.Biomed',
             'slug' => 'nikki-aldi-massardi',
             'jabatan' => '',

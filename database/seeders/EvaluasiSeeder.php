@@ -20,7 +20,8 @@ class EvaluasiSeeder extends Seeder
             'npm_mahasiswa'=> 'G1A023001',
             'jawaban'=> 'opsi_a',
             'soal_id' => '4',
-            'ujian_id' => '2'
+            'ujian_id' => '2',
+            'skor' => '1'
         ]);
     }
 }

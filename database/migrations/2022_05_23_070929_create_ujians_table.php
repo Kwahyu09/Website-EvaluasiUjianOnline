@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->char('kd_ujian')->unique();
-            $table->string('nama_ujian');
+            $table->string('nama_ujian',30);
             $table->string('kelas');
-            $table->string('modul');
-            $table->string('grupsoal');
+            $table->string('modul',50);
+            $table->string('grupsoal',50);
             $table->string('slug');
             $table->string('acak_soal')->nullable();
             $table->date('tanggal');

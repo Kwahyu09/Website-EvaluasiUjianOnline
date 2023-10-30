@@ -2,16 +2,22 @@ function getServerTime() {
     return $.ajax({ async: false }).getResponseHeader("Date");
 }
 function realtimeClock() {
-    var rtClock = new Date();
-    // var rtClock = new Date(getServerTime());
+    var currentTime = new Date();
+    var endTime = new Date(
+        currentTime.toDateString() + " " + "{{$ujian->waktu_selesai}}"
+    );
 
-    var hours = rtClock.getHours();
-    var minutes = rtClock.getMinutes();
-    var seconds = rtClock.getSeconds();
+    var timeRemaining = endTime - currentTime;
+    if (timeRemaining <= 0) {
+        // Jika waktu berakhir, Anda dapat menambahkan logika atau tindakan yang sesuai di sini.
+        // Misalnya, menghentikan penghitungan waktu atau mengirimkan data ke server.
+        document.getElementById("clock").innerHTML = "Waktu telah berakhir";
+        return;
+    }
 
-    // menampilkan AM PM
-    // var amPm = (hours < 12) ? "AM" : "PM";
-    // hours = (hours > 12) ? hours - 12 : hours;
+    var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+    var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+    var seconds = Math.floor((timeRemaining / 1000) % 60);
 
     hours = ("0" + hours).slice(-2);
     minutes = ("0" + minutes).slice(-2);
@@ -19,6 +25,6 @@ function realtimeClock() {
 
     document.getElementById("clock").innerHTML =
         hours + " : " + minutes + " : " + seconds;
-    // + "  " + amPm;
-    var jamnya = setTimeout(realtimeClock, 500);
+
+    setTimeout(realtimeClock, 500);
 }

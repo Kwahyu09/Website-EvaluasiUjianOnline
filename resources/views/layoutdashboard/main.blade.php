@@ -38,6 +38,13 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+      .card-fixed {
+        position: fixed;
+        top: 49%;
+        right: 80px;
+        transform: translateY(-50%);
+        z-index: 999;
+      }
         #watch {
             color: rgb(252, 150, 65);
             position: absolute;

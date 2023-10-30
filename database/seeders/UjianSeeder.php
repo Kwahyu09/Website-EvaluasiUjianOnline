@@ -17,7 +17,7 @@ class UjianSeeder extends Seeder
     {
         
         Ujian::create([
-            'kd_ujian' => 'ts6781',
+            'kd_ujian' => 'JA9WJDAK',
             'nama_ujian' => 'Ulangan Tengah Semester Demam',
             'kelas' => 'kedokteran-a-2019',
             'modul' => 'Sistem Saraf',
@@ -30,7 +30,7 @@ class UjianSeeder extends Seeder
             'user_id' => '5'
         ]);
         Ujian::create([
-            'kd_ujian' => 'avd984',
+            'kd_ujian' => 'USJA9WS2',
             'nama_ujian' => 'Ulangan Harian Demam',
             'kelas' => 'kedokteran-b-2023',
             'modul' => 'Demam',
@@ -43,7 +43,7 @@ class UjianSeeder extends Seeder
             'user_id' => '5'
         ]);
         Ujian::create([
-            'kd_ujian' => 'xca986',
+            'kd_ujian' => '9IKSAFAS',
             'nama_ujian' => 'Ujian Akhir Semester',
             'kelas' => 'kedokteran-b-2023',
             'acak_soal' => 'Y',

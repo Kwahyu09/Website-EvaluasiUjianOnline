@@ -79,12 +79,7 @@ class EvaluasiController extends Controller
         
         // Ambil nomor halaman selanjutnya
         evaluasi::create($validatedData);
-        $nextPage = $request->page + 1;
-        if($request->page === $request->pageAkhir ){
-            return back();
-        }else{
-            return redirect('/masuk-ujian'.'/'.$request->slug.'?page='.$nextPage);
-        }
+        return redirect('/masuk-ujian'.'/'.$request->slug);
     }
 
     /**

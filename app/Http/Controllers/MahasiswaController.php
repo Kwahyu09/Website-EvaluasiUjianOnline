@@ -85,28 +85,42 @@ class MahasiswaController extends Controller
         $grup = Grup_soal::where('slug', $slug)->get();
         $id_grup = $grup[0]['id'];
 
-        if($ujian->acak_soal === "Y"){
-            $soal = Soal::inRandomOrder()
-                ->where('grup_soal_id', $id_grup)
-                ->paginate(1);
-        }else{
-            $soal = Soal::where('grup_soal_id', $id_grup)
-            ->paginate(1);
+        $total = Soal::where('grup_soal_id',$id_grup)->sum('bobot');
+        // Memeriksa apakah soal sudah diacak sebelumnya
+        $soalTeracak = session()->get('soal_teracak');
+        
+        if (!$soalTeracak) {
+            // Mengambil soal berdasarkan ID grup dan mengacak urutannya
+            $soal = Soal::where('grup_soal_id', $id_grup)->orderBy('bobot', 'desc')->get()->shuffle();
+
+            // Menyimpan soal yang diacak dalam session
+            session()->put('soal_teracak', $soal);
+        } else {
+            $soal = $soalTeracak;
         }
 
-        $soalAsli = Soal::where('grup_soal_id', $id_grup)
-        ->orderBy('id') // Ganti 'id' dengan kolom yang ingin Anda gunakan untuk mengurutkan
-        ->paginate(1);
+        $totalBobot = 0;
+        $soalTampil = [];
+
+        foreach ($soal as $item) {
+            $totalBobot += $item->bobot;
+
+            if ($totalBobot <= 100) {
+                $soalTampil[] = $item;
+            } else {
+                break;
+            }
+        }
 
         $npm = Auth::user()->npm;
         $evaluasi = Evaluasi::where('ujian_id', $ujian->id)->where('npm_mahasiswa',$npm)->get();
         return view('masuk_ujian',  [
             "title" => "Ujian Mahasiswa",
-            "soal" => $soal,
-            "soalAsli" => $soalAsli,
+            "soal" => $soalTampil,
             "ujian" => $ujian,
             "jam" => $jam,
             "tanggal" => $tanggal,
+            "bobot" => $total,
             "evaluasi" => $evaluasi
         ]);
     }
