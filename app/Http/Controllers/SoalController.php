@@ -325,6 +325,9 @@ class SoalController extends Controller
         if(preg_match('/^gambar-soal\//', $soal->opsi_e)){
             Storage::delete($soal->opsi_e);
         }
+        if(preg_match('/^gambar-soal\//', $soal->jawaban)){
+            Storage::delete($soal->jawaban);
+        }
         soal::destroy($soal->id);
         return back()->with('success', 'Data Berhasil DiHapus!');
     }

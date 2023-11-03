@@ -76,10 +76,11 @@ class EvaluasiController extends Controller
         }else{
             $validatedData['skor'] = 0;
         }
-        
-        // Ambil nomor halaman selanjutnya
+        if(session('ujian_selesai')){
+            return back()->with('success', 'Jawaban Gagal Diubah!');
+        }
         evaluasi::create($validatedData);
-        return redirect('/masuk-ujian'.'/'.$request->slug);
+        return redirect('/masuk-ujian'.'/'.$request->slug)->with('success', 'Jawaban Berhasil Ditambah!');
     }
 
     /**
@@ -149,9 +150,10 @@ class EvaluasiController extends Controller
         }else{
             $validatedData['skor'] = 0;
         }
-
+        if(session('ujian_selesai')){
+            return back()->with('success', 'Jawaban Gagal Diubah!');
+        }
         evaluasi::where('id', $id)->update($validatedData);
-
         return back()->with('success', 'Jawaban Berhasil Diubah!');
     }
 

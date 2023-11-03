@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Ujian;
 use App\Models\Evaluasi;
 use App\Models\HasilUjian;
+use App\Models\Soal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HasilujianController extends Controller
 {
@@ -52,24 +54,37 @@ class HasilujianController extends Controller
             "ujian" => $ujian
         ]);
     }
-    
+    public function hasil_ujianmhs(){
+        return view('hasil_ujian',  [
+            "title" => "Ujian Mahasiswa",
+            "total" => session('hasilmahasiswa')
+        ]);
+    }
     public function selesai_ujian(Request $request)
     {
         $validatedData = $request->validate([
             'ujian_id' => 'required',
+            'totalbobot' => 'required',
             'nama_mahasiswa' => 'required',
             'npm_mahasiswa' => 'required'
         ]);
 
-        $validatedData['nilai'] = Evaluasi::where('ujian_id', $request->ujian_id)
+        $totalbobot = $request['totalbobot'];
+        $nilaimhs = Evaluasi::where('ujian_id', $request->ujian_id)
                         ->where('npm_mahasiswa', $request->npm_mahasiswa)
                        ->sum('skor');
-                       
+        $nilai = ($nilaimhs / $totalbobot) * 100;
+        // Use number_format to format the number with up to 2 decimal places
+        $nilaiFormatted = number_format($nilai, 2);
+
+        // Remove trailing zeros and the decimal point if there are no decimal places
+        $validatedData['nilai'] = rtrim(rtrim($nilaiFormatted, '0'), '.'); 
+
         HasilUjian::create($validatedData);
-        return view('hasil_ujian',  [
-            "title" => "Ujian Mahasiswa",
-            "total" => $validatedData['nilai']
-        ]);
+        // Setel sesi 'ujian_selesai' menjadi true
+        session()->put('ujian_selesai', true);
+
+        return redirect()->route('hasil-ujian')->with('hasilmahasiswa', $validatedData['nilai'])->header('Cache-Control', 'no-cache, no-store, must-revalidate');
     }
     /**
      * Show the form for creating a new resource.

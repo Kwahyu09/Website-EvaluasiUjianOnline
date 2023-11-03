@@ -111,23 +111,23 @@ class MahasiswaController extends Controller
                 break;
             }
         }
-
+        $Bobotgruptotal = Soal::where('grup_soal_id',$id_grup)->sum('bobot');
         $npm = Auth::user()->npm;
-        $evaluasi = Evaluasi::where('ujian_id', $ujian->id)->where('npm_mahasiswa',$npm)->get();
-        return view('masuk_ujian',  [
-            "title" => "Ujian Mahasiswa",
-            "soal" => $soalTampil,
-            "ujian" => $ujian,
-            "jam" => $jam,
-            "tanggal" => $tanggal,
-            "bobot" => $total,
-            "evaluasi" => $evaluasi
-        ]);
+        $evaluasi = Evaluasi::where('ujian_id', $ujian->id)->where('npm_mahasiswa',$npm)->get();           
+            return view('masuk_ujian',  [
+                "title" => "Ujian Mahasiswa",
+                "soal" => $soalTampil,
+                "ujian" => $ujian,
+                "totalbobot" => $Bobotgruptotal,
+                "jam" => $jam,
+                "tanggal" => $tanggal,
+                "bobot" => $total,
+                "evaluasi" => $evaluasi
+            ]);
     }
 
     public function ujian_data(Request $request)
     {
-
         $timezone = 'Asia/Jakarta'; 
         $date = new DateTime('now', new DateTimeZone($timezone)); 
         $tanggal = $date->format('Y-m-d');
@@ -140,7 +140,7 @@ class MahasiswaController extends Controller
         ]);
         $idUjian = $request->id_ujian;
         $kode = $request->kd_ujian;
-        
+        session()->forget('ujian_selesai');
         $ujian = Ujian::find($idUjian);
         $npm = Auth::user()->npm;
         $hasil = HasilUjian::where('ujian_id', $ujian->id)->where('npm_mahasiswa',$npm)->count();
@@ -161,8 +161,6 @@ class MahasiswaController extends Controller
         else {
             return back()->with('success', 'Kode Ujian Salah');
         }
-
-        
     }
 
     /**

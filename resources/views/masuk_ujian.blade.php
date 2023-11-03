@@ -1,6 +1,16 @@
 @extends('layoutdashboard.main')
 @section('container')
+<head>
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="Pragma" content="no-store" />
+    <meta http-equiv="Expires" content="0" />
+</head>
 <div class="row">
+@if(session('ujian_selesai'))
+    <div class="alert alert-info">
+        Anda sudah menyelesaikan ujian ini.
+    </div>
+@else
     @if ($jam > $ujian->waktu_selesai)
         <div class="col-md-12 col-sm-12 mb-3 mt-3 d-flex justify-content-center">
             <div class="card">
@@ -11,6 +21,7 @@
                             <label for="" class="text-center">Klik Tombol selesai ujian untuk menyelesaikan ujian</label><br>
                         </div>
                         <input type="hidden" name="ujian_id" id="ujian_id" value="{{ $ujian->id }}">
+                        <input type="hidden" name="totalbobot" id="totalbobot" value="{{ $totalbobot }}">
                         <input type="hidden" name="nama_mahasiswa" id="nama_mahasiswa" value="{{ Auth::user()->nama }}">
                         <input type="hidden" name="npm_mahasiswa" id="npm_mahasiswa" value="{{ Auth::user()->npm }}">
                         <div class="card-footer mr-3 mb-3 mt-0 d-flex justify-content-center">
@@ -52,11 +63,14 @@
                             <div class="col-md-0">
                                 <p>{{ $loop->iteration }}.</p>
                             </div>
-                            <div class="col-md-11">
+                            <div class="col-md-11 mb-3">
                                 {!! $s->pertanyaan !!}
                             </div>
                         </div>       
                         <div class="form-group">
+                                @if($s->gambar)
+                                    <img class="mb-3" style="border: 1px solid black;" src="{{ asset('storage/' . $s->gambar) }}" alt="Gambar" width="500px">
+                                @endif
                             <div class="form-check mb-2">
                                 <input
                                 class="form-check-input"
@@ -69,7 +83,11 @@
                                     name="jawaban"
                                     id="jawaban"
                                     value="{{ $s->opsi_a }}">
-                                    <label class="form-check-label" for="jawaban">{!! $s->opsi_a !!}</label>
+                                @if (preg_match('/^gambar-soal\//', $s->opsi_a))
+                                    <img class="mb-2" style="border: 1px solid black;" src="{{ asset('storage/' . $s->opsi_a) }}" alt="Gambar" width="500px">
+                                @else
+                                    <label class="form-check-label">{!! $s->opsi_a !!}</label>
+                                @endif
                             </div>
                                 <div class="form-check mb-2">
                                     <input
@@ -83,7 +101,11 @@
                                         name="jawaban"
                                         id="jawaban"
                                         value="{{ $s->opsi_b }}">
-                                        <label class="form-check-label" for="jawaban">{!! $s->opsi_b !!}</label>
+                                    @if (preg_match('/^gambar-soal\//', $s->opsi_b))
+                                        <img class="mb-2" style="border: 1px solid black;" src="{{ asset('storage/' . $s->opsi_b) }}" alt="Gambar" width="500px">
+                                    @else
+                                        <label class="form-check-label">{!! $s->opsi_b !!}</label>
+                                    @endif
                                 </div>
                                 <div class="form-check mb-2">
                                     <input
@@ -97,7 +119,11 @@
                                             @endif
                                         @endforeach
                                         value="{{ $s->opsi_c }}">
-                                        <label class="form-check-label" for="jawaban">{!! $s->opsi_c !!}</label>
+                                    @if (preg_match('/^gambar-soal\//', $s->opsi_c))
+                                        <img class="mb-2" style="border: 1px solid black;" src="{{ asset('storage/' . $s->opsi_c) }}" alt="Gambar" width="500px">
+                                    @else
+                                        <label class="form-check-label">{!! $s->opsi_c !!}</label>
+                                    @endif
                                 </div>
                                 <div class="form-check mb-2">
                                     <input
@@ -111,7 +137,11 @@
                                         @endforeach
                                         id="jawaban"
                                         value="{{ $s->opsi_d }}">
-                                        <label class="form-check-label" for="jawaban">{!! $s->opsi_d !!}</label>
+                                    @if (preg_match('/^gambar-soal\//', $s->opsi_d))
+                                        <img class="mb-2" style="border: 1px solid black;" src="{{ asset('storage/' . $s->opsi_d) }}" alt="Gambar" width="500px">
+                                    @else
+                                        <label class="form-check-label">{!! $s->opsi_d !!}</label>
+                                    @endif
                                 </div>
                                 <div class="form-check">
                                     <input
@@ -125,7 +155,11 @@
                                         @endforeach
                                         id="jawaban"
                                         value="{{ $s->opsi_e }}">
-                                        <label class="form-check-label" for="jawaban">{!! $s->opsi_e !!}</label>
+                                    @if (preg_match('/^gambar-soal\//', $s->opsi_e))
+                                        <img class="mb-2" style="border: 1px solid black;" src="{{ asset('storage/' . $s->opsi_e) }}" alt="Gambar" width="500px">
+                                    @else
+                                        <label class="form-check-label">{!! $s->opsi_e !!}</label>
+                                    @endif
                                 </div>
                                     @error('jawaban')
                                     <p class="text-danger">
@@ -163,7 +197,7 @@
                             <div class="d-flex justify-content-center">
                                 <form id="form-selesai" action="/selesaiujian" action="post">
                                     <input type="hidden" name="ujian_id" id="ujian_id" value="{{ $ujian->id }}">
-                                    <input type="hidden" name="bobot" id="bobot" value="{{ $bobot }}">
+                                    <input type="hidden" name="totalbobot" id="totalbobot" value="{{ $totalbobot }}">
                                     <input type="hidden" name="nama_mahasiswa" id="nama_mahasiswa" value="{{ Auth::user()->nama }}">
                                     <input type="hidden" name="npm_mahasiswa" id="npm_mahasiswa" value="{{ Auth::user()->npm }}">
                                     <div class="card-footer mr-3 mb-3 mt-0 d-flex justify-content-center">
@@ -179,6 +213,7 @@
                 {{ $title }}</p>
             @endif
         @endif
+    @endif
 </div>
 <script>
     // Tangkap tombol Selesai Ujian menggunakan ID

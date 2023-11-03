@@ -117,6 +117,7 @@ Route::post('/cetak', [HasilujianController::class, 'cetak'])->middleware(['auth
 Route::post('/evaluasi/store', [EvaluasiController::class,'store'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-mahasiswa-tambah');
 Route::put('/evaluasi/update/{id}', [EvaluasiController::class,'update'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-mahasiswa-update');
 Route::get('/selesaiujian', [HasilujianController::class,'selesai_ujian'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian.berakhir');
+Route::get('/hasilujian', [HasilujianController::class,'hasil_ujianmhs'])->middleware(['auth', 'role:Mahasiswa'])->name('hasil-ujian');
 Route::post('/selesaiujian', [HasilujianController::class,'selesai_ujian'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian.berakhirpost');
 
 
