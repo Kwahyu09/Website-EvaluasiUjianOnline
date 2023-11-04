@@ -134,13 +134,12 @@ class UjianController extends Controller
     {
         $rules = [
             'user_id' => 'required',
-            'kd_ujian' => 'required|min:5|max:150',
-            'nama_ujian' => 'required|min:5|max:150',
-            'kelas' => 'required|max:255',
-            'modul' => 'required|max:255',
+            'kd_ujian' => 'required|min:6|max:8',
+            'nama_ujian' => 'required|min:5|max:60',
+            'kelas' => 'required|max:30',
+            'modul' => 'required|max:30',
             'grupsoal' => 'required|max:255',
             'acak_soal' => 'required',
-            'acak_jawaban' => 'required',
             'tanggal' => 'required',
             'waktu_mulai' => 'required',
             'waktu_selesai' => 'required'

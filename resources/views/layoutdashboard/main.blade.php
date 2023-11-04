@@ -40,10 +40,34 @@
     <style>
       .card-fixed {
         position: fixed;
-        top: 49%;
-        right: 80px;
+        top: 40%;
+        right: 20px;
         transform: translateY(-50%);
         z-index: 999;
+      }
+      .kotak-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+      }
+
+      .kotak-soal {
+          width: 40px;
+          height: 40px;
+          text-align: center;
+          line-height: 40px;
+          border: 1px solid #000;
+          border-radius: 5px;
+          text-decoration: none;
+          color: #000;
+          background-color: #ccc;
+          cursor: pointer;
+          margin-bottom: 10px;
+      }
+
+      .biru {
+          background-color: blue;
+          color: white;
       }
         #watch {
             color: rgb(252, 150, 65);

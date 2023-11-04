@@ -113,6 +113,7 @@ class MahasiswaController extends Controller
         }
         $Bobotgruptotal = Soal::where('grup_soal_id',$id_grup)->sum('bobot');
         $npm = Auth::user()->npm;
+        $jumlahsoal = Soal::where('grup_soal_id',$id_grup)->count();
         $evaluasi = Evaluasi::where('ujian_id', $ujian->id)->where('npm_mahasiswa',$npm)->get();           
             return view('masuk_ujian',  [
                 "title" => "Ujian Mahasiswa",
@@ -120,6 +121,7 @@ class MahasiswaController extends Controller
                 "ujian" => $ujian,
                 "totalbobot" => $Bobotgruptotal,
                 "jam" => $jam,
+                "jumlahsoal" => $jumlahsoal,
                 "tanggal" => $tanggal,
                 "bobot" => $total,
                 "evaluasi" => $evaluasi

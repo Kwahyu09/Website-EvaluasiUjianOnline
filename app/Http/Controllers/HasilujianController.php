@@ -84,7 +84,7 @@ class HasilujianController extends Controller
         // Setel sesi 'ujian_selesai' menjadi true
         session()->put('ujian_selesai', true);
 
-        return redirect()->route('hasil-ujian')->with('hasilmahasiswa', $validatedData['nilai'])->header('Cache-Control', 'no-cache, no-store, must-revalidate');
+        return redirect()->route('hasil-ujianmhs')->with('hasilmahasiswa', $validatedData['nilai'])->header('Cache-Control', 'no-cache, no-store, must-revalidate');
     }
     /**
      * Show the form for creating a new resource.

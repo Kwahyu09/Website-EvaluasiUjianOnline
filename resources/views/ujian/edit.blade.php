@@ -19,7 +19,7 @@
                                         type="hidden"
                                         name="user_id"
                                         class="form-control @error('user_id') is-invalid @enderror"
-                                        id="user_id" value="{{ old('user_id') }}">
+                                        id="user_id" value="{{ auth()->user()->id }}">
                                     <div class="form-group">
                                         <label for="nama_ujian">Nama {{ $title }}</label>
                                         <input
