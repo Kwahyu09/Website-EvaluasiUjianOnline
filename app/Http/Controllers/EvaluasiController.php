@@ -80,7 +80,12 @@ class EvaluasiController extends Controller
             return back()->with('success', 'Jawaban Gagal Diubah!');
         }
         evaluasi::create($validatedData);
-        return redirect('/masuk-ujian'.'/'.$request->slug)->with('success', 'Jawaban Berhasil Ditambah!');
+        $pageNext = $request->page + 1;
+        if($request->page == $request->pt){
+            return redirect('/masuk-ujian'.'/'.$request->slug.'#soal-'.$request->pt)->with('success', 'Jawaban Berhasil Ditambah!');
+        }else{
+            return redirect('/masuk-ujian'.'/'.$request->slug.'#soal-'.$pageNext)->with('success', 'Jawaban Berhasil Ditambah!');
+        }
     }
 
     /**
@@ -154,7 +159,12 @@ class EvaluasiController extends Controller
             return back()->with('success', 'Jawaban Gagal Diubah!');
         }
         evaluasi::where('id', $id)->update($validatedData);
-        return back()->with('success', 'Jawaban Berhasil Diubah!');
+        $pageNext = $request->page + 1;
+        if($request->page == $request->pt){
+            return redirect('/masuk-ujian'.'/'.$request->slug.'#soal-'.$request->pt)->with('success', 'Jawaban Berhasil Ditambah!');
+        }else{
+            return redirect('/masuk-ujian'.'/'.$request->slug.'#soal-'.$pageNext)->with('success', 'Jawaban Berhasil Ditambah!');
+        }
     }
 
     /**

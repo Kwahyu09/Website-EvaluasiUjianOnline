@@ -62,6 +62,8 @@
                                     <input type="hidden" name="skor" id="skor" value="{{ $s->bobot }}">
                                     <input type="hidden" name="slug" id="slug" value="{{ $ujian->slug }}">
                                     <input type="hidden" name="ujian_id" id="ujian_id" value="{{ $ujian->id }}">
+                                    <input type="hidden" name="page" id="page" value="{{ $loop->iteration }}">
+                                    <input type="hidden" name="pt" id="pt" value="{{ $jumlahsoal }}">
                                     <input type="hidden" name="nama_mahasiswa" id="nama_mahasiswa"
                                         value="{{ Auth::user()->nama }}">
                                     <input type="hidden" name="npm_mahasiswa" id="npm_mahasiswa"
@@ -313,6 +315,37 @@
             document.getElementById(soalId).style.display = 'block';
         });
     });
-    
+    document.addEventListener("DOMContentLoaded", function() {
+    // Fungsi untuk menampilkan soal sesuai dengan hash URL
+    function tampilkanSoal() {
+        var hash = window.location.hash; // Mendapatkan hash URL (contoh: "#soal-10")
+
+        // Jika tidak ada hash URL, tampilkan soal nomor 1
+        if (!hash) {
+        document.getElementById('soal-1').style.display = 'block';
+        } else {
+        // Coba untuk mendapatkan nomor soal dari hash URL
+        var nomorSoal = parseInt(hash.replace("#soal-", ""));
+
+        // Periksa apakah nomor soal valid (angka)
+        if (!isNaN(nomorSoal)) {
+            // Sembunyikan semua soal
+            document.querySelectorAll('.soal').forEach(function(soal) {
+            soal.style.display = 'none';
+            });
+
+            // Tampilkan soal yang sesuai dengan nomor soal dari hash URL
+            var soalId = 'soal-' + nomorSoal;
+            document.getElementById(soalId).style.display = 'block';
+        }
+        }
+    }
+
+    // Panggil fungsi tampilkanSoal saat halaman dimuat
+    tampilkanSoal();
+
+    // Tambahkan event listener untuk mengikuti perubahan hash URL
+    window.addEventListener("hashchange", tampilkanSoal);
+    });
 </script>
 @endsection

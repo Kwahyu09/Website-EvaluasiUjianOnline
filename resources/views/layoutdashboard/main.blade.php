@@ -52,10 +52,10 @@
       }
 
       .kotak-soal {
-          width: 40px;
-          height: 40px;
+          width: 30px;
+          height: 30px;
           text-align: center;
-          line-height: 40px;
+          line-height: 30px;
           border: 1px solid #000;
           border-radius: 5px;
           text-decoration: none;
