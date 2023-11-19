@@ -106,6 +106,7 @@ class EvaluasiController extends Controller
         $opsi_b = Evaluasi::where('ujian_id',$id_ujian)->where('soal_id',$id_soal)->where('jawaban',$soal->opsi_b)->count();
         $opsi_c = Evaluasi::where('ujian_id',$id_ujian)->where('soal_id',$id_soal)->where('jawaban',$soal->opsi_c)->count();
         $opsi_d = Evaluasi::where('ujian_id',$id_ujian)->where('soal_id',$id_soal)->where('jawaban',$soal->opsi_d)->count();
+        $opsi_e = Evaluasi::where('ujian_id',$id_ujian)->where('soal_id',$id_soal)->where('jawaban',$soal->opsi_e)->count();
       
     
         return view('evaluasiSoal', [
@@ -115,6 +116,7 @@ class EvaluasiController extends Controller
             "opsib" => $opsi_b,
             "opsic" => $opsi_c,
             "opsid" => $opsi_d,
+            "opsie" => $opsi_e,
             "datasoal" => $soal
         ]);
     }
