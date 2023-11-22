@@ -1,4 +1,4 @@
-@extends('layoutdashboard.main') 
+@extends('layoutdashboard.main')
 @section('container')
 <h5 class="mt-4 mb-5">Data Mahasiswa Berdasarkan Kelas</h5>
 @if ($post->count())
@@ -23,7 +23,7 @@
                                 <h6>Tahun :
                                     {{ $pos->tahun_ajaran }}
                                     <br>
-                                     Jurusan :
+                                    Jurusan :
                                     {{ $pos->jurusan }}</h6>
                             </div>
                         </div>

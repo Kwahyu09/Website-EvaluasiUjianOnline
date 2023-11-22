@@ -10,6 +10,7 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class GrupsoalController extends Controller
 {
+    //menampilkan index grup soal
     public function index()
     {
         $post = Modul::latest()->filter(request(['search','modul']))->paginate(8);

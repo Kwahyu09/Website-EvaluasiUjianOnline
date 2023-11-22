@@ -57,123 +57,124 @@
                             <!-- Konten form -->
                             @csrf
                             @endif
-                                <div class="form-row">
-                                    <input type="hidden" name="soal_id" id="soal_id" value="{{ $s->id }}">
-                                    <input type="hidden" name="skor" id="skor" value="{{ $s->bobot }}">
-                                    <input type="hidden" name="slug" id="slug" value="{{ $ujian->slug }}">
-                                    <input type="hidden" name="ujian_id" id="ujian_id" value="{{ $ujian->id }}">
-                                    <input type="hidden" name="page" id="page" value="{{ $loop->iteration }}">
-                                    <input type="hidden" name="pt" id="pt" value="{{ $jumlahsoal }}">
-                                    <input type="hidden" name="nama_mahasiswa" id="nama_mahasiswa"
-                                        value="{{ Auth::user()->nama }}">
-                                    <input type="hidden" name="npm_mahasiswa" id="npm_mahasiswa"
-                                        value="{{ Auth::user()->npm }}">
-                                    <div class="col-md-0">
-                                        <p>{{ $loop->iteration }}.</p>
-                                    </div>
-                                    <div class="col-md-11 mb-3">
-                                        {!! $s->pertanyaan !!}
-                                    </div>
+                            <div class="form-row">
+                                <input type="hidden" name="soal_id" id="soal_id" value="{{ $s->id }}">
+                                <input type="hidden" name="skor" id="skor" value="{{ $s->bobot }}">
+                                <input type="hidden" name="slug" id="slug" value="{{ $ujian->slug }}">
+                                <input type="hidden" name="ujian_id" id="ujian_id" value="{{ $ujian->id }}">
+                                <input type="hidden" name="page" id="page" value="{{ $loop->iteration }}">
+                                <input type="hidden" name="pt" id="pt" value="{{ $jumlahsoal }}">
+                                <input type="hidden" name="nama_mahasiswa" id="nama_mahasiswa"
+                                    value="{{ Auth::user()->nama }}">
+                                <input type="hidden" name="npm_mahasiswa" id="npm_mahasiswa"
+                                    value="{{ Auth::user()->npm }}">
+                                <div class="col-md-0">
+                                    <p>{{ $loop->iteration }}.</p>
                                 </div>
-                                <div class="form-group">
-                                    @if($s->gambar)
-                                    <img class="mb-3" style="border: 1px solid black;"
-                                        src="{{ asset('storage/' . $s->gambar) }}" alt="Gambar" width="500px">
+                                <div class="col-md-11 mb-3">
+                                    {!! $s->pertanyaan !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @if($s->gambar)
+                                <img class="mb-3" style="border: 1px solid black;"
+                                    src="{{ asset('storage/' . $s->gambar) }}" alt="Gambar" width="500px">
+                                @endif
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" @foreach($evaluasi as $eval)
+                                        @if($eval->soal_id == $s->id && $eval->jawaban == $s->opsi_a)
+                                    checked
                                     @endif
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" @foreach($evaluasi as $eval)
-                                            @if($eval->soal_id == $s->id && $eval->jawaban == $s->opsi_a)
-                                        checked
-                                        @endif
-                                        @endforeach
-                                        name="jawaban"
-                                        id="jawaban"
-                                        value="{{ $s->opsi_a }}">
-                                        @if (preg_match('/^gambar-soal\//', $s->opsi_a))
-                                        <img class="mb-2" style="border: 1px solid black;"
-                                            src="{{ asset('storage/' . $s->opsi_a) }}" alt="Gambar" width="500px">
-                                        @else
-                                        <label class="form-check-label">{!! $s->opsi_a !!}</label>
-                                        @endif
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" @foreach($evaluasi as $eval)
-                                            @if($eval->soal_id == $s->id && $eval->jawaban == $s->opsi_b)
-                                        checked
-                                        @endif
-                                        @endforeach
-                                        name="jawaban"
-                                        id="jawaban"
-                                        value="{{ $s->opsi_b }}">
-                                        @if (preg_match('/^gambar-soal\//', $s->opsi_b))
-                                        <img class="mb-2" style="border: 1px solid black;"
-                                            src="{{ asset('storage/' . $s->opsi_b) }}" alt="Gambar" width="500px">
-                                        @else
-                                        <label class="form-check-label">{!! $s->opsi_b !!}</label>
-                                        @endif
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="jawaban" id="jawaban"
-                                            @foreach($evaluasi as $eval) @if($eval->soal_id == $s->id && $eval->jawaban ==
-                                        $s->opsi_c)
-                                        checked
-                                        @endif
-                                        @endforeach
-                                        value="{{ $s->opsi_c }}">
-                                        @if (preg_match('/^gambar-soal\//', $s->opsi_c))
-                                        <img class="mb-2" style="border: 1px solid black;"
-                                            src="{{ asset('storage/' . $s->opsi_c) }}" alt="Gambar" width="500px">
-                                        @else
-                                        <label class="form-check-label">{!! $s->opsi_c !!}</label>
-                                        @endif
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="jawaban" @foreach($evaluasi as $eval)
-                                            @if($eval->soal_id == $s->id && $eval->jawaban == $s->opsi_d)
-                                        checked
-                                        @endif
-                                        @endforeach
-                                        id="jawaban"
-                                        value="{{ $s->opsi_d }}">
-                                        @if (preg_match('/^gambar-soal\//', $s->opsi_d))
-                                        <img class="mb-2" style="border: 1px solid black;"
-                                            src="{{ asset('storage/' . $s->opsi_d) }}" alt="Gambar" width="500px">
-                                        @else
-                                        <label class="form-check-label">{!! $s->opsi_d !!}</label>
-                                        @endif
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jawaban" @foreach($evaluasi as $eval)
-                                            @if($eval->soal_id == $s->id && $eval->jawaban == $s->opsi_e)
-                                        checked
-                                        @endif
-                                        @endforeach
-                                        id="jawaban"
-                                        value="{{ $s->opsi_e }}">
-                                        @if (preg_match('/^gambar-soal\//', $s->opsi_e))
-                                        <img class="mb-2" style="border: 1px solid black;"
-                                            src="{{ asset('storage/' . $s->opsi_e) }}" alt="Gambar" width="500px">
-                                        @else
-                                        <label class="form-check-label">{!! $s->opsi_e !!}</label>
-                                        @endif
-                                    </div>
-                                    @error('jawaban')
-                                    <p class="text-danger">
-                                        {{ $message }}
-                                    </p>
-                                    @enderror
+                                    @endforeach
+                                    name="jawaban"
+                                    id="jawaban"
+                                    value="{{ $s->opsi_a }}">
+                                    @if (preg_match('/^gambar-soal\//', $s->opsi_a))
+                                    <img class="mb-2" style="border: 1px solid black;"
+                                        src="{{ asset('storage/' . $s->opsi_a) }}" alt="Gambar" width="500px">
+                                    @else
+                                    <label class="form-check-label">{!! $s->opsi_a !!}</label>
+                                    @endif
                                 </div>
-                                <div class="form-group mr-3 mb-1 mt-0 d-flex justify-content-center">
-                                    @if ($evaluasi->count() > 0 && $evaluasi_exists)
-                                    <button class="btn btn-warning " id="" type="submit">Ubah Jawaban</button>
-                                </form>
-                                @else
-                                <button class="btn btn-primary" data-soal="{{ $loop->iteration }}" type="submit">Tambah Jawaban</button>
-                            </form>
-                            @endif
-                        </div>
-                    </div>
-                    @endforeach
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" @foreach($evaluasi as $eval)
+                                        @if($eval->soal_id == $s->id && $eval->jawaban == $s->opsi_b)
+                                    checked
+                                    @endif
+                                    @endforeach
+                                    name="jawaban"
+                                    id="jawaban"
+                                    value="{{ $s->opsi_b }}">
+                                    @if (preg_match('/^gambar-soal\//', $s->opsi_b))
+                                    <img class="mb-2" style="border: 1px solid black;"
+                                        src="{{ asset('storage/' . $s->opsi_b) }}" alt="Gambar" width="500px">
+                                    @else
+                                    <label class="form-check-label">{!! $s->opsi_b !!}</label>
+                                    @endif
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="jawaban" id="jawaban"
+                                        @foreach($evaluasi as $eval) @if($eval->soal_id == $s->id && $eval->jawaban ==
+                                    $s->opsi_c)
+                                    checked
+                                    @endif
+                                    @endforeach
+                                    value="{{ $s->opsi_c }}">
+                                    @if (preg_match('/^gambar-soal\//', $s->opsi_c))
+                                    <img class="mb-2" style="border: 1px solid black;"
+                                        src="{{ asset('storage/' . $s->opsi_c) }}" alt="Gambar" width="500px">
+                                    @else
+                                    <label class="form-check-label">{!! $s->opsi_c !!}</label>
+                                    @endif
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="jawaban" @foreach($evaluasi as
+                                        $eval) @if($eval->soal_id == $s->id && $eval->jawaban == $s->opsi_d)
+                                    checked
+                                    @endif
+                                    @endforeach
+                                    id="jawaban"
+                                    value="{{ $s->opsi_d }}">
+                                    @if (preg_match('/^gambar-soal\//', $s->opsi_d))
+                                    <img class="mb-2" style="border: 1px solid black;"
+                                        src="{{ asset('storage/' . $s->opsi_d) }}" alt="Gambar" width="500px">
+                                    @else
+                                    <label class="form-check-label">{!! $s->opsi_d !!}</label>
+                                    @endif
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="jawaban" @foreach($evaluasi as
+                                        $eval) @if($eval->soal_id == $s->id && $eval->jawaban == $s->opsi_e)
+                                    checked
+                                    @endif
+                                    @endforeach
+                                    id="jawaban"
+                                    value="{{ $s->opsi_e }}">
+                                    @if (preg_match('/^gambar-soal\//', $s->opsi_e))
+                                    <img class="mb-2" style="border: 1px solid black;"
+                                        src="{{ asset('storage/' . $s->opsi_e) }}" alt="Gambar" width="500px">
+                                    @else
+                                    <label class="form-check-label">{!! $s->opsi_e !!}</label>
+                                    @endif
+                                </div>
+                                @error('jawaban')
+                                <p class="text-danger">
+                                    {{ $message }}
+                                </p>
+                                @enderror
+                            </div>
+                            <div class="form-group mr-3 mb-1 mt-0 d-flex justify-content-center">
+                                @if ($evaluasi->count() > 0 && $evaluasi_exists)
+                                <button class="btn btn-warning " id="" type="submit">Ubah Jawaban</button>
+                        </form>
+                        @else
+                        <button class="btn btn-primary" data-soal="{{ $loop->iteration }}" type="submit">Tambah
+                            Jawaban</button>
+                    </form>
+                    @endif
+                </div>
+            </div>
+            @endforeach
         </div>
     </div>
     <div class="col-md-4 col-sm-5 mb-5 card-fixed">
@@ -205,14 +206,14 @@
                         $jumlahBaris = ceil($jumlahSoal / $kotakPerBaris);
                         @endphp
                         <div class="kotak-container">
-                            @for ($baris = 0; $baris < $jumlahBaris; $baris++)
-                                @for ($i = ($baris * $kotakPerBaris) + 1; $i <= min(($baris + 1) * $kotakPerBaris, $jumlahSoal); $i++)
-                                    @php
-                                        $evaluasi_exists = $evaluasi->contains('soal_id', $soal[$i-1]->id);
-                                    @endphp
-                                    <a style="text-decoration:none" href="#soal-{{ $i }}" class="kotak-soal @if ($evaluasi->count() > 0 && $evaluasi_exists) biru @endif">{{ $i }}</a>
+                            @for ($baris = 0; $baris < $jumlahBaris; $baris++) @for ($i=($baris * $kotakPerBaris) + 1;
+                                $i <=min(($baris + 1) * $kotakPerBaris, $jumlahSoal); $i++) @php
+                                $evaluasi_exists=$evaluasi->contains('soal_id', $soal[$i-1]->id);
+                                @endphp
+                                <a style="text-decoration:none" href="#soal-{{ $i }}"
+                                    class="kotak-soal @if ($evaluasi->count() > 0 && $evaluasi_exists) biru @endif">{{ $i }}</a>
                                 @endfor
-                            @endfor
+                                @endfor
                         </div>
                     </form>
                 </div>
@@ -315,37 +316,37 @@
             document.getElementById(soalId).style.display = 'block';
         });
     });
-    document.addEventListener("DOMContentLoaded", function() {
-    // Fungsi untuk menampilkan soal sesuai dengan hash URL
-    function tampilkanSoal() {
-        var hash = window.location.hash; // Mendapatkan hash URL (contoh: "#soal-10")
+    document.addEventListener("DOMContentLoaded", function () {
+        // Fungsi untuk menampilkan soal sesuai dengan hash URL
+        function tampilkanSoal() {
+            var hash = window.location.hash; // Mendapatkan hash URL (contoh: "#soal-10")
 
-        // Jika tidak ada hash URL, tampilkan soal nomor 1
-        if (!hash) {
-        document.getElementById('soal-1').style.display = 'block';
-        } else {
-        // Coba untuk mendapatkan nomor soal dari hash URL
-        var nomorSoal = parseInt(hash.replace("#soal-", ""));
+            // Jika tidak ada hash URL, tampilkan soal nomor 1
+            if (!hash) {
+                document.getElementById('soal-1').style.display = 'block';
+            } else {
+                // Coba untuk mendapatkan nomor soal dari hash URL
+                var nomorSoal = parseInt(hash.replace("#soal-", ""));
 
-        // Periksa apakah nomor soal valid (angka)
-        if (!isNaN(nomorSoal)) {
-            // Sembunyikan semua soal
-            document.querySelectorAll('.soal').forEach(function(soal) {
-            soal.style.display = 'none';
-            });
+                // Periksa apakah nomor soal valid (angka)
+                if (!isNaN(nomorSoal)) {
+                    // Sembunyikan semua soal
+                    document.querySelectorAll('.soal').forEach(function (soal) {
+                        soal.style.display = 'none';
+                    });
 
-            // Tampilkan soal yang sesuai dengan nomor soal dari hash URL
-            var soalId = 'soal-' + nomorSoal;
-            document.getElementById(soalId).style.display = 'block';
+                    // Tampilkan soal yang sesuai dengan nomor soal dari hash URL
+                    var soalId = 'soal-' + nomorSoal;
+                    document.getElementById(soalId).style.display = 'block';
+                }
+            }
         }
-        }
-    }
 
-    // Panggil fungsi tampilkanSoal saat halaman dimuat
-    tampilkanSoal();
+        // Panggil fungsi tampilkanSoal saat halaman dimuat
+        tampilkanSoal();
 
-    // Tambahkan event listener untuk mengikuti perubahan hash URL
-    window.addEventListener("hashchange", tampilkanSoal);
+        // Tambahkan event listener untuk mengikuti perubahan hash URL
+        window.addEventListener("hashchange", tampilkanSoal);
     });
 </script>
 @endsection

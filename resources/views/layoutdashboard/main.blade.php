@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <link rel="icon" href="{{ asset('/backend/assets/img/logounib.png') }}">
+    <link rel="icon" href="{{ asset('/backend/assets/img/logounib.png') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -16,59 +17,64 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
 
-  {{-- Trik EDITOR --}}
+    {{-- Trik EDITOR --}}
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
+    @if (Auth::user()->role == 'Mahasiswa')
     <script src="{{ asset('/js/jam.js') }}"></script>
+    @endif
     <style>
-      trix-toolbar [data-trix-button-group="file-tools"] {
-        display: none;
-      }
+        trix-toolbar [data-trix-button-group="file-tools"] {
+            display: none;
+        }
     </style>
     <style>
-      #chartContainer {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-      }
-      .chart {
-        width: 100%;
-        height: 300px;
-      }
+        #chartContainer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .chart {
+            width: 100%;
+            height: 300px;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-      .card-fixed {
-        position: fixed;
-        top: 40%;
-        right: 20px;
-        transform: translateY(-50%);
-        z-index: 999;
-      }
-      .kotak-container {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
-      }
+        .card-fixed {
+            position: fixed;
+            top: 40%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 999;
+        }
 
-      .kotak-soal {
-          width: 30px;
-          height: 30px;
-          text-align: center;
-          line-height: 30px;
-          border: 1px solid #000;
-          border-radius: 5px;
-          text-decoration: none;
-          color: #000;
-          background-color: #ccc;
-          cursor: pointer;
-          margin-bottom: 10px;
-      }
+        .kotak-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-      .biru {
-          background-color: blue;
-          color: white;
-      }
+        .kotak-soal {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #000;
+            background-color: #ccc;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .biru {
+            background-color: blue;
+            color: white;
+        }
+
         #watch {
             color: rgb(252, 150, 65);
             position: absolute;
@@ -92,53 +98,65 @@
 
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('backend/js', new Date());
+        window.dataLayer = window.dataLayer || [];
 
-    gtag('config', 'UA-94034622-3');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('backend/js', new Date());
+
+        gtag('config', 'UA-94034622-3');
     </script>
 
     <title>evaluasi-ujian | {{ $title }}</title>
 </head>
-<body onload="realtimeClock()">
-    <div id="app">
-        <div class="main-wrapper main-wrapper-1">
-          @include('partial.navbar')
-          <div class="main-sidebar sidebar-style-2">
-            @include('partial.sidebare')
-          </div>
+@if (Auth::user()->role == 'Mahasiswa')
 
-          <!-- Main Content -->
-          <div class="main-content">
-            <section class="section">
-              <div class="section-header">
-                <h3>Fakultas Kedokteran dan Ilmu Kesehatan UNIB</h3>
-              </div>
-                    @yield('container')
-                
-              </div>
-            </section>
-          </div>
+<body onload="realtimeClock()">
+    @endif
+
+    <body>
+        <div id="app">
+            <div class="main-wrapper main-wrapper-1">
+                @include('partial.navbar')
+                <div class="main-sidebar sidebar-style-2">
+                    @include('partial.sidebare')
+                </div>
+
+                <!-- Main Content -->
+                <div class="main-content">
+                    <section class="section">
+                        <div class="section-header">
+                            <h3>Fakultas Kedokteran dan Ilmu Kesehatan UNIB</h3>
+                        </div>
+                        @yield('container')
+
+                </div>
+                </section>
+            </div>
         </div>
-      </div>
-      <!-- General JS Scripts -->
-      <script src="https://code.jquery.com/jquery-3.7.0.slim.js" integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
-      <script src="{{ asset('/dist/sweetalert2.all.min.js') }}"></script>
-      <script src="{{ asset('/dist/myscript.js') }}"></script>
-      <script src="{{ asset('/backend/assets/modules/jquery.min.js') }}"></script>
-      <script src="{{ asset('/backend/assets/modules/popper.js') }}"></script>
-      <script src="{{ asset('/backend/assets/modules/tooltip.js') }}"></script>
-      <script src="{{ asset('/backend/assets/modules/bootstrap/js/bootstrap.min.js') }}"></script>
-      <script src="{{ asset('/backend/assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
-      <script src="{{ asset('/backend/assets/modules/moment.min.js') }}"></script>
-      <script src="{{ asset('/backend/assets/js/stisla.js') }}"></script>
-      <!-- Page Specific JS File -->
-      <script src="{{ asset('/backend/assets/js/page/index-0.js') }}"></script>
-      <!-- Template JS File -->
-      <script src="{{ asset('/backend/assets/js/scripts.js') }}"></script>
-      <script src="{{ asset('/backend/assets/js/custom.js') }}"></script>
+        </div>
+        <!-- General JS Scripts -->
+        <script src="https://code.jquery.com/jquery-3.7.0.slim.js"
+            integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
+        <script src="{{ asset('/dist/sweetalert2.all.min.js') }}"></script>
+        <script src="{{ asset('/dist/myscript.js') }}"></script>
+        <script src="{{ asset('/backend/assets/modules/jquery.min.js') }}"></script>
+        <script src="{{ asset('/backend/assets/modules/popper.js') }}"></script>
+        <script src="{{ asset('/backend/assets/modules/tooltip.js') }}"></script>
+        <script src="{{ asset('/backend/assets/modules/bootstrap/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('/backend/assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
+        <script src="{{ asset('/backend/assets/modules/moment.min.js') }}"></script>
+        <script src="{{ asset('/backend/assets/js/stisla.js') }}"></script>
+        <!-- Page Specific JS File -->
+        @if (Auth::user()->role == 'Mahasiswa')
+        <script src="{{ asset('/backend/assets/js/page/index-0.js') }}"></script>
+        @endif
+        <!-- Template JS File -->
+        <script src="{{ asset('/backend/assets/js/scripts.js') }}"></script>
+        <script src="{{ asset('/backend/assets/js/custom.js') }}"></script>
     </body>
-    </html>
+
+</html>

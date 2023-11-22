@@ -8,22 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AktorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
+    //menampilkan halaman home admin
     public function index_admin()
     {
         return view('aktor.index', [
@@ -32,14 +17,7 @@ class AktorController extends Controller
         ]);
     }
 
-    public function profile_admin()
-    {
-        return view('aktor.edit', [
-            "title" => "Profile Admin",
-            "post" => User::latest()->where('role','Admin')->paginate(10)
-        ]);
-    }
-
+    //menampilkan halaman home staff
     public function index_staff()
     {
         return view('aktor.index', [
@@ -48,6 +26,7 @@ class AktorController extends Controller
         ]);
     }
 
+    //menampilkan halaman home ketua modul
     public function index_ketua()
     {
         return view('aktor.index', [
@@ -56,14 +35,7 @@ class AktorController extends Controller
         ]);
     }
 
-    // public function index_mahasiswa()
-    // {
-    //     return view('aktor', [
-    //         "title" => "mahasiswa",
-    //         "post" => User::latest()->Filter(request(['search']))->where('role','Mahasiswa')->paginate(10)
-    //     ]);
-    // }
-
+    //menampilkan halaman tambah data staff
     public function create_staff()
     {
         return view('aktor.create', [
@@ -72,6 +44,7 @@ class AktorController extends Controller
         ]);
     }
 
+    //menambahkan data staff ke database
     public function store_staff(Request $request)
     {
         $validatedData = $request->validate([
@@ -88,6 +61,7 @@ class AktorController extends Controller
         return redirect('/staff')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
+    //menampilkan halaman tambah data ketua
     public function create_ketua()
     {
         return view('aktor.create', [
@@ -96,6 +70,7 @@ class AktorController extends Controller
         ]);
     }
 
+    //menambahkan data ketua ke database
     public function store_ketua(Request $request)
     {
         $validatedData = $request->validate([
@@ -112,40 +87,7 @@ class AktorController extends Controller
         return redirect('/ketua')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
-
-    public function create()
-    {
-        return view('create_akor');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
+    //menampilkan halaman edit profile
     public function edit(User $user)
     {
         $role = "Admin";
@@ -166,6 +108,7 @@ class AktorController extends Controller
         ]);
     }
 
+    //menampilkan halaman edit staff aktor admin
     public function edit_staf(User $user)
     {
         $kelas_id = "";
@@ -176,6 +119,8 @@ class AktorController extends Controller
             "kelas_id" => $kelas_id
         ]);
     }
+
+    //menampilkan halaman edit ketua aktor admin
     public function edit_ketua(User $user)
     {
         $kelas_id = "";
@@ -187,13 +132,7 @@ class AktorController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
+    //mengubah data admin pada database
     public function update_admin(Request $request, User $user)
     {
         $rules = [
@@ -217,9 +156,9 @@ class AktorController extends Controller
         User::where('id', $user->id)
             ->update($validatedData);
         return redirect('/')->with('success', 'Data Berhasil Diubah!');
-
     }
 
+    //mengubah data staff didatabase
     public function update_staf(Request $request, User $user)
     {
         $rules = [
@@ -243,8 +182,9 @@ class AktorController extends Controller
         User::where('id', $user->id)
             ->update($validatedData);
         return redirect('/staff')->with('success', 'Data Berhasil Diubah!');
-
     }
+
+    //mengubah data ketua didatabase
     public function update_ketua(Request $request, User $user)
     {
         $rules = [
@@ -268,21 +208,16 @@ class AktorController extends Controller
         User::where('id', $user->id)
             ->update($validatedData);
         return redirect('/ketua')->with('success', 'Data Berhasil Diubah!');
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
+    //menghapus data staff didatabase
     public function destroy_staff(User $user)
     {
         User::destroy($user->id);
         return redirect('/staff')->with('success', 'Data Berhasil DiHapus!');
     }
     
+    //menghapus data ketua di database
     public function destroy_ketua(User $user)
     {
         User::destroy($user->id);

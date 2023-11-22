@@ -1,4 +1,4 @@
-@extends('layoutdashboard.main') 
+@extends('layoutdashboard.main')
 @section('container')
 <h5 class="mt-4 mb-5">Data
     {{ $title }}

@@ -12,7 +12,6 @@ use App\Http\Controllers\GrupsoalController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\HasilujianController;
 use App\Http\Controllers\DashboardHomeController;
-use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +45,6 @@ Route::put('/Ketua/{user:username}/update', [AktorController::class,'update_ketu
 Route::get('/ketua/{user:username}/edit', [AktorController::class, 'edit_ketua'])->middleware(['auth', 'role:Admin|Staf'])->name('editKetua');
 Route::get('/ujian-mahasiswa', [MahasiswaController::class,'ujian_index'])->middleware(['auth', 'role:Mahasiswa'])->name('mahasiswa-index');
 
-Route::get('/mahasiswa-home', [MahasiswaController::class,'mahasiswa_index'])->middleware(['auth', 'role:Mahasiswa'])->name('mahasiswa-home');
 Route::get('/masuk-ujian/{ujian:slug}', [MahasiswaController::class,'ujian_masuk'])->middleware(['auth', 'role:Mahasiswa'])->name('ujian-mahasiswa-index');
 
 Route::get('/kelas', [KelasController::class,'index'])->middleware(['auth', 'role:Admin|Staf'])->name('Kelas');
@@ -64,7 +62,6 @@ Route::get('/dosen/{dosen:slug}/delete', [DosenController::class, 'destroy'])->m
 Route::put('/dosen/{dosen:slug}', [DosenController::class,'update'])->middleware(['auth', 'role:Admin|Staf'])->name('updateDosen');
 Route::get('/dosen/create/checkSlug',[DosenController::class, 'checkslug'])->middleware(['auth']);
 
-Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->middleware(['auth', 'role:Admin|Staf'])->name('Mahasiswa');
 Route::get('/mahasiswa/{user:username}/delete', [MahasiswaController::class, 'destroy'])->middleware(['auth', 'role:Admin|Staf'])->name('MahasiswaHapus');
 Route::post('/mahasiswa/store', [MahasiswaController::class,'store'])->middleware(['auth', 'role:Admin|Staf'])->name('Mahasiswa-tambah');
 Route::get('/mahasiswa/create/{kelas:slug}', [MahasiswaController::class, 'create'])->middleware(['auth', 'role:Admin|Staf'])->name('CreateKetua');

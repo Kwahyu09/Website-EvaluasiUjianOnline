@@ -1,4 +1,4 @@
-@extends('layoutdashboard.main') 
+@extends('layoutdashboard.main')
 @section('container')
 <main role="main" class="main-content">
     <div class="container-fluid">
@@ -7,7 +7,7 @@
                 <h2 class="h3 mb-3 page-title">Data {{ $title }}</h2>
                 @if ($post->count())
                 <div class="row">
-                  @foreach ($post as $pos)
+                    @foreach ($post as $pos)
                     <div class="col-md-3">
                         <a class="text-decoration-none" href="/kelas/{{ $pos->slug }}">
                             <div class="card shadow mb-4">
@@ -49,5 +49,6 @@
         </div>
         <!-- .row -->
     </div>
-    <!-- .container-fluid -->
-    @endsection
+</main>
+<!-- .container-fluid -->
+@endsection

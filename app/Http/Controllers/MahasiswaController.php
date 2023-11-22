@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use DateTime;
 use DateTimeZone;
-use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Kelas;
 use App\Models\Soal;
 use App\Models\Ujian;
-use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,25 +20,7 @@ use App\Http\Controllers\Controller;
 
 class MahasiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('mahasiswa', [
-            "title" => "mahasiswa",
-            "post" => User::latest()->Filter(request(['search']))->where('role','Mahasiswa')->paginate(10)
-        ]);
-    }
-    public function mahasiswa_index()
-    {
-        return view('mahasiswa', [
-            "title" => "mahasiswa",
-            "post" => User::latest()->Filter(request(['search']))->where('role','Mahasiswa')->paginate(10)
-        ]);
-    }
+    // import data mahasiswa
     public function ImportExel(Request $request)
     {
         // validasi
@@ -64,6 +44,8 @@ class MahasiswaController extends Controller
 		// alihkan halaman kembali
 		return redirect('/kelas'.'/'.$request->slug_kelas)->with('success','Data Mahasiswa Berhasil Diimport!');
     }
+
+    // menampilkan menu ujian pada aktor mahasiswa
     public function ujian_index()
     {
         $kelas = Auth::user()->kelas;
@@ -74,6 +56,8 @@ class MahasiswaController extends Controller
             "post" => $ujian,
         ]);
     }
+
+    // menampilkan menu ujian mahasiswa
     public function ujian_masuk(Ujian $ujian)
     {
         $timezone = 'Asia/Jakarta'; 
@@ -128,6 +112,7 @@ class MahasiswaController extends Controller
             ]);
     }
 
+    // menampilkan menu data ujian di aktor mahasiswa
     public function ujian_data(Request $request)
     {
         $timezone = 'Asia/Jakarta'; 
@@ -165,11 +150,7 @@ class MahasiswaController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan halaman tambah data mahasiswa
     public function create(Kelas $kelas)
     {
         return view('mahasiswa.create', [
@@ -180,6 +161,7 @@ class MahasiswaController extends Controller
         ]);
     }
 
+    // menampilkan halaman import data mahasiswa
     public function createImport(Kelas $kelas)
     {
         return view('mahasiswa.import', [
@@ -190,12 +172,7 @@ class MahasiswaController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreMahasiswaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+    //menambahkan data mahasiswa ke dalam database
     public function store(Request $request)
     {
          $validatedData = $request->validate([
@@ -213,23 +190,7 @@ class MahasiswaController extends Controller
         return redirect('/kelas'.'/'.$request->slug_kelas)->with('success', 'Data Berhasil Ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Mahasiswa  $mahasiswa
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Mahasiswa $mahasiswa)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Mahasiswa  $mahasiswa
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan menu edit mahasiswa
     public function edit(User $user)
     {
         return view('aktor.edit3', [
@@ -241,13 +202,7 @@ class MahasiswaController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMahasiswaRequest  $request
-     * @param  \App\Models\Mahasiswa  $mahasiswa
-     * @return \Illuminate\Http\Response
-     */
+    // mengubah data mahasiswa didatabase
     public function update(Request $request, User $user)
     {
         $rules = [
@@ -275,12 +230,7 @@ class MahasiswaController extends Controller
         return redirect('/kelas'.'/'.$slug)->with('success', 'Data Berhasil Diubah!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Mahasiswa  $mahasiswa
-     * @return \Illuminate\Http\Response
-     */
+    // menghapus data mahasiswa
     public function destroy(User $user)
     {
         User::destroy($user->id);

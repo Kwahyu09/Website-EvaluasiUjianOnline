@@ -12,11 +12,7 @@ use App\Imports\SoalImport;
 
 class SoalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan menu soal
     public function index(Grup_soal $grup_soal)
     {
         return view('grupsoal.soal.soal',[
@@ -27,11 +23,7 @@ class SoalController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan menu tambah data soal
     public function create(Grup_soal $grup_soal)
     {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -50,6 +42,8 @@ class SoalController extends Controller
             "grupsoal_slug" => $grup_soal->slug
         ]);
     }
+
+    // menampilkan tambah data soal jika jawaban bergambar
     public function create_gambar(Grup_soal $grup_soal)
     {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -68,6 +62,8 @@ class SoalController extends Controller
             "grupsoal_slug" => $grup_soal->slug
         ]);
     }
+
+    // method untuk mengimmport data soal
     public function ImportExel(Request $request)
     {
         // validasi
@@ -92,6 +88,7 @@ class SoalController extends Controller
 		return redirect('/soal'.'/'.$request->slug_grup)->with('success','Data Mahasiswa Berhasil Diimport!');
     }
 
+    // menampilkan halaman import data soal
     public function createImport(Grup_soal $grup_soal)
     {
         return view('grupsoal.soal.import',[
@@ -104,12 +101,7 @@ class SoalController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // menambahkan data soal ke dalam database
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -144,6 +136,8 @@ class SoalController extends Controller
         soal::create($validatedData);
         return redirect('/soal'.'/'.$request['grupsoal_slug'])->with('success', 'Data Berhasil Ditambahkan!');
     }
+
+    // menambahkan data soal dengan jawaban ada gambar ke database
     public function storegambar(Request $request)
     {
         $validatedData = $request->validate([
@@ -194,23 +188,7 @@ class SoalController extends Controller
         return redirect('/soal'.'/'.$request['grupsoal_slug'])->with('success', 'Data Berhasil Ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\soal  $soal
-     * @return \Illuminate\Http\Response
-     */
-    public function show(soal $soal)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\soal  $soal
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan halaman edit soal
     public function edit(soal $soal)
     {
         return view('grupsoal.soal.edit',[
@@ -220,13 +198,7 @@ class SoalController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\soal  $soal
-     * @return \Illuminate\Http\Response
-     */
+    // mengubah data soal didalam database
     public function update(Request $request, soal $soal)
     {
         $rules = [
@@ -299,12 +271,7 @@ class SoalController extends Controller
         return redirect('/soal'.'/'.$soal->grup_soal->slug)->with('success', 'Data Berhasil DiUbah!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\soal  $soal
-     * @return \Illuminate\Http\Response
-     */
+    // menghapus soal beserta gambar didalam sistem
     public function destroy(soal $soal)
     {
         if($soal->gambar){

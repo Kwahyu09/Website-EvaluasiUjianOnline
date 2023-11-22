@@ -13,11 +13,7 @@
             <div class="col-md-4">
                 <form action="/{{ $title }}">
                     <div class="input-group mb-3">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Cari.."
-                            name="search"
+                        <input type="text" class="form-control" placeholder="Cari.." name="search"
                             value="{{ request('search') }}">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">
@@ -37,9 +33,9 @@
                         <tr>
                             <th scope="col">No</th>
                             @if($title == "staff")
-                                <th scope="col">NIK</th>
+                            <th scope="col">NIK</th>
                             @elseif($title == "ketua")
-                                <th scope="col">NIP</th>
+                            <th scope="col">NIP</th>
                             @endif
                             <th scope="col">Nama</th>
                             <th scope="col">Usename</th>
@@ -50,25 +46,24 @@
                     <tbody>
                         @foreach ($post as $pos)
                         <tr>
-                            <td>{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}</td>
+                            <td>{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}
+                            </td>
                             @if($title == "staff")
-                                <td>{{ $pos->nik }}</td>
+                            <td>{{ $pos->nik }}</td>
                             @elseif($title == "ketua")
-                                <td>{{ $pos->nip }}</td>
+                            <td>{{ $pos->nip }}</td>
                             @endif
                             <td>{{ $pos->nama }}</td>
                             <td>{{ $pos->username }}</td>
                             <td>{{ $pos->email }}</td>
                             <td>
-                                <a
-                                    href="/{{ $title }}/{{ $pos->username }}/edit"
-                                    class="btn btn-primary btn-action mr-1"
-                                    data-toggle="tooltip"
-                                    title="Ubah">
+                                <a href="/{{ $title }}/{{ $pos->username }}/edit"
+                                    class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Ubah">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <a href="/{{ $title }}/{{ $pos->username }}/delete" class="btn btn-danger btn-action mr-1 tombol-hapus" data-toggle="tooltip"
-                                title="Hapus">
+                                <a href="/{{ $title }}/{{ $pos->username }}/delete"
+                                    class="btn btn-danger btn-action mr-1 tombol-hapus" data-toggle="tooltip"
+                                    title="Hapus">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>

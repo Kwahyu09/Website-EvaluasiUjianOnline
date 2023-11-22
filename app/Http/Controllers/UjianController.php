@@ -6,18 +6,12 @@ use App\Models\Ujian;
 use App\Models\Grup_soal;
 use App\Models\Kelas;
 use App\Models\Modul;
-use App\Http\Requests\StoreUjianRequest;
-use App\Http\Requests\UpdateUjianRequest;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class UjianController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan menu ujian
     public function index()
     {
         $ujian = Ujian::latest()->filter(request(['search']))->paginate(10);
@@ -31,11 +25,7 @@ class UjianController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //menampilkan menu tambah ujian
     public function create()
     {
         $modul = Modul::all();
@@ -60,12 +50,7 @@ class UjianController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreUjianRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+    // menambahkan data ujian ke database
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -86,23 +71,7 @@ class UjianController extends Controller
         return redirect('/ujian')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Ujian  $ujian
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Ujian $ujian)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Ujian  $ujian
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan menu edit ujian
     public function edit(Ujian $ujian)
     {
         $modul = Modul::all();  
@@ -123,13 +92,7 @@ class UjianController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateUjianRequest  $request
-     * @param  \App\Models\Ujian  $ujian
-     * @return \Illuminate\Http\Response
-     */
+    //mengubah data ujian didatabase
     public function update(Request $request, Ujian $ujian)
     {
         $rules = [
@@ -155,18 +118,14 @@ class UjianController extends Controller
         return redirect('/ujian')->with('success', 'Data Berhasil DiUbah!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Ujian  $ujian
-     * @return \Illuminate\Http\Response
-     */
+    //menghapus data ujian
     public function destroy(Ujian $ujian)
     {
         Ujian::destroy($ujian->id);
         return back()->with('success', 'Data Berhasil DiHapus!');
     }
 
+    // membuat slug data ujian
     public function checkSlug(Request $request)
     {
         $slug = SlugService::createSlug(Ujian::class, 'slug', $request->nama_ujian);

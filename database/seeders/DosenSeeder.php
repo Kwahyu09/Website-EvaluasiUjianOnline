@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Dosen;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DosenSeeder extends Seeder
 {

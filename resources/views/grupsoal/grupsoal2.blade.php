@@ -3,16 +3,16 @@
     {{ $title }}
     Modul
     {{ $modul }}</h5>
-    <div class="d-flex justify-content-start mb-4 mt-3">
-      <div class="d-flex justify-content-start">
+<div class="d-flex justify-content-start mb-4 mt-3">
+    <div class="d-flex justify-content-start">
         <a href="/grupsoal/create/{{ $slug }}" class="btn btn-primary">Tambah Data
-          <i class="bi bi-plus-circle"></i>
+            <i class="bi bi-plus-circle"></i>
         </a>
-      </div>
     </div>
-    <div class="flash-data" data-flashdata="{{ session('success') }}">
-    </div>
-    @if ($post->count())
+</div>
+<div class="flash-data" data-flashdata="{{ session('success') }}">
+</div>
+@if ($post->count())
 <div class="container">
     <div class="row">
         @foreach ($post as $pos)
@@ -34,15 +34,13 @@
                             </div>
                             <div class="col-auto">
                                 <div class="file-action">
-                                    <a
-                                        href="/grupsoal/{{ $pos->slug }}/edit"
-                                        class="btn btn-primary btn-action mr-1"
-                                        data-toggle="tooltip"
-                                        title="Ubah">
+                                    <a href="/grupsoal/{{ $pos->slug }}/edit" class="btn btn-primary btn-action mr-1"
+                                        data-toggle="tooltip" title="Ubah">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <a href="/grupsoal/{{ $pos->slug }}/delete" class="btn btn-danger btn-action mr-1 tombol-hapus" data-toggle="tooltip"
-                                    title="Hapus">
+                                    <a href="/grupsoal/{{ $pos->slug }}/delete"
+                                        class="btn btn-danger btn-action mr-1 tombol-hapus" data-toggle="tooltip"
+                                        title="Hapus">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </div>

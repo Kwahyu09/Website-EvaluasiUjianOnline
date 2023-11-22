@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Evaluasi;
 use App\Models\Grup_soal;
-use App\Http\Requests\UpdateevaluasiRequest;
 use App\Models\Ujian;
 use App\Models\Soal;
 use Illuminate\Http\Request;
@@ -12,14 +11,10 @@ use Illuminate\Http\Request;
 
 class EvaluasiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //menampilkan menu evaluasi index
     public function index()
     {
-        $ujian = Ujian::latest()->filter(request(['search','ujian']))->paginate(10);
+        $ujian = Ujian::latest()->filter(request(['search','ujian']));
 
         if(auth()->user()->role == "Ketua"){
             $ujian = Ujian::where('user_id', auth()->user()->id)->latest()->filter(request(['search','ujian']))->paginate(10);
@@ -29,6 +24,8 @@ class EvaluasiController extends Controller
             "post" => $ujian
         ]);
     }
+
+    // menampilkan menu evaluasi persoal
     public function soalEvaluasi(Request $request)
     {
         $id_ujian = $request->id_ujian;
@@ -37,7 +34,7 @@ class EvaluasiController extends Controller
         $slug = $ujian->grupsoal;
         $grup = Grup_soal::where('slug', $slug)->get();
         $id_grup = $grup[0]['id'];
-        $soal = Soal::latest()->where('grup_soal_id',$id_grup)->paginate(1000);
+        $soal = Soal::latest()->where('grup_soal_id',$id_grup)->paginate(500);
         return view('evaluasi', [
             "title" => "Evaluasi",
             "soal" => $soal,
@@ -45,22 +42,7 @@ class EvaluasiController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreevaluasiRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+    // menambahkan data evaluasi ketika mahasiswa menambahkan jawaban ujiannya
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -88,12 +70,7 @@ class EvaluasiController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\evaluasi  $evaluasi
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan data evaluasi detai berserta grafik jawaban persoal
     public function show(Request $request)
     {
         $id_ujian = $request->ujian_id;
@@ -108,7 +85,6 @@ class EvaluasiController extends Controller
         $opsi_d = Evaluasi::where('ujian_id',$id_ujian)->where('soal_id',$id_soal)->where('jawaban',$soal->opsi_d)->count();
         $opsi_e = Evaluasi::where('ujian_id',$id_ujian)->where('soal_id',$id_soal)->where('jawaban',$soal->opsi_e)->count();
       
-    
         return view('evaluasiSoal', [
             "title" => "Evaluasi Ujian",
             "soal" => $eval,
@@ -121,24 +97,7 @@ class EvaluasiController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\evaluasi  $evaluasi
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(evaluasi $evaluasi)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateevaluasiRequest  $request
-     * @param  \App\Models\evaluasi  $evaluasi
-     * @return \Illuminate\Http\Response
-     */
+    // mengubah data evaluasi ketika mahasiswa mengubah jawaban ujiannya
     public function update(Request $request, $id)
     {
         $rules = [
@@ -163,20 +122,9 @@ class EvaluasiController extends Controller
         evaluasi::where('id', $id)->update($validatedData);
         $pageNext = $request->page + 1;
         if($request->page == $request->pt){
-            return redirect('/masuk-ujian'.'/'.$request->slug.'#soal-'.$request->pt)->with('success', 'Jawaban Berhasil Ditambah!');
+            return redirect('/masuk-ujian'.'/'.$request->slug.'#soal-'.$request->pt)->with('success', 'Jawaban Berhasil DiUbah!');
         }else{
-            return redirect('/masuk-ujian'.'/'.$request->slug.'#soal-'.$pageNext)->with('success', 'Jawaban Berhasil Ditambah!');
+            return redirect('/masuk-ujian'.'/'.$request->slug.'#soal-'.$pageNext)->with('success', 'Jawaban Berhasil DiUbah!');
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\evaluasi  $evaluasi
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(evaluasi $evaluasi)
-    {
-        //
     }
 }

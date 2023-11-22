@@ -8,24 +8,16 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DosenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //menampilkan halaman index dosen
     public function index()
     {
         return view('fakultas.dosen.index', [
             "title" => "Dosen",
-            "post" => Dosen::latest()->filter(request(['search']))->paginate(5)
+            "post" => Dosen::latest()->filter(request(['search']))->paginate(10)
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //menampilkan halaman tambah data dosen
     public function create()
     {
         return view('fakultas.dosen.create', [
@@ -33,12 +25,7 @@ class DosenController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreDosenRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+    //menambahkan data dosen ke database
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -56,23 +43,7 @@ class DosenController extends Controller
         return redirect('/dosen')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Dosen  $dosen
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Dosen $dosen)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Dosen  $dosen
-     * @return \Illuminate\Http\Response
-     */
+    //menampilkan halaman edit dosen
     public function edit(Dosen $dosen)
     {
         return view('fakultas.dosen.edit', [
@@ -81,13 +52,7 @@ class DosenController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateDosenRequest  $request
-     * @param  \App\Models\Dosen  $dosen
-     * @return \Illuminate\Http\Response
-     */
+    //mengubah data dosen di database
     public function update(Request $request, Dosen $dosen)
     {
         $rules = [
@@ -114,18 +79,14 @@ class DosenController extends Controller
         return redirect('/dosen')->with('success', 'Data Berhasil DiUbah!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Dosen  $dosen
-     * @return \Illuminate\Http\Response
-     */
+    //menghapus data dosen di database
     public function destroy(Dosen $dosen)
     {
         Dosen::destroy($dosen->id);
         return redirect('/dosen')->with('success', 'Data Berhasil DiHapus!');
     }
 
+    //cekslug
     public function checkSlug(Request $request)
     {
         $slug = SlugService::createSlug(Dosen::class, 'slug', $request->nama_dos);

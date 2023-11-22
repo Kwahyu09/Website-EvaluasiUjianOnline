@@ -9,16 +9,11 @@ use App\Models\Kelas;
 use App\Models\Modul;
 use App\Models\Ujian;
 use App\Models\Grup_soal;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class DashboardHomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //menampilkan halaman home
     public function index()
     {
         $staf = User::where('role', 'Staf')->count();
@@ -47,26 +42,4 @@ class DashboardHomeController extends Controller
             "ujian" => $ujian
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
 }

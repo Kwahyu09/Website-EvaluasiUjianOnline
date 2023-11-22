@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Grup_soal;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class GrupsoalSeeder extends Seeder
 {

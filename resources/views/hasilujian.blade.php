@@ -1,18 +1,18 @@
-@extends('layoutdashboard.main') 
+@extends('layoutdashboard.main')
 @section('container')
 <div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-auto col-md-8">
                 <h4 class="mb-2">Data Hasil {{ $ujian->nama_ujian }}</h4>
-                    <h5>Kelas : {{ $ujian->kelas }}</h5>
+                <h5>Kelas : {{ $ujian->kelas }}</h5>
             </div>
             <div class="col-auto col-md-8">
                 <div class="input-group mb-3">
                     <form method="post" action="{{ route('cetak') }}">
                         @csrf
                         <input type="hidden" name="ujian_id" id="ujian_id" value="{{ $ujian->id }}">
-                    <button class="btn btn-info"><i class="bi bi-printer"></i>Cetak</button>
+                        <button class="btn btn-info"><i class="bi bi-printer"></i>Cetak</button>
                     </form>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                        @foreach ($hasil as $has)
+                            @foreach ($hasil as $has)
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $has->npm_mahasiswa }}</td>
                             <td>{{ $has->nama_mahasiswa }}</td>

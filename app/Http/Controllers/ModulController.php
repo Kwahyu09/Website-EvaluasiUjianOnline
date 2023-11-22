@@ -9,24 +9,16 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ModulController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan halaman modul
     public function index()
     {
         return view('fakultas.modul.index', [
             "title" => "Modul",
-            "post" => Modul::latest()->filter(request(['search']))->paginate(10)
+            "post" => Modul::with('user')->latest()->filter(request(['search']))->paginate(10)
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan halaman tambah modul
     public function create()
     {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -41,12 +33,7 @@ class ModulController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // menambahkan data modul ke database
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -63,12 +50,7 @@ class ModulController extends Controller
         return redirect('/modul')->with('success', 'Data Modul Berhasil Ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\modul  $modul
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan data grupsoal ketika modul diklik
     public function show(modul $modul)
     {
         return view('grupsoal.grupsoal2', [
@@ -78,12 +60,7 @@ class ModulController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\modul  $modul
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan menu edit modul
     public function edit(modul $modul)
     {
         return view('fakultas.modul.edit', [
@@ -93,13 +70,7 @@ class ModulController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\modul  $modul
-     * @return \Illuminate\Http\Response
-     */
+    // mengubah data modul didatabase
     public function update(Request $request, modul $modul)
     {
         $rules = [
@@ -124,18 +95,14 @@ class ModulController extends Controller
         return redirect('/modul')->with('success', 'Data Berhasil DiUbah!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\modul  $modul
-     * @return \Illuminate\Http\Response
-     */
+    // mengahapus data modul
     public function destroy(modul $modul)
     {
         Modul::destroy($modul->id);
         return redirect('/modul')->with('success', 'Data Berhasil DiHapus!');
     }
 
+    // method untuk membuat checkslug
     public function checkSlug(Request $request)
     {
         $slug = SlugService::createSlug(Modul::class, 'slug', $request->nama_modul);

@@ -13,11 +13,7 @@
             <div class="col-md-4">
                 <form action="/modul">
                     <div class="input-group mb-3">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Cari.."
-                            name="search"
+                        <input type="text" class="form-control" placeholder="Cari.." name="search"
                             value="{{ request('search') }}">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">
@@ -47,21 +43,21 @@
                     <tbody>
                         @foreach ($post as $pos)
                         <tr>
-                            <td>{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}</td>
+                            <td>{{ ($post->currentPage() - 1)  * $post->links()->paginator->perPage() + $loop->iteration }}
+                            </td>
                             <td>{{ $pos->kd_modul }}</td>
                             <td>{{ $pos->nama_modul }}</td>
                             <td>{{ $pos->user->nama }}</td>
                             <td>{{ $pos->semester }}</td>
                             <td>{{ $pos->sks }}</td>
                             <td>
-                                <a
-                                    href="/modul/{{ $pos->slug }}/edit"
-                                    class="btn btn-primary btn-action mr-1"
-                                    data-toggle="tooltip"
-                                    title="Ubah">
+                                <a href="/modul/{{ $pos->slug }}/edit" class="btn btn-primary btn-action mr-1"
+                                    data-toggle="tooltip" title="Ubah">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <a href="/modul/{{ $pos->slug }}/delete" class="btn btn-danger btn-action mr-1 tombol-hapus" data-toggle="tooltip" title="Hapus">
+                                <a href="/modul/{{ $pos->slug }}/delete"
+                                    class="btn btn-danger btn-action mr-1 tombol-hapus" data-toggle="tooltip"
+                                    title="Hapus">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>

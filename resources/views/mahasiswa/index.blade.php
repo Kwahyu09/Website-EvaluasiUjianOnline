@@ -1,4 +1,4 @@
-@extends('layoutdashboard.main') 
+@extends('layoutdashboard.main')
 @section('container')
 <div class="card">
     <div class="card-body">
@@ -16,11 +16,7 @@
             <div class="col-md-4">
                 <form action="{{ url()->full() }}">
                     <div class="input-group mb-3">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Cari.."
-                            name="search"
+                        <input type="text" class="form-control" placeholder="Cari.." name="search"
                             value="{{ request('search') }}">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">
@@ -55,15 +51,13 @@
                             <td>{{ $pos->username }}</td>
                             <td>{{ $pos->email }}</td>
                             <td>
-                                <a
-                                    href="/mahasiswa/{{ $pos->username }}/edit"
-                                    class="btn btn-primary btn-action mr-1"
-                                    data-toggle="tooltip"
-                                    title="Ubah">
+                                <a href="/mahasiswa/{{ $pos->username }}/edit" class="btn btn-primary btn-action mr-1"
+                                    data-toggle="tooltip" title="Ubah">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <a href="/mahasiswa/{{ $pos->username }}/delete" class="btn btn-danger btn-action mr-1 tombol-hapus" data-toggle="tooltip"
-                                title="Hapus">
+                                <a href="/mahasiswa/{{ $pos->username }}/delete"
+                                    class="btn btn-danger btn-action mr-1 tombol-hapus" data-toggle="tooltip"
+                                    title="Hapus">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>

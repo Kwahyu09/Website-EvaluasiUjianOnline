@@ -13,21 +13,21 @@
                         <form action="{{ route('evaluasi_soal') }}" method="post">
                             @csrf
                             <div class="input-group mb-3">
-                                <select class="custom-select" id="id_ujian" name="id_ujian" >
+                                <select class="custom-select" id="id_ujian" name="id_ujian">
                                     <option selected="selected">Pilih...</option>
                                     @foreach ($post as $pos)
                                     <option value="{{ $pos->id }}">{{ $pos->nama_ujian }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-auto mr-5">
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <button type="submit" class="btn btn-info mr-5">
-                                <span class="bi bi-arrow-up-right-circle fe-12 mr-2"></span>Lihat</button>
+                    </div>
+                    <div class="col-auto mr-5">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-info mr-5">
+                            <span class="bi bi-arrow-up-right-circle fe-12 mr-2"></span>Lihat</button>
                         </form>
                     </div>
                 </div>

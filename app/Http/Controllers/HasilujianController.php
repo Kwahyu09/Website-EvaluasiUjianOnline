@@ -5,20 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Ujian;
 use App\Models\Evaluasi;
 use App\Models\HasilUjian;
-use App\Models\Soal;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class HasilujianController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //menampilkan halaman hasil ujian memilih ujian index
     public function index()
     {
-        $ujian = Ujian::latest()->paginate(1000);
+        $ujian = Ujian::all();
 
         if(auth()->user()->role == "Ketua"){
             $ujian = Ujian::where('user_id', auth()->user()->id)->latest();
@@ -28,6 +22,8 @@ class HasilujianController extends Controller
             "ujian" => $ujian
         ]);
     }
+
+    // menampilkan hasil ujian detai dimana terlihat nama dan nilai mahasiswa
     public function hasil(Request $request)
     {
         $id_ujian = $request->ujian_id;
@@ -54,12 +50,16 @@ class HasilujianController extends Controller
             "ujian" => $ujian
         ]);
     }
+
+    // menampilkan hasil ujian untuk mahasiswa
     public function hasil_ujianmhs(){
         return view('hasil_ujian',  [
             "title" => "Ujian Mahasiswa",
             "total" => session('hasilmahasiswa')
         ]);
     }
+
+    // method untuk menghitung hasil ujian
     public function selesai_ujian(Request $request)
     {
         $validatedData = $request->validate([
@@ -74,10 +74,10 @@ class HasilujianController extends Controller
                         ->where('npm_mahasiswa', $request->npm_mahasiswa)
                        ->sum('skor');
         $nilai = ($nilaimhs / $totalbobot) * 100;
-        // Use number_format to format the number with up to 2 decimal places
+        // menggunakan format dibelakang koma diambil 2 angka setelah koma
         $nilaiFormatted = number_format($nilai, 2);
 
-        // Remove trailing zeros and the decimal point if there are no decimal places
+        // hapus nilai koma jika bilangan bulat
         $validatedData['nilai'] = rtrim(rtrim($nilaiFormatted, '0'), '.'); 
 
         HasilUjian::create($validatedData);
@@ -85,70 +85,5 @@ class HasilujianController extends Controller
         session()->put('ujian_selesai', true);
 
         return redirect()->route('hasil-ujianmhs')->with('hasilmahasiswa', $validatedData['nilai'])->header('Cache-Control', 'no-cache, no-store, must-revalidate');
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreUjianRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Ujian  $ujian
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Ujian $ujian)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Ujian  $ujian
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Ujian $ujian)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateUjianRequest  $request
-     * @param  \App\Models\Ujian  $ujian
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Ujian $ujian)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Ujian  $ujian
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Ujian $ujian)
-    {
-        //
     }
 }

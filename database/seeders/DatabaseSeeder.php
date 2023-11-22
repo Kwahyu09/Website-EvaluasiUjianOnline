@@ -11,7 +11,6 @@ use Database\Seeders\UjianSeeder;
 use Database\Seeders\EvaluasiSeeder;
 use Database\Seeders\GrupsoalSeeder;
 use Database\Seeders\HasilUjianSeeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {

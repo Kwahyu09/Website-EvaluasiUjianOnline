@@ -1,4 +1,4 @@
-@extends('layoutdashboard.main') 
+@extends('layoutdashboard.main')
 @section('container')
 <div class="card">
     <div class="card-body">
@@ -14,39 +14,41 @@
                         <div class="table-responsive">
                             <table class="table table-striped" id="sortable-table">
                                 <thead>
-                                <tr style="background-color: lightslategray;">
-                                    <th style="width: 50px">No</th>
-                                    <th>Pertanyaan</th>
-                                    <th>Jawaban</th>
-                                    <th>Bobot</th>
-                                    <th>Aksi</th>
-                                </tr>
+                                    <tr style="background-color: lightslategray;">
+                                        <th style="width: 50px">No</th>
+                                        <th>Pertanyaan</th>
+                                        <th>Jawaban</th>
+                                        <th>Bobot</th>
+                                        <th>Aksi</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($soal as $s)
                                     <tr>
-                                        <td style="width: 50px">{{ ($soal->currentPage() - 1)  * $soal->links()->paginator->perPage() + $loop->iteration }}</td>
+                                        <td style="width: 50px">
+                                            {{ ($soal->currentPage() - 1)  * $soal->links()->paginator->perPage() + $loop->iteration }}
+                                        </td>
                                         <td>{!! $s->pertanyaan !!}</td>
                                         @if (preg_match('/^gambar-soal\//', $s->jawaban))
                                         <td>
-                                        <img class="mb-2 mt-2" style="border: 1px solid black;"
-                                            src="{{ asset('storage/' . $s->jawaban) }}" alt="Gambar" width="300px">
+                                            <img class="mb-2 mt-2" style="border: 1px solid black;"
+                                                src="{{ asset('storage/' . $s->jawaban) }}" alt="Gambar" width="300px">
                                         </td>
                                         @else
                                         <td>
-                                        <label class="form-check-label">{!! $s->jawaban !!}</label>
+                                            <label class="form-check-label">{!! $s->jawaban !!}</label>
                                         </td>
                                         @endif
                                         <td>{{ $s->bobot }}</td>
                                         <td style="width: 150px">
                                             <form method="POST" action="/evaluasi/show">
                                                 @csrf
-                                                <input type="hidden" name="ujian_id" id="ujian_id" value="{{ $ujian->id }}">
+                                                <input type="hidden" name="ujian_id" id="ujian_id"
+                                                    value="{{ $ujian->id }}">
                                                 <input type="hidden" name="soal_id" id="soal_id" value="{{ $s->id }}">
-                                                <button class="btn btn-info btn-action mr-1"
-                                                data-toggle="tooltip"
-                                                title="Lihat Evaluasi" type="submit">
-                                                <i class="bi bi-info-square"></i></button>
+                                                <button class="btn btn-info btn-action mr-1" data-toggle="tooltip"
+                                                    title="Lihat Evaluasi" type="submit">
+                                                    <i class="bi bi-info-square"></i></button>
                                             </form>
                                         </td>
                                     </tr>

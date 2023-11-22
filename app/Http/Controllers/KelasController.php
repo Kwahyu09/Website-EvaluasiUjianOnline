@@ -9,11 +9,7 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class KelasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan menu kelas
     public function index()
     {
         return view('fakultas.kelas.index', [
@@ -22,11 +18,7 @@ class KelasController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan menu tambah kelas
     public function create()
     {
         return view('fakultas.kelas.create',[
@@ -34,12 +26,7 @@ class KelasController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // menambahkan data kelas ke database
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -53,12 +40,7 @@ class KelasController extends Controller
         return redirect('/kelas')->with('success', 'Data Kelas Berhasil Ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
+    // menampiilkan menu mahasiswa
     public function show(Request $request, Kelas $kelas)
     {
         $search = $request->get('search');
@@ -76,12 +58,7 @@ class KelasController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
+    // menampilkan menu edit kelas
     public function edit(Kelas $kelas)
     {
         return view('fakultas.kelas.edit', [
@@ -90,13 +67,7 @@ class KelasController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
+    // mengubah data kelas di database
     public function update(Request $request, Kelas $kelas)
     {
         $rules = [
@@ -115,12 +86,7 @@ class KelasController extends Controller
         return redirect('/kelas')->with('success', 'Data Berhasil DiUbah!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
+    // menghapus data kelas di database
     public function destroy(Kelas $kelas)
     {
         Kelas::destroy($kelas->id);
@@ -133,6 +99,7 @@ class KelasController extends Controller
         return response()->json(['slug' => $slug ]);
     }
 
+    // menampilkan menu mahasiswa berdasarkan kelas
     public function kelas_mahasiswa()
     {
         return view('mahasiswa.kelas',[
