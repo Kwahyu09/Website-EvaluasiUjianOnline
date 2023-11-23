@@ -85,26 +85,8 @@
                         </div>
                         @enderror
                     </div>
-                    <div class="from-group">
-                        <div class="form-check-inline mt-2">
-                            <label for="acak_soal">Acak Soal : </label>
-                        </div>
-                        <div class="form-check form-check-inline mb-2">
-                            <input class="form-check-input" type="radio" name="acak_soal" id="acak_soal" value="Y"
-                                <?php if($post->acak_soal =='Y') echo 'checked'?>>
-                            <label class="form-check-label" for="acak_soal">Ya</label>
-                        </div>
-                        <div class="form-check form-check-inline mb-2">
-                            <input class="form-check-input" type="radio" name="acak_soal" id="acak_soal" value="T"
-                                <?php if($post->acak_soal =='T') echo 'checked'?>>
-                            <label class="form-check-label" for="acak_soal">Tidak</label>
-                        </div>
-                        @error('acak_soal')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
+                    <input type="hidden" name="acak_soal" class="form-control @error('acak_soal') is-invalid @enderror"
+                        id="acak_soal" value="{{ $post->acak_soal }}">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
