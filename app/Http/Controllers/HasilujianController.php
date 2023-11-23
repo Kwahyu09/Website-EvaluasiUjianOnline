@@ -12,7 +12,7 @@ class HasilujianController extends Controller
     //menampilkan halaman hasil ujian memilih ujian index
     public function index()
     {
-        $ujian = Ujian::all();
+        $ujian = Ujian::latest()->get();
 
         if(auth()->user()->role == "Ketua"){
             $ujian = Ujian::where('user_id', auth()->user()->id)->latest();

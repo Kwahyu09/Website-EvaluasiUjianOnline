@@ -27,7 +27,7 @@
                         <tr>
                             <th>No</th>
                             <th>Npm</th>
-                            <th>Nama Siswa</th>
+                            <th>Nama Mahasiswa</th>
                             <th>Skor Akhir</th>
                         </tr>
                     </thead>

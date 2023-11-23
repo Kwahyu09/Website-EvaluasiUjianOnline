@@ -14,7 +14,7 @@ class EvaluasiController extends Controller
     //menampilkan menu evaluasi index
     public function index()
     {
-        $ujian = Ujian::latest()->filter(request(['search','ujian']));
+        $ujian = Ujian::latest()->get();
 
         if(auth()->user()->role == "Ketua"){
             $ujian = Ujian::where('user_id', auth()->user()->id)->latest()->filter(request(['search','ujian']))->paginate(10);
