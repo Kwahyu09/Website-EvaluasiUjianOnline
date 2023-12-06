@@ -1,6 +1,6 @@
 @extends('layoutdashboard.main')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @section('container')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="card">
     <div class="card-body">
         <div class="row">
@@ -165,5 +165,6 @@
             }
         });
     });
+
 </script>
 @endsection

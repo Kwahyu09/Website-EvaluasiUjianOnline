@@ -105,7 +105,7 @@ class SoalController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'pertanyaan' => 'required|min:2|max:255',
+            'pertanyaan' => 'required|min:2',
             'grup_soal_id' => 'required',
             'slug' => 'required|min:3|max:8|unique:App\Models\Soal',
             'gambar' => 'image|file|max:5120',
@@ -202,8 +202,9 @@ class SoalController extends Controller
     public function update(Request $request, soal $soal)
     {
         $rules = [
-            'pertanyaan' => 'required|min:2|max:255',
+            'pertanyaan' => 'required|min:2',
             'grup_soal_id' => 'required',
+            'slug' => 'required',
             'opsi_a' => 'required',
             'opsi_b' => 'required',
             'opsi_c' => 'required',
@@ -211,10 +212,48 @@ class SoalController extends Controller
             'opsi_e' => 'required',
             'bobot' => 'required'
         ];
-        
-        if($request->slug != $soal->slug){
-            $validatedData['slug'] = 'required|min:5|max:50|unique:App\Models\Soal';
+
+        $validatedData = $request->validate($rules);
+
+        if($request->file('gambar')){
+            if($request->oldGambar){
+                Storage::delete($request->oldGambar);
+            }
+            $validatedData['gambar'] = $request->file('gambar')->store('gambar-soal');
         }
+
+        if($request['jawaban'] == "opsi_a"){
+            $validatedData['jawaban'] = $request['opsi_a'];
+        }elseif($request['jawaban'] == "opsi_b"){
+            $validatedData['jawaban'] = $request['opsi_b'];
+        }elseif($request['jawaban'] == "opsi_c"){
+            $validatedData['jawaban'] = $request['opsi_c'];
+        }elseif($request['jawaban'] == "opsi_d"){
+            $validatedData['jawaban'] = $request['opsi_d'];
+        }else{
+            $validatedData['jawaban'] = $request['opsi_e'];
+        }
+        
+        Soal::where('id', $soal->id)
+            ->update($validatedData);
+        return redirect('/soal'.'/'.$soal->grup_soal->slug)->with('success', 'Data Berhasil DiUbah!');
+    }
+
+    public function updategambar(Request $request, soal $soal)
+    {
+        $rules = [
+            'pertanyaan' => 'required|min:2|max:255',
+            'grup_soal_id' => 'required',
+            'slug' => 'required',
+            'gambar' => 'image|file|max:5120',
+            'opsi_a' => 'image|file|max:5120',
+            'opsi_b' => 'image|file|max:5120',
+            'opsi_c' => 'image|file|max:5120',
+            'opsi_d' => 'image|file|max:5120',
+            'opsi_e' => 'image|file|max:5120',
+            'bobot' => 'required'
+        ];
+        
         $validatedData = $request->validate($rules);
 
         if($request->file('gambar')){

@@ -72,9 +72,9 @@
                         <select class="custom-select" id="kelas" name="kelas">
                             @foreach ($kelas as $k)
                             @if(old('kelas') == $k->slug )
-                            <option value="{{ $k->slug }}" selected>{{ $k->slug }}</option>
+                            <option value="{{ $k->slug }}" selected>{{ $k->nama_kelas }} {{ $k->tahun_ajaran }}</option>
                             @else
-                            <option value="{{ $k->slug }}">{{ $k->slug }}</option>
+                            <option value="{{ $k->slug }}">{{ $k->nama_kelas }} {{ $k->tahun_ajaran }}</option>
                             @endif
                             @endforeach
                         </select>

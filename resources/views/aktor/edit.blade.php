@@ -36,7 +36,7 @@
                         </div>
                         @enderror
                     </div>
-                    @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Ketua')
+                    @if(Auth::user()->role == 'Admin')
                     <div class="form-group">
                         <label for="inputAddress2">NIP</label>
                         <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror" id="nip"
@@ -47,12 +47,23 @@
                         </div>
                         @enderror
                     </div>
-                    @elseif(Auth::user()->role == 'Mahasiswa')
+                    @elseif(Auth::user()->role == 'Ketua')
                     <div class="form-group">
-                        <label for="inputAddress2">NPM</label>
+                        <label for="inputAddress2">NIP</label>
                         <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror" id="nip"
                             required value="{{ old('nip', $post->nip) }}" readonly>
                         @error('nip')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    @elseif(Auth::user()->role == 'Mahasiswa')
+                    <div class="form-group">
+                        <label for="inputAddress2">NPM</label>
+                        <input type="text" name="npm" class="form-control @error('npm') is-invalid @enderror" id="npm"
+                            required value="{{ old('npm', $post->npm) }}" readonly>
+                        @error('npm')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -85,6 +96,7 @@
                             <label for="inputPassword4">Password</label>
                             <input type="password" name="password"
                                 class="form-control  @error('password') is-invalid @enderror" id="password" required>
+                            <input class="mt-1" type="checkbox" onclick="myFunction()">Tampilkan Password
                             @error('password')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -101,5 +113,14 @@
         </div>
     </div>
 </div>
-</div>
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 @endsection

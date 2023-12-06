@@ -88,6 +88,7 @@ Route::get('/grupsoal/create/{modul:slug}/checkSlug', [GrupsoalController::class
 
 Route::get('/soal/{soal:slug}/edit', [SoalController::class,'edit'])->middleware(['auth','role:Admin|Ketua'])->name('soal_edit');
 Route::put('/soal/{soal:slug}/update', [SoalController::class,'update'])->middleware(['auth','role:Admin|Ketua'])->name('soal_update');
+Route::put('/soal/{soal:slug}/updategambar', [SoalController::class,'updategambar'])->middleware(['auth','role:Admin|Ketua'])->name('soal_updategambar');
 Route::post('/soal/store', [SoalController::class, 'store'])->middleware(['auth','role:Admin|Ketua'])->name('soal_store');
 Route::post('/soal/storegambar', [SoalController::class, 'storegambar'])->middleware(['auth','role:Admin|Ketua'])->name('soal_store');
 Route::get('/soal/{soal:slug}/delete', [SoalController::class, 'destroy'])->middleware(['auth','role:Admin|Ketua'])->name('destroySoal');

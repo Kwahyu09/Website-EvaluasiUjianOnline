@@ -6,7 +6,7 @@
         <form method="post" action="/soal/import_excel" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="slug_grup" id="slug_grup" value="{{ $grupsoal_slug }}">
-            <label>Pilih file excel : harus berformat (csv)</label>
+            <label>Pilih file excel</label>
             <div class="form-group">
                 <div class="mb-3">
                     <input class="form-control @error('gambar') is-invalid @enderror" type="file" name="file" required>

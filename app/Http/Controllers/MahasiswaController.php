@@ -89,7 +89,7 @@ class MahasiswaController extends Controller
         foreach ($soal as $item) {
             $totalBobot += $item->bobot;
 
-            if ($totalBobot <= 100) {
+            if ($totalBobot <= 200) {
                 $soalTampil[] = $item;
             } else {
                 break;
@@ -218,7 +218,7 @@ class MahasiswaController extends Controller
             $rules['username'] = 'required|min:6|max:8|unique:App\Models\User';
         }
         if($request->email != $user->email){
-            $rules['email'] = 'required|email:dns|max:60|min:6|unique:App\Models\User';
+            $rules['email'] = 'required|email|max:60|min:6|unique:App\Models\User';
         }
 
         $slug = $user->kelas->slug;

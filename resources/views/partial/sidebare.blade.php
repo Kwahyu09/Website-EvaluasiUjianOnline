@@ -75,11 +75,29 @@
         </li>
         @endif
         @if (Auth::user()->role == 'Mahasiswa')
+        <li class="{{ Request::is('profile*') ? 'active' : '' }}">
+            @if(Request::is('masuk-ujian*') || Request::is('selesaiujian*'))
+            <a href="" data-toggle="nav-link"></a>
+            @else
+            <a href="/profile/{{ Auth::user()->username }}/edit" data-toggle="nav-link">
+                <i class="far fa-user"></i> <span>Profile</span></a>
+            @endif
+        </li>
         <li class="{{ Request::is('ujian-mahasiswa*') || Request::is('ujian-data*') ? 'active' : '' }}">
             @if(Request::is('masuk-ujian*') || Request::is('selesaiujian*'))
             <a href="" data-toggle="nav-link"></a>
             @else
             <a href="/ujian-mahasiswa" data-toggle="nav-link"><i class="far fa-file"></i><span>Ujian</span></a>
+            @endif
+        </li>
+        <li>
+            @if(Request::is('masuk-ujian*') || Request::is('selesaiujian*'))
+            @else
+            <form action="/logout" method="post">
+                @csrf
+                <button type="submit" class="dropdown-item text-danger ml-4 mt-5"><i
+                    class="bi bi-box-arrow-down-left mr-3">   </i> Logout</button>
+            </form>
             @endif
         </li>
         @endif

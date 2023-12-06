@@ -45,7 +45,7 @@ class GrupsoalController extends Controller
                   ->orWhere('opsi_e', 'like', '%' . $search . '%')
                   ->orWhere('jawaban', 'like', '%' . $search . '%')
                   ->orWhere('bobot', 'like', '%' . $search . '%');
-            })->get()
+            })->orderBy('id', 'desc')->get()
         ]);
     }
 

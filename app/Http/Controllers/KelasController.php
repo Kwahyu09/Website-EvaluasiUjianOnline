@@ -54,7 +54,7 @@ class KelasController extends Controller
             ->orWhere('nama', 'like', '%' . $search . '%')
             ->orWhere('npm', 'like', '%' . $search . '%')
             ->orWhere('email', 'like', '%' . $search . '%');
-            })->get()
+            })->orderBy('npm', 'asc')->get()
         ]);
     }
 

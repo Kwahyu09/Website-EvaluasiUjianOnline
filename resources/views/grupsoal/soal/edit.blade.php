@@ -6,7 +6,11 @@
             <div class="card-header">
                 <h4>Ubah Data {{ $title }}</h4>
             </div>
-            <form action="/soal/{{ $post->slug }}/update" method="post" enctype="multipart/form-data">
+            @if (preg_match('/^gambar-soal\//', $post->opsi_a))
+                <form action="/soal/{{ $post->slug }}/updategambar" method="post" enctype="multipart/form-data">
+            @else
+                <form action="/soal/{{ $post->slug }}/update" method="post" enctype="multipart/form-data">
+            @endif
                 @method('put')
                 @csrf
                 <div class="card-body">

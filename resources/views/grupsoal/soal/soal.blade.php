@@ -93,7 +93,7 @@
                                         @if (preg_match('/^gambar-soal\//', $pos->opsi_d))
                                         <img src="{{ asset('storage/' . $pos->opsi_d) }}" alt="Gambar" width="100px">
                                         @else
-                                        {!! $pos->opsi_e !!}
+                                        {!! $pos->opsi_d !!}
                                         @endif
                                     </td>
                                     <td>

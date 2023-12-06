@@ -17,7 +17,7 @@ class EvaluasiController extends Controller
         $ujian = Ujian::latest()->get();
 
         if(auth()->user()->role == "Ketua"){
-            $ujian = Ujian::where('user_id', auth()->user()->id)->latest()->filter(request(['search','ujian']))->paginate(10);
+            $ujian = Ujian::where('user_id', auth()->user()->id)->latest()->filter(request(['search','ujian']))->paginate(1000);
         }
         return view('evaluasiujian', [
             "title" => "Evaluasi Ujian",

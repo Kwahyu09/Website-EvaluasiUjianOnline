@@ -85,6 +85,7 @@
                             <label for="inputPassword4">Password</label>
                             <input type="password" name="password"
                                 class="form-control  @error('password') is-invalid @enderror" id="password" required>
+                            <input class="mt-1" type="checkbox" onclick="myFunction()">Tampilkan Password
                             @error('password')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -101,4 +102,14 @@
         </div>
     </div>
 </div>
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 @endsection

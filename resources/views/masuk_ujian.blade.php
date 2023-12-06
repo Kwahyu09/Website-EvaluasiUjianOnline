@@ -183,7 +183,7 @@
                 <div class="d-flex justify-content-center mb-3">
                     <h5 class="mt-3">Sisa Waktu Pengerjaan :</h5>
                 </div>
-                <div class="d-flex justify-content-center mb-3">
+                <div class="d-flex justify-content-center mb-0">
                     <label id="clock" style="font-size: 35px; color: #000000; -webkit-text-stroke: 3px #050505;
                                                             text-shadow: 4px 4px 10px #fbfbfb,
                                                             4px 4px 20px #36D6FE,
@@ -197,23 +197,26 @@
                         <input type="hidden" name="totalbobot" id="totalbobot" value="{{ $totalbobot }}">
                         <input type="hidden" name="nama_mahasiswa" id="nama_mahasiswa" value="{{ Auth::user()->nama }}">
                         <input type="hidden" name="npm_mahasiswa" id="npm_mahasiswa" value="{{ Auth::user()->npm }}">
-                        <div class="card-footer mr-3 mb-3 mt-0 d-flex justify-content-center">
+                        <div class="card-footer mr-3 mb-0 mt-0 d-flex justify-content-center">
                             <button id="tombol-selesai" class="btn btn-danger mt-3" type="submit">Selesai Ujian</button>
                         </div>
-                        @php
-                        $jumlahSoal = count($soal);
-                        $kotakPerBaris = 10;
-                        $jumlahBaris = ceil($jumlahSoal / $kotakPerBaris);
-                        @endphp
                         <div class="kotak-container">
-                            @for ($baris = 0; $baris < $jumlahBaris; $baris++) @for ($i=($baris * $kotakPerBaris) + 1;
-                                $i <=min(($baris + 1) * $kotakPerBaris, $jumlahSoal); $i++) @php
-                                $evaluasi_exists=$evaluasi->contains('soal_id', $soal[$i-1]->id);
-                                @endphp
-                                <a style="text-decoration:none" href="#soal-{{ $i }}"
-                                    class="kotak-soal @if ($evaluasi->count() > 0 && $evaluasi_exists) biru @endif">{{ $i }}</a>
+                            @php
+                                $jumlahSoal = count($soal);
+                                $kotakPerBaris = 10; // Jumlah kotak soal per baris (bisa disesuaikan)
+                                $jumlahBaris = ceil($jumlahSoal / $kotakPerBaris); // Hitung jumlah baris yang diperlukan
+                            @endphp
+                            @for ($baris = 0; $baris < $jumlahBaris; $baris++)
+                                @for ($i = ($baris * $kotakPerBaris) + 1; $i <= min(($baris + 1) * $kotakPerBaris, $jumlahSoal); $i++)
+                                    @php
+                                        $evaluasi_exists = $evaluasi->contains('soal_id', $soal[$i-1]->id);
+                                    @endphp
+                                    <a style="text-decoration:none" href="#soal-{{ $i }}"
+                                        class="kotak-soal @if ($evaluasi->count() > 0 && $evaluasi_exists) biru @endif">
+                                        {{ $i }}
+                                    </a>
                                 @endfor
-                                @endfor
+                            @endfor
                         </div>
                     </form>
                 </div>

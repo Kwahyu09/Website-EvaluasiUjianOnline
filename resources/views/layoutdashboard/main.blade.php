@@ -48,12 +48,15 @@
             right: 20px;
             transform: translateY(-50%);
             z-index: 999;
+            bottom: -20%;
         }
 
         .kotak-container {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
+            overflow-y: auto; /* Tambahkan properti overflow-y untuk mengizinkan scrolling vertikal */
+            max-height: 400px; /* Atur ketinggian maksimum untuk memunculkan scroll ketika konten melebihi ukuran ini */
         }
 
         .kotak-soal {
@@ -113,11 +116,10 @@
     <title>evaluasi-ujian | {{ $title }}</title>
 </head>
 @if (Auth::user()->role == 'Mahasiswa')
-
-<body onload="realtimeClock()">
-    @endif
-
+    <body onload="realtimeClock()">
+@else
     <body>
+@endif
         <div id="app">
             <div class="main-wrapper main-wrapper-1">
                 @include('partial.navbar')
