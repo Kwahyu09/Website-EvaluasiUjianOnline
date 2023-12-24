@@ -34,7 +34,7 @@
                             <th scope="col">No</th>
                             <th scope="col">Kode Modul</th>
                             <th scope="col">Nama Modul</th>
-                            <th scope="col">Dosen Pengampu</th>
+                            <th scope="col">Ketua Modul</th>
                             <th scope="col">Semester</th>
                             <th scope="col">Sks</th>
                             <th scope="col">Action</th>

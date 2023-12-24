@@ -24,7 +24,7 @@ use App\Http\Controllers\DashboardHomeController;
 |
 */
 Route::get('/profile/{user:username}/edit', [AktorController::class, 'edit'])->middleware(['auth'])->name('profile');
-Route::put('/Admin/{user:username}', [AktorController::class,'update_admin'])->middleware(['auth', 'role:Admin'])->name('updateAdmin');
+Route::put('/Admin/{user:username}', [AktorController::class,'profile'])->middleware(['auth', 'role:Admin'])->name('updateAdmin');
 
 Route::get('/', [DashboardHomeController::class, 'index'])->middleware(['auth'])->name('home');
 
@@ -32,7 +32,7 @@ Route::get('/staff', [AktorController::class, 'index_staff'])->middleware(['auth
 Route::get('/staff/create', [AktorController::class, 'create_staff'])->middleware(['auth', 'role:Admin'])->name('CreateStaff');
 Route::post('/staff/store', [AktorController::class, 'store_staff'])->middleware(['auth', 'role:Admin'])->name('StoreStaff');
 Route::get('/staff/{user:username}/delete', [AktorController::class, 'destroy_staff'])->middleware(['auth', 'role:Admin'])->name('destroyStaff');
-Route::put('/Staf/{user:username}', [AktorController::class,'update_admin'])->middleware(['auth'])->name('ProfileStaf');
+Route::put('/Staf/{user:username}', [AktorController::class,'profile'])->middleware(['auth'])->name('ProfileStaf');
 Route::get('/staff/{user:username}/edit', [AktorController::class, 'edit_staf'])->middleware(['auth', 'role:Admin'])->name('editStaff');
 Route::put('/Staf/{user:username}/update', [AktorController::class,'update_staf'])->middleware(['auth', 'role:Admin'])->name('updateStaf');
 
@@ -40,7 +40,7 @@ Route::get('/ketua', [AktorController::class, 'index_ketua'])->middleware(['auth
 Route::get('/ketua/create', [AktorController::class, 'create_ketua'])->middleware(['auth', 'role:Admin|Staf'])->name('CreateKetua');
 Route::post('/ketua/store', [AktorController::class, 'store_ketua'])->middleware(['auth', 'role:Admin|Staf'])->name('StoreKetua');
 Route::get('/ketua/{user:username}/delete', [AktorController::class, 'destroy_ketua'])->middleware(['auth', 'role:Admin|Staf'])->name('destroyKetua');
-Route::put('/Ketua/{user:username}', [AktorController::class,'update_admin'])->middleware(['auth'])->name('ProfileKetua');
+Route::put('/Ketua/{user:username}', [AktorController::class,'profile'])->middleware(['auth'])->name('ProfileKetua');
 Route::put('/Ketua/{user:username}/update', [AktorController::class,'update_ketua'])->middleware(['auth'])->name('updateKetua');
 Route::get('/ketua/{user:username}/edit', [AktorController::class, 'edit_ketua'])->middleware(['auth', 'role:Admin|Staf'])->name('editKetua');
 Route::get('/ujian-mahasiswa', [MahasiswaController::class,'ujian_index'])->middleware(['auth', 'role:Mahasiswa'])->name('mahasiswa-index');
@@ -67,7 +67,7 @@ Route::post('/mahasiswa/store', [MahasiswaController::class,'store'])->middlewar
 Route::get('/mahasiswa/create/{kelas:slug}', [MahasiswaController::class, 'create'])->middleware(['auth', 'role:Admin|Staf'])->name('CreateKetua');
 Route::get('/mahasiswa/import/{kelas:slug}', [MahasiswaController::class, 'createImport'])->middleware(['auth', 'role:Admin|Staf'])->name('CreateKetua');
 Route::post('/mahasiswa/import_excel', [MahasiswaController::class, 'ImportExel'])->middleware(['auth', 'role:Admin|Staf'])->name('CreateKetua');
-Route::put('/Mahasiswa/{user:username}', [AktorController::class,'update_admin'])->middleware(['auth'])->name('ProfileMahasiswa');
+Route::put('/Mahasiswa/{user:username}', [AktorController::class,'profile'])->middleware(['auth'])->name('ProfileMahasiswa');
 Route::get('/mahasiswa/{user:username}/edit', [MahasiswaController::class, 'edit'])->middleware(['auth', 'role:Admin|Staf'])->name('editMahasiswa');
 Route::put('/Mahasiswa/{user:username}/update', [MahasiswaController::class,'update'])->middleware(['auth'])->name('UpdateMahasiswa');
 

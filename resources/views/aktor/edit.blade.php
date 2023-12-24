@@ -93,11 +93,35 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="inputPassword4">Password</label>
+                            <label for="password_lama">Password Lama</label>
+                            <input type="password" name="password_lama"
+                                class="form-control  @error('password_lama') is-invalid @enderror" id="password_lama" required>
+                            <input class="mt-1" type="checkbox" onclick="myFunction()">Tampilkan Password
+                            @error('password_lama')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Password Baru</label>
                             <input type="password" name="password"
                                 class="form-control  @error('password') is-invalid @enderror" id="password" required>
-                            <input class="mt-1" type="checkbox" onclick="myFunction()">Tampilkan Password
+                            <input class="mt-1" type="checkbox" onclick="myFunction1()">Tampilkan Password
                             @error('password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Konfirmasi Password Baru</label>
+                            <input type="password" name="password_confirmation"
+                                class="form-control  @error('password_confirmation') is-invalid @enderror" id="password_confirmation" required>
+                            <input class="mt-1" type="checkbox" onclick="myFunction2()">Tampilkan Password
+                            @error('password_confirmation')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -115,7 +139,23 @@
 </div>
 <script>
     function myFunction() {
+        var x = document.getElementById("password_lama");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+    function myFunction1() {
         var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+    function myFunction2() {
+        var x = document.getElementById("password_confirmation");
         if (x.type === "password") {
             x.type = "text";
         } else {

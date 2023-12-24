@@ -133,12 +133,12 @@ class AktorController extends Controller
     }
 
     //mengubah data admin pada database
-    public function update_admin(Request $request, User $user)
+    public function profile(Request $request, User $user)
     {
         $rules = [
             'nama' => 'required|max:60|min:3',
             'role' => 'required|min:4|max:9',
-            'password' => 'required|min:6|max:8'
+            'password' => 'required|min:6|max:8|confirmed',
         ];
 
         if($request->nip != $user->nip){
@@ -151,7 +151,17 @@ class AktorController extends Controller
             $rules['email'] = 'required|email:dns|max:60|min:6|unique:App\Models\User';
         }
 
+        // Ambil password dari database untuk user yang diedit
+        $userFromDB = User::find($user->id);
+        
+        // Periksa apakah password lama yang dimasukkan sama dengan password di database setelah dihash
+        if (!Hash::check($request->password_lama, $userFromDB->password)) {
+            return redirect()->back()->withInput()->withErrors(['password_lama' => 'Password lama tidak sesuai']);
+        }
+
         $validatedData = $request->validate($rules);
+
+
         $validatedData['password'] = Hash::make($validatedData['password']);
         User::where('id', $user->id)
             ->update($validatedData);
@@ -164,7 +174,7 @@ class AktorController extends Controller
         $rules = [
             'nama' => 'required|max:60|min:3',
             'role' => 'required|min:4|max:9',
-            'password' => 'required|min:6|max:8'
+            'password' => 'required|min:6|max:8|confirmed'
         ];
 
         if($request->nik != $user->nik){
@@ -175,6 +185,14 @@ class AktorController extends Controller
         }
         if($request->email != $user->email){
             $rules['email'] = 'required|email:dns|max:60|min:6|unique:App\Models\User';
+        }
+
+        // Ambil password dari database untuk user yang diedit
+        $userFromDB = User::find($user->id);
+        
+        // Periksa apakah password lama yang dimasukkan sama dengan password di database setelah dihash
+        if (!Hash::check($request->password_lama, $userFromDB->password)) {
+            return redirect()->back()->withInput()->withErrors(['password_lama' => 'Password lama tidak sesuai']);
         }
 
         $validatedData = $request->validate($rules);
@@ -190,7 +208,7 @@ class AktorController extends Controller
         $rules = [
             'nama' => 'required|max:60|min:3',
             'role' => 'required|min:4|max:9',
-            'password' => 'required|min:6|max:8'
+            'password' => 'required|min:6|max:8|confirmed'
         ];
 
         if($request->nip != $user->nip){
@@ -201,6 +219,14 @@ class AktorController extends Controller
         }
         if($request->email != $user->email){
             $rules['email'] = 'required|email:dns|max:60|min:6|unique:App\Models\User';
+        }
+        
+        // Ambil password dari database untuk user yang diedit
+        $userFromDB = User::find($user->id);
+        
+        // Periksa apakah password lama yang dimasukkan sama dengan password di database setelah dihash
+        if (!Hash::check($request->password_lama, $userFromDB->password)) {
+            return redirect()->back()->withInput()->withErrors(['password_lama' => 'Password lama tidak sesuai']);
         }
 
         $validatedData = $request->validate($rules);

@@ -52,11 +52,11 @@
                         <!-- Konten form -->
                         @method('put')
                         @csrf
-                        @else
+                    @else
                         <form method="POST" action="{{ route('ujian-mahasiswa-tambah') }}">
                             <!-- Konten form -->
                             @csrf
-                            @endif
+                    @endif
                             <div class="form-row">
                                 <input type="hidden" name="soal_id" id="soal_id" value="{{ $s->id }}">
                                 <input type="hidden" name="skor" id="skor" value="{{ $s->bobot }}">
