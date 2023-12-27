@@ -221,9 +221,13 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="prodi">Prodi</label>
-                            <input type="prodi" name="prodi" class="form-control  @error('prodi') is-invalid @enderror"
-                                id="prodi" required value="{{ old('prodi') }}">
+                            <label for="prodi_id">Prodi</label>
+                                <select class="custom-select @error('prodi_id') is-invalid @enderror" id="prodi_id"
+                                    name="prodi_id" required>
+                                    @foreach ($prodi as $prod)
+                                        <option value="{{ $prod->id }}">{{ $prod->nama_prodi }}</option>
+                                    @endforeach
+                                </select>
                             @error('prodi')
                             <div class="invalid-feedback">
                                 {{ $message }}

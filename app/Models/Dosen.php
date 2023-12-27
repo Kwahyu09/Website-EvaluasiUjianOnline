@@ -21,7 +21,6 @@ class Dosen extends Model
                   ->orWhere('jabatan', 'like', '%' . $search . '%')
                   ->orWhere('gol_regu', 'like', '%' . $search . '%')
                   ->orWhere('jenis_kel', 'like', '%' . $search . '%')
-                  ->orWhere('prodi', 'like', '%' . $search . '%')
                   ->orWhere('email', 'like', '%' . $search . '%');
         });
     }
@@ -29,6 +28,10 @@ class Dosen extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class);
     }
 
     public function sluggable(): array

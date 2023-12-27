@@ -32,11 +32,6 @@ class Modul extends Model
         });
     }
 
-    public function ketuasekretaris()
-    {
-        return $this->belongsTo(ketuasekretaris::class);
-    }
-
     public function grup_soal()
     {
         return $this->hasMany(grup_soal::class);

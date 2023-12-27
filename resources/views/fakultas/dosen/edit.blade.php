@@ -222,10 +222,18 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="prodi">Prodi</label>
-                            <input type="prodi" name="prodi" class="form-control  @error('prodi') is-invalid @enderror"
-                                id="prodi" required value="{{ old('prodi', $post->prodi) }}">
-                            @error('prodi')
+                            <label for="prodi_id">Prodi</label>
+                            <select class="custom-select @error('prodi_id') is-invalid @enderror" id="prodi_id"
+                                name="prodi_id" required>
+                                @if(old('prodi_id', $post->prodi_id) == "1")
+                                    <option value="1"selected>Kedokteran</option>
+                                    <option value="2">Pendidikan Profesi Dokter</option>
+                                    @else
+                                    <option value="1">Kedokteran</option>
+                                    <option value="2"selected>Pendidikan Profesi Dokter</option>
+                                @endif
+                            </select>
+                            @error('prodi_id')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

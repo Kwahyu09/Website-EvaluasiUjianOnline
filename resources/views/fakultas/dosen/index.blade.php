@@ -64,7 +64,7 @@
                                         <td>{{ $pos->gol_regu }}</td>
                                         @endif
                                         <td>{{ $pos->jenis_kel }}</td>
-                                        <td>{{ $pos->prodi }}</td>
+                                        <td>{{ $pos->prodi->nama_prodi }}</td>
                                         <td>{{ $pos->email }}</td>
                                         <td style="width: 150px">
                                             <a href="/dosen/{{ $pos->slug }}/edit"

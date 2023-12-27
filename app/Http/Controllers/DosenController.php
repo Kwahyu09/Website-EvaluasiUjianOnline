@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dosen;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -13,15 +14,17 @@ class DosenController extends Controller
     {
         return view('fakultas.dosen.index', [
             "title" => "Dosen",
-            "post" => Dosen::latest()->filter(request(['search']))->paginate(10)
+            "post" => Dosen::with('prodi')->latest()->filter(request(['search']))->paginate(10)
         ]);
     }
 
     //menampilkan halaman tambah data dosen
     public function create()
     {
+        $prodi = Prodi::all(); 
         return view('fakultas.dosen.create', [
-            "title" => "Dosen"
+            "title" => "Dosen",
+            "prodi" => $prodi
         ]);
     }
 
@@ -29,13 +32,13 @@ class DosenController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'prodi_id' => 'required',
             'nip' => 'required|min:16|max:18|unique:App\Models\Dosen',
             'nama_dos' => 'required|min:3|max:60',
             'slug' => 'required|unique:App\Models\Dosen',
             'jabatan' => 'max:50',
             'gol_regu' => 'max:50',
             'jenis_kel' => 'required|min:4|max:9',
-            'prodi' => 'required|min:3|max:50',
             'email' => 'required|email|max:60|min:6|unique:App\Models\Dosen'
         ]);
         
@@ -46,6 +49,7 @@ class DosenController extends Controller
     //menampilkan halaman edit dosen
     public function edit(Dosen $dosen)
     {
+        $prodi = Prodi::all(); 
         return view('fakultas.dosen.edit', [
             "title" => "Dosen",
             "post" => $dosen,
@@ -56,11 +60,11 @@ class DosenController extends Controller
     public function update(Request $request, Dosen $dosen)
     {
         $rules = [
+            'prodi_id' => 'required',
             'nama_dos' => 'required|min:3|max:255',
             'jabatan' => 'max:255',
             'gol_regu' => 'max:255',
-            'jenis_kel' => 'required|min:4|max:9',
-            'prodi' => 'required|min:3|max:50'
+            'jenis_kel' => 'required|min:4|max:9'
         ];
 
         if($request->nip != $dosen->nip){

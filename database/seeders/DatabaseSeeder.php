@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             SoalSeeder::class,
             HasilUjianSeeder::class,
             EvaluasiSeeder::class,
+            ProdiSeeder::class,
         ]);
     }
 }

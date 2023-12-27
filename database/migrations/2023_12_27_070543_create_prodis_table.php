@@ -13,16 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dosens', function (Blueprint $table) {
+        Schema::create('prodis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('prodi_id');
-            $table->string('nip',18)->unique();
-            $table->string('nama_dos',50);
+            $table->string('nama_prodi',50);
             $table->string('slug');
-            $table->string('jabatan',20)->nullable();
-            $table->string('gol_regu',8)->nullable();
-            $table->string('jenis_kel',10);
-            $table->string('email',70);
             $table->timestamps();
         });
     }
@@ -34,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dosens');
+        Schema::dropIfExists('prodis');
     }
 };
