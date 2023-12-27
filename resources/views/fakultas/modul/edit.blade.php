@@ -10,8 +10,15 @@
                 @method('put')
                 @csrf
                 <div class="card-body">
-                    <input type="hidden" name="kd_modul" class="form-control" id="kd_modul"
-                        value="{{ $post->kd_modul }}">
+                    <<div class="form-group">
+                        <label for="kd_modul">Kode Modul</label>
+                        <input type="text" name="kd_modul" class="form-control @error('kd_modul') is-invalid @enderror" id="kd_modul" required value="{{ old('kd_modul', $post->kd_modul) }}">
+                        @error('kd_modul')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
                     <div class="form-group">
                         <label for="nama_modul">Nama Modul</label>
                         <input type="text" name="nama_modul"

@@ -21,14 +21,8 @@ class ModulController extends Controller
     // menampilkan halaman tambah modul
     public function create()
     {
-        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        $kode_unik = '';
-        for ($i = 0; $i < 8; $i++) {
-            $kode_unik .= $characters[random_int(0, strlen($characters) - 1)];
-        }
         return view('fakultas.modul.create',[
             "title" => "Modul",
-            "kd_modul" => $kode_unik,
             "post" => User::all()->where('role','Ketua')
         ]);
     }
